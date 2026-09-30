@@ -25,7 +25,7 @@ Objective: define Trick 01 sufficiently to choose a vertical-slice architecture.
 - Natural photographic spectator reveal.
 - Shared state: Firebase Realtime Database.
 - Performer auth: Firebase Authentication.
-- Hosting/static assets: Firebase Hosting.
+- Frontend/static assets: GitHub Pages from the existing `Magic` repository.
 - Spectator remains unauthenticated.
 - Cloudflare Durable Objects is the fallback only if prototype evidence disproves Firebase.
 
@@ -64,12 +64,14 @@ Build a two-device prototype that proves:
 
 ### Current next work
 
-1. bootstrap frontend project in the repository;
-2. create Firebase project/configuration or obtain project credentials;
-3. implement channel routing, Firebase Auth/RTDB integration, rules, and setup/reveal UI;
-4. add placeholder card assets sufficient for functional testing;
-5. deploy;
-6. run the two-device acceptance suite.
+1. bootstrap the frontend in the existing `Magic` repository;
+2. add a GitHub Actions workflow that builds and deploys only the static app artifact to GitHub Pages;
+3. use a Pages-safe channel URL such as `?c=<channelId>`;
+4. create Firebase project/configuration or obtain project credentials;
+5. add the GitHub Pages domain to Firebase Auth authorized domains;
+6. implement Firebase Auth/RTDB integration, Security Rules, hidden setup, 52-card grid, and spectator reveal;
+7. deploy to GitHub Pages;
+8. run the two-device acceptance suite.
 
 ## S3 — Trick 01 Production Polish
 
