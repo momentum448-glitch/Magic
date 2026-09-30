@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#16130f">
+  <title>Photo</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <main id="app" class="app-shell" aria-live="polite">
+    <section class="reveal-stage" id="revealStage">
+      <div class="ambient"></div>
+      <div class="photo-frame">
+        <div id="card" class="playing-card is-loading" aria-label="Loading">
+          <div class="corner top"><span class="rank">•</span><span class="suit">•</span></div>
+          <div class="pip" aria-hidden="true">•</div>
+          <div class="corner bottom"><span class="rank">•</span><span class="suit">•</span></div>
+        </div>
+      </div>
+      <p id="statusText" class="status-text">Đang tải ảnh…</p>
+    </section>
+
+    <button id="secretHotspot" class="secret-hotspot" type="button" aria-label=" " tabindex="-1"></button>
+  </main>
+
+  <dialog id="setupDialog" class="panel-dialog">
+    <form method="dialog" class="panel" id="setupForm">
+      <header class="panel-header">
+        <div>
+          <p class="eyebrow">Performer</p>
+          <h1>Chọn lá bài</h1>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="Đóng">×</button>
+      </header>
+
+      <div id="deckGrid" class="deck-grid"></div>
+
+      <footer class="panel-footer">
+        <div>
+          <div id="selectedLabel" class="selected-label">Chưa chọn</div>
+          <div id="writeStatus" class="write-status"></div>
+        </div>
+        <button id="doneButton" class="primary-button" type="button" disabled>Done</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="armDialog" class="panel-dialog">
+    <form method="dialog" class="panel arm-panel" id="armForm">
+      <header class="panel-header">
+        <div>
+          <p class="eyebrow">One-time device setup</p>
+          <h1>Arm performer device</h1>
+        </div>
+      </header>
+
+      <label class="field">
+        <span>Fine-grained GitHub token</span>
+        <input id="tokenInput" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+      </label>
+      <p class="helper">
+        Token chỉ được giữ trong session của tab này. Token phải chỉ có quyền
+        <strong>Contents: write</strong> trên repo <strong>Magic-state</strong>.
+      </p>
+      <div id="armStatus" class="write-status"></div>
+
+      <footer class="panel-footer arm-footer">
+        <button id="clearTokenButton" class="secondary-button" type="button">Clear</button>
+        <button id="saveTokenButton" class="primary-button" type="button">Arm device</button>
+      </footer>
+    </form>
+  </dialog>
+</body>
+</html>
