@@ -55,15 +55,17 @@ For v1, the app may store the token locally on the performer's own device after 
 ## Hidden setup flow
 
 1. Performer opens the same Pages URL/channel on their own phone.
-2. Long-press invisible hotspot ~2–3 seconds.
-3. Setup UI opens.
-4. Performer selects one of 52 cards.
-5. Press Done.
-6. App calls GET Contents API for `channels/<channelId>.json` to obtain current blob SHA.
-7. App sends PUT Contents API with the new Base64-encoded JSON and that SHA, authenticated with the PAT.
-8. On HTTP 200/201, Done succeeds and setup closes.
-9. On HTTP 409, app re-fetches SHA and retries once.
-10. On failure, setup stays open and does not claim success.
+2. Performer taps the setup hotspot 5 times.
+3. During prototype/QC, the hotspot is intentionally visible and shows tap progress; after the flow is proven, it will be visually hidden while keeping the same 5-tap gesture.
+4. If the performer device has no session token, the 5th tap opens the Arm dialog instead of failing silently.
+5. After successful Arm from this path, the 52-card setup opens automatically.
+6. Performer selects one of 52 cards.
+7. Press Done.
+8. App calls GET Contents API for `channels/<channelId>.json` to obtain current blob SHA.
+9. App sends PUT Contents API with the new Base64-encoded JSON and that SHA, authenticated with the PAT.
+10. On HTTP 200/201, Done succeeds and setup closes.
+11. On HTTP 409, app re-fetches SHA and retries once.
+12. On failure, setup stays open and does not claim success.
 
 GitHub requires `Contents: write` for create/update file contents.
 
