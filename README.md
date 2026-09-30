@@ -1,26 +1,18 @@
 # Magic
 
-This repository uses a cross-chat continuity system so a new conversation can take execution ownership without relying on old chat history.
+Digital tools for live magic performance.
 
-## Start here in every new chat
+## Trick 01 — QR Card Reveal
 
-1. Read `AGENTS.md`.
-2. Read `project_state/PROJECT_CANON.md`.
-3. Read `project_state/PROJECT_STAGE.md`.
-4. Read `project_state/HANDOFF_CURRENT.md`.
-5. Verify the actual repository state before changing anything.
-6. Continue from the exact next action in the handoff.
+Current vertical slice is GitHub-only:
 
-## Project-control files
+- Frontend: GitHub Pages
+- Deploy: GitHub Actions
+- Shared state: GitHub REST Contents API
+- State repository: `momentum448-glitch/Magic-state`
+- Spectator URL: `https://momentum448-glitch.github.io/Magic/?c=test01`
+- Performer device arm URL: `https://momentum448-glitch.github.io/Magic/?c=test01#arm`
 
-- `AGENTS.md` — operating rules and handoff protocol.
-- `project_state/PROJECT_CANON.md` — durable decisions and architecture.
-- `project_state/PROJECT_STAGE.md` — lifecycle stage, goals, and exit criteria.
-- `project_state/HANDOFF_CURRENT.md` — latest execution state and exact next action.
-- `project_state/DECISION_LOG.md` — append-only record of meaningful decisions.
+The performer token must be a fine-grained PAT scoped only to `Magic-state` with `Contents: write`. Never commit a PAT to this repository.
 
-## Google Drive mirror
-
-Drive folder: https://drive.google.com/drive/folders/11-OPyrRF57g7fJqjGjY3XcMoYVp8FJvF
-
-GitHub is the canonical execution source. Drive is the human-readable mirror/backup.
+Project continuity and execution status live under `project_state/`.
