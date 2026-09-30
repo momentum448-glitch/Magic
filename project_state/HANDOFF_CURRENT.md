@@ -1,87 +1,46 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0001**  
+Handoff ID: **H-0002**  
 Last updated: **2026-09-30**  
 Current stage: **S1 — Core Project Discovery**  
-Status: **READY TO CONTINUE**
+Status: **WAITING FOR FOUNDATIONAL DECISIONS**
 
 ## Completed in this checkpoint
 
-- Verified GitHub repository `momentum448-glitch/Magic` exists.
-- Verified default branch is `main`.
-- Verified the repository was empty at continuity-system setup.
-- Created dedicated Drive folder: `Magic — Project Control`.
-- Created and verified Drive control documents:
-  - `MAGIC — CONTINUITY_RULES`
-  - `MAGIC — PROJECT_CANON`
-  - `MAGIC — PROJECT_STAGE`
-  - `MAGIC — HANDOFF_CURRENT`
-  - `MAGIC — DECISION_LOG`
-- Initialized repository continuity files:
-  - `README.md`
-  - `AGENTS.md`
-  - `project_state/PROJECT_CANON.md`
-  - `project_state/PROJECT_STAGE.md`
-  - `project_state/DECISION_LOG.md`
-  - `project_state/HANDOFF_CURRENT.md` (this file)
-- Defined source-of-truth hierarchy, update triggers, closing protocol, and structured discovery rule.
+- Verified repository continuity files before changing project state.
+- Locked project domain: digital tools for live magic performance.
+- Locked Trick 01: QR Card Reveal.
+- Locked audience effect: spectator names any card, scans QR, sees the matching card image.
+- Locked performer flow: secretly enter setup mode, select named card, press Done, then spectator scans.
+- Locked two-mode model: normal/reveal mode and hidden setup mode in one web product.
+- Updated `PROJECT_CANON.md`, `PROJECT_STAGE.md`, and `DECISION_LOG.md`.
+- Mirrored canon, stage, decision, and handoff state to Drive.
 
-## Locked decisions
+## Important technical implication
 
-- GitHub actual state is the execution truth.
-- Drive is the readable mirror/backup.
-- New chats must read the control files before execution.
-- Actual repo state outranks stale handoff text.
-- `HANDOFF_CURRENT.md` is updated last.
-- Important decisions are logged, not left only in chat history.
-- “Auto-update” means an in-session completion protocol, not background/asynchronous work.
+The performer and spectator use different devices. Trick 01 therefore requires shared cross-device state. A purely static/local-only implementation cannot satisfy the effect reliably.
 
-## Current real state
+## Open foundational decisions
 
-Repository continuity infrastructure is initialized on `main`.
+1. QR/state model: global shared slot vs performer-specific channel vs session-specific QR.
+2. Exact hidden gesture for setup entry.
+3. Reveal lifecycle/reset/expiry behavior.
+4. Spectator-facing reveal presentation.
+5. Setup selection UI details.
+6. Backend/deployment choice, to be verified for latency and consistency.
 
-Drive control folder:
-https://drive.google.com/drive/folders/11-OPyrRF57g7fJqjGjY3XcMoYVp8FJvF
+## Preliminary recommendation
 
-The actual product/problem scope of Magic has **not** yet been defined.
-
-## Tests / verification completed
-
-- GitHub repository discovery: PASS.
-- GitHub write permission: PASS.
-- `AGENTS.md` repository readback: PASS.
-- Drive folder creation: PASS.
-- Drive control-folder listing: PASS.
-- Drive control documents present: PASS.
-
-## Blockers / risks
-
-No technical blocker for continuity.
-
-Open product-definition risk: the project goal, users, success outcome, and scope are still undefined.
+- performer-specific channel bound to a stable QR;
+- one hidden long-press hotspot for setup;
+- 52-card grid + Done;
+- short server-side armed TTL rather than indefinite stale state;
+- spectator page should look like a normal photo/reveal, not an app control panel;
+- research a small low-latency shared backend before locking deployment.
 
 ## Exact next action
 
-Run one structured discovery round with no more than 5–7 high-impact questions/decisions to define:
-
-1. the real problem to solve;
-2. the primary user/stakeholder;
-3. the desired outcome and success signal;
-4. scope boundaries;
-5. platform/environment;
-6. the highest-risk assumption requiring research, repository inspection, data, or testing.
-
-## New-chat takeover instruction
-
-Read, in order:
-
-1. `AGENTS.md`
-2. `project_state/PROJECT_CANON.md`
-3. `project_state/PROJECT_STAGE.md`
-4. `project_state/HANDOFF_CURRENT.md`
-5. `project_state/DECISION_LOG.md` when relevant
-
-Then verify the real GitHub state and continue from **Exact next action** above.
+User answers or approves the recommended choices for the 5–6 high-impact decisions above. After that, advance to S2 and design/build the vertical-slice prototype.
 
 ## Sync status
 
