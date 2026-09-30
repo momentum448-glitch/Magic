@@ -20,7 +20,7 @@ Locked product outcome:
 
 ## S2 — Architecture / Execution Planning
 
-Status: **ACTIVE — GITHUB-ONLY**
+Status: **ACTIVE — VERTICAL SLICE DEPLOYED / DEVICE WRITE QC PENDING**
 
 Locked v1 stack:
 - application repository: `momentum448-glitch/Magic`;
@@ -29,40 +29,65 @@ Locked v1 stack:
 - shared state: GitHub REST Contents API;
 - performer credential: fine-grained PAT;
 - spectator: unauthenticated public read;
-- recommended dedicated state repository: `momentum448-glitch/Magic-state`;
+- dedicated public state repository: `momentum448-glitch/Magic-state`;
 - state files: `channels/<channelId>.json`.
 
-### Why a separate state repo is required for the recommended design
+### Completed implementation
 
-A fine-grained PAT with `Contents: write` is scoped to a repository, not a single file path. A separate state repo limits a leaked performer token to mutable trick state instead of giving it write access to the main application source.
+- Created and verified public state repo `momentum448-glitch/Magic-state`.
+- Initialized:
+  - `channels/test01.json`
+  - `channels/test02.json`
+- Added static app under `site/`:
+  - `site/index.html`
+  - `site/styles.css`
+  - `site/app.js`
+  - `site/.nojekyll`
+- Implemented:
+  - public state read from GitHub Contents API;
+  - query-channel routing via `?c=<channelId>`;
+  - hidden long-press setup gate;
+  - 52-card setup grid;
+  - performer device arming via `#arm`;
+  - session-only PAT storage;
+  - GitHub API GET current SHA + PUT updated state;
+  - one retry on HTTP 409 conflict;
+  - spectator reveal shell;
+  - neutral failure states.
+- Added GitHub Pages workflow:
+  - checkout;
+  - JavaScript syntax check;
+  - Pages configure;
+  - artifact upload;
+  - Pages deployment.
+- GitHub Actions run `36696469456`: **PASS**.
+- Workflow commit: `47fd8543fa665e1a525877c3c690469e289d9bca`.
 
-### First vertical-slice milestone
+### Current Pages target
 
-1. GitHub Pages serves the app.
-2. Performer enters hidden setup.
-3. Performer selects one of 52 cards and presses Done.
-4. App GETs the current state file to obtain its blob SHA.
-5. App PUTs the new JSON through GitHub Contents API using the fine-grained PAT.
-6. Done succeeds only after the GitHub API confirms the update.
-7. Spectator scans the fixed QR.
-8. App fetches the public state JSON from GitHub API with browser cache bypassed.
-9. Correct card photo renders.
-10. Repeat across two channel files and verify isolation.
+Spectator:
+`https://momentum448-glitch.github.io/Magic/?c=test01`
 
-### Required validation
+Performer one-time arm page:
+`https://momentum448-glitch.github.io/Magic/?c=test01#arm`
 
-- 50 sequential writes with zero wrong reveal after successful Done;
-- stale-read testing from a second device;
-- handling of HTTP 409 update conflicts by re-fetching SHA and retrying once;
-- unauthenticated read rate-limit observation;
-- token never present in repository/build/network calls except the authenticated GitHub write request;
-- cold-load Pages path works under `/Magic/?c=...`.
+### Remaining S2 validation
 
-### Current dependency
+1. Create a fine-grained PAT restricted to `Magic-state` with `Contents: write`.
+2. Arm the performer device with that token.
+3. Verify browser-side write from GitHub Pages.
+4. Verify second-device fresh read after Done.
+5. Run sequential card-change correctness test.
+6. Verify `test01` and `test02` isolation.
+7. Observe latency and public API rate-limit headers.
+8. Confirm PAT never appears in source/build artifact.
 
-Create the dedicated public state repository `momentum448-glitch/Magic-state`.
+### Known constraints
 
-The current GitHub connector can edit existing repositories but does not expose repository creation, so this one repository must be created by the user in GitHub UI before the final live write path can be connected.
+- Public unauthenticated GitHub REST requests are rate-limited per originating IP.
+- Every card update creates a commit in `Magic-state`.
+- Client-side token handling is acceptable only for this prototype and must pass show-use QC.
+- Public GitHub-only architecture is not cryptographically secret from a technically inspecting spectator.
 
 ## S3 — Trick 01 Production Polish
 
