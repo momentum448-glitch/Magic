@@ -200,3 +200,12 @@
 **Reason:** The live trick sequence prepares the card before the spectator scans the QR, so a fresh load naturally retrieves the intended state.
 
 **Consequence:** Do not add polling or realtime refresh in v1. If a spectator page was already open before a performer update, manual refresh is required.
+
+
+## D-030 — 2026-09-30
+
+**Decision:** Hide the visual treatment of the five-tap setup hotspot while keeping the same five-tap activation area and gesture.
+
+**Reason:** The visible prototype trigger has passed device QC and should no longer be exposed in the spectator-facing experience.
+
+**Consequence:** The active build has no visible `SETUP ×5` label or tap counter. The tappable top-left hotspot remains active for five taps, and all existing Arm/setup behavior is unchanged.
