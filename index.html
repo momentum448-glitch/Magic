@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
+  <title>Photo</title>
+  <link rel="stylesheet" href="./app.css" />
+</head>
+<body>
+  <main id="app" aria-live="polite">
+    <section id="loading" class="center"><div class="spinner"></div></section>
+    <section id="reveal" class="reveal hidden">
+      <div class="photo-frame"><div id="card" class="playing-card"></div></div>
+    </section>
+    <section id="error" class="center hidden"><button id="retry">Thử lại</button></section>
+  </main>
+
+  <div id="secretHotspot" aria-hidden="true"></div>
+
+  <dialog id="setup">
+    <div class="setup-head">
+      <strong>Setup</strong>
+      <button id="closeSetup" class="ghost">×</button>
+    </div>
+    <div id="tokenPanel" class="token-panel">
+      <input id="tokenInput" type="password" autocomplete="off" placeholder="GitHub fine-grained token" />
+      <button id="saveToken">Lưu trên máy này</button>
+      <small>Token chỉ lưu trong localStorage của thiết bị này.</small>
+    </div>
+    <div id="deck" class="deck"></div>
+    <div class="setup-foot">
+      <span id="setupStatus"></span>
+      <button id="done" disabled>Done</button>
+    </div>
+  </dialog>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
