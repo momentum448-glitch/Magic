@@ -3,7 +3,7 @@
 Handoff ID: **H-0009**  
 Last updated: **2026-09-30**  
 Current stage: **S2 — GitHub-only vertical slice**  
-Status: **FIVE-TAP SETUP DEPLOYED — PERFORMER WRITE QC PENDING**
+Status: **FIVE-TAP SETUP QC PASSED — PERFORMER WRITE + SECOND-DEVICE QC NEXT**
 
 ## Latest user-driven UX change
 
@@ -52,16 +52,21 @@ Pages URL:
 - Token is stored only in `sessionStorage` for the current browser session.
 - Never paste the PAT into ChatGPT or commit it.
 
-## Immediate QC
+## QC checkpoint
 
-1. Open `https://momentum448-glitch.github.io/Magic/?c=test01` on the performer phone.
-2. Confirm the visible `SETUP ×5` box appears at top-left.
-3. Tap it 5 times.
-4. If Arm dialog opens, enter the fine-grained PAT and tap Arm device.
-5. Confirm the 52-card grid opens automatically.
-6. Select a test card and press Done.
-7. Confirm `Đã sẵn sàng.`
-8. On another device open the same spectator URL and verify the selected card.
+- User confirmed the 5-tap setup activation works correctly on device.
+- Visible prototype hotspot behavior: **PASS**.
+- Long-press issue: **RESOLVED**.
+
+## Immediate next QC
+
+1. On performer phone, open setup with 5 taps.
+2. Choose an obvious card, recommended `7H` (7♥).
+3. Press Done.
+4. Confirm the performer UI reports `Đã sẵn sàng.`
+5. On a second device open `https://momentum448-glitch.github.io/Magic/?c=test01`.
+6. Confirm 7♥ appears after a fresh load.
+7. Repeat with 2–3 different cards to observe latency and any stale reads.
 
 ## Remaining acceptance tests
 
