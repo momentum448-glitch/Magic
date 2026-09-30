@@ -82,5 +82,5 @@ Pages URL:
 ## Sync status
 
 - GitHub: **SYNCED**
-- Drive: **SYNCED**
+- Drive: **SYNCED after five-tap QC pass**
 - Pending sync: **NONE**
