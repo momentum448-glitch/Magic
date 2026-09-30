@@ -67,15 +67,23 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
 7. Meaningful decisions are preserved in `DECISION_LOG.md`.
 8. State documents are updated during the active work session, not promised for later.
 
-## Open architecture decisions for Trick 01
+## Trick 01 — Backend architecture v1
 
-The following are not yet canon:
-- exact backend/shared-state service;
-- hosting/deployment platform;
-- authentication/provisioning mechanism for performer-specific channels;
-- implementation details for cross-device latency and consistency.
+Locked for the vertical slice:
+- shared state: Firebase Realtime Database;
+- performer authentication: Firebase Authentication;
+- spectator authentication: none;
+- frontend/static assets: Firebase Hosting;
+- one stable channel ID per performer;
+- performer writes only their own channel under Firebase Security Rules;
+- spectator reads the public current card state for the scanned channel;
+- Done is considered successful only after the Firebase write Promise confirms server synchronization;
+- performer auth should persist locally on the performer's device to minimize show-time friction;
+- v1 performer provisioning is manual rather than self-service.
 
-These items require research and/or prototype testing before being locked.
+Architecture details are recorded in `project_state/ARCHITECTURE_TRICK_01.md`.
+
+Production confidence still requires two-device latency, stale-read, authorization, and channel-isolation tests. Cloudflare Durable Objects is the designated fallback if Firebase fails those tests.
 
 ## Canon update rule
 
