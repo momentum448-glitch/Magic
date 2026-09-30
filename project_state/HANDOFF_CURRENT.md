@@ -1,47 +1,61 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0005**  
+Handoff ID: **H-0006**  
 Last updated: **2026-09-30**  
 Current stage: **S2 — Architecture / Execution Planning**  
-Status: **READY TO BUILD ON GITHUB PAGES**
+Status: **GITHUB-ONLY LOCKED — WAITING FOR STATE REPO**
 
-## Hosting decision updated
+## Architecture now locked
 
-- Use GitHub + GitHub Pages for frontend delivery.
-- Use existing repo `momentum448-glitch/Magic`.
-- No new repo required for v1.
-- Default Pages project URL: `https://momentum448-glitch.github.io/Magic/`.
-- Fixed QR channel URL: `https://momentum448-glitch.github.io/Magic/?c=<channelId>`.
-- Deploy built static app artifact via GitHub Actions.
-- Do not depend on dynamic server routes.
+- Main app repo: `momentum448-glitch/Magic`.
+- Frontend/static assets: GitHub Pages.
+- Deployment: GitHub Actions.
+- Mutable shared state: GitHub REST Contents API.
+- Performer credential: fine-grained GitHub PAT.
+- Spectator: unauthenticated public read.
+- Recommended dedicated public state repo: `momentum448-glitch/Magic-state`.
+- State files: `channels/<channelId>.json`.
+- No Firebase/Supabase/Cloudflare dependency in active v1.
 
-## Backend remains
+## Why a separate state repo
 
-- Firebase Realtime Database for shared state.
-- Firebase Authentication for performer-only write access.
-- Spectator remains unauthenticated read-only.
-- GitHub Pages origin must be added to Firebase Auth authorized domains.
-- Cloudflare Durable Objects remains backend fallback if Firebase fails live tests.
+A fine-grained PAT with `Contents: write` is repository-scoped. Keeping state separate means the performer token cannot alter the `Magic` application code.
 
-## Superseded decision
+## Performer flow
 
-Firebase Hosting is no longer used for v1 frontend hosting.
+Long press → select card → Done → GET state file SHA → PUT updated JSON with PAT → success only on GitHub 200/201.
 
-## Why no new repo
+On HTTP 409, re-fetch the latest SHA and retry once.
 
-The current `Magic` repo can host a GitHub Pages project site. A separate `momentum448-glitch.github.io` repository is only useful if a root account site is specifically desired later.
+## Spectator flow
+
+Scan fixed QR → GitHub Pages app → parse `?c=<channelId>` → unauthenticated GET state JSON from public state repo with browser cache bypass → render matching local photograph.
+
+## Known GitHub-only constraints
+
+- GitHub unauthenticated REST API primary limit is currently 60 requests/hour per originating IP.
+- Every card update creates a repository commit.
+- Client-side performer token handling must be tested carefully.
+- Fresh-read latency/cache behavior must pass two-device QC.
+- A technically inspecting spectator can reverse-engineer public client/state behavior; v1 does not provide cryptographic secrecy.
+
+## Current blocker / dependency
+
+Create public GitHub repository:
+
+`momentum448-glitch/Magic-state`
+
+The current GitHub connector can edit existing repositories but does not expose repository creation. Once the repo exists, the assistant can initialize its state files and continue implementation.
 
 ## Exact next action
 
-1. bootstrap static frontend in `Magic` repo;
-2. configure `/Magic/` base path;
-3. add GitHub Actions Pages workflow;
-4. implement `?c=<channelId>` routing;
-5. add Firebase environment/config wiring;
-6. implement hidden setup, 52-card selector, Done, reveal shell, and Security Rules;
-7. enable/configure a real Firebase project and authorize the GitHub Pages domain;
-8. deploy to Pages;
-9. run two-device QC.
+1. User creates public repo `Magic-state`.
+2. Initialize `channels/test01.json`.
+3. Bootstrap `Magic` Pages frontend.
+4. Implement GitHub API read/write adapter and performer PAT setup.
+5. Add hidden setup, 52-card selector, Done, and spectator reveal shell.
+6. Deploy GitHub Pages.
+7. Run two-device acceptance tests.
 
 ## Sync status
 
