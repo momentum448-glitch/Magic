@@ -10,50 +10,69 @@ Objective: establish reliable cross-chat continuity using GitHub + Google Drive.
 
 ## S1 — Core Project Discovery
 
-Status: **ACTIVE — BACKEND RESEARCH REMAINS**
+Status: **COMPLETE**
 
-Objective: define the first production-ready magic effect and lock the few architecture decisions that materially affect implementation.
+Objective: define Trick 01 sufficiently to choose a vertical-slice architecture.
 
-### Confirmed
+### Locked outcome
 
-- Project domain: tools for live magic performance.
-- Trick 01: QR-based playing-card reveal.
-- Spectator uses the public/reveal flow.
-- Performer secretly enters setup mode, selects a card, presses Done, then spectator scanning the QR sees that card.
-- One website product exposes both normal and hidden setup behavior.
-- QR model: one stable QR per performer-specific channel.
-- Secret setup gesture: long-press an invisible hotspot for roughly 2–3 seconds.
-- Setup UI: 52-card grid + Done.
-- Reveal lifecycle: selected card persists until performer explicitly changes it; no automatic expiry/reset.
-- Spectator presentation: natural photographic-looking reveal, not an app-like result screen.
+- Product domain: digital tools for live magic performance.
+- Trick 01: QR Card Reveal.
+- One stable QR per performer-specific channel.
+- Hidden long-press setup entry.
+- 52-card grid + Done.
+- Selected card persists until performer changes it.
+- Natural photographic spectator reveal.
+- Shared state: Firebase Realtime Database.
+- Performer auth: Firebase Authentication.
+- Hosting/static assets: Firebase Hosting.
+- Spectator remains unauthenticated.
+- Cloudflare Durable Objects is the fallback only if prototype evidence disproves Firebase.
 
-### Remaining high-impact work
+### S1 exit status
 
-1. Research and select the backend/shared-state approach.
-2. Select hosting/deployment based on the backend choice.
-3. Verify cross-device propagation latency and consistency.
-4. Define performer-channel provisioning/authentication details.
+- effect and performer flow: PASS;
+- state/channel model: PASS;
+- hidden setup behavior: PASS;
+- lifecycle: PASS;
+- backend/hosting direction: PASS;
+- first milestone: PASS;
+- test plan: PASS.
 
-### S1 exit criteria
-
-- backend/shared-state approach is locked from current evidence;
-- first implementation milestone is defined;
-- architecture is sufficient to build a vertical-slice prototype;
-- test plan covers cross-device state, accidental setup discovery, stale-state behavior, and channel isolation.
-
-## Candidate first implementation milestone
-
-A two-device vertical slice where:
-- performer opens their stable channel;
-- secretly enters setup;
-- selects a card and presses Done;
-- a second device scans the fixed QR;
-- the second device reveals the correct card;
-- changing the card on performer device updates the next spectator reveal;
-- no cross-channel leakage occurs.
+Research notes: `project_state/RESEARCH_BACKEND_TRICK_01.md`  
+Architecture: `project_state/ARCHITECTURE_TRICK_01.md`
 
 ## S2 — Architecture / Execution Planning
 
+Status: **ACTIVE**
+
+Objective: turn the locked v1 architecture into an executable vertical slice and prove it on two devices.
+
+### First milestone
+
+Build a two-device prototype that proves:
+
+1. performer opens their stable channel;
+2. authenticated performer enters setup by hidden long-press;
+3. performer selects a card and presses Done;
+4. Done waits for server commit;
+5. spectator scans fixed QR on another device;
+6. spectator receives the correct card image;
+7. performer changes the card and the next spectator load follows;
+8. unauthorized writes are rejected;
+9. two channel IDs do not leak state.
+
+### Current next work
+
+1. bootstrap frontend project in the repository;
+2. create Firebase project/configuration or obtain project credentials;
+3. implement channel routing, Firebase Auth/RTDB integration, rules, and setup/reveal UI;
+4. add placeholder card assets sufficient for functional testing;
+5. deploy;
+6. run the two-device acceptance suite.
+
+## S3 — Trick 01 Production Polish
+
 Status: **NOT STARTED**
 
-Entry condition: S1 exit criteria are satisfied.
+Entry condition: S2 vertical slice passes correctness, isolation, auth, and latency tests.
