@@ -1,86 +1,51 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0009**  
+Handoff ID: **H-0010**  
 Last updated: **2026-09-30**  
 Current stage: **S2 — GitHub-only vertical slice**  
-Status: **FIVE-TAP SETUP QC PASSED — PERFORMER WRITE + SECOND-DEVICE QC NEXT**
+Status: **CORE CROSS-DEVICE FLOW PASSED — STABILITY QC NEXT**
 
-## Latest user-driven UX change
+## Passed on user devices
 
-- The previous 2–3 second long-press setup gesture has been removed.
-- Setup activation is now **5 taps** on the setup hotspot.
-- During prototype/QC the hotspot is intentionally visible.
-- Current visible label: `SETUP ×5`.
-- Tap progress is shown as `0/5` through `5/5`.
-- After the setup flow is proven, the hotspot will be visually hidden while preserving the same 5-tap gesture.
-- D-010 is superseded by D-028.
+- Five-tap visible setup hotspot: **PASS**.
+- Performer setup opens correctly.
+- Performer selects a card and presses Done.
+- GitHub state write succeeds.
+- Spectator device shows the correct selected card after a fresh page load / manual refresh.
+- User explicitly accepted manual refresh for already-open spectator pages.
 
-## Five-tap behavior
+## Locked v1 spectator behavior
 
-1. Open the normal channel URL.
-2. Tap the visible `SETUP ×5` hotspot 5 times.
-3. If a performer token is already armed in the current browser session, the 52-card setup opens.
-4. If no token is armed, the 5th tap opens the Arm dialog instead of failing silently.
-5. After a successful Arm from this path, the 52-card setup opens automatically.
-6. Select a card and press Done.
-7. Done GETs the current state SHA and PUTs the new JSON.
-8. Success is shown only after GitHub confirms the write.
-9. HTTP 409 causes one SHA refresh + retry.
+- Spectator state is **snapshot-on-load**.
+- No automatic polling or realtime refresh in v1.
+- If spectator opens/scans after performer has pressed Done, the page reads the latest state.
+- If spectator page was already open before the card changed, manual refresh/F5 is required.
+- This is accepted because the intended live sequence is performer prepares first, spectator scans after.
+- Do not add polling unless later show evidence requires it.
 
-## Verified deployment
+## Current deployed app
 
-Latest deployed app commit:
-
-`bc553ffe46569497092cd1ea9b6ec4e79f5cdff9`
-
-GitHub Actions run:
-
-`36700487226`
-
-Result: **SUCCESS**
-
-Pages URL:
-
+Pages:
 `https://momentum448-glitch.github.io/Magic/?c=test01`
 
-## State backend
+Latest five-tap app commit:
+`bc553ffe46569497092cd1ea9b6ec4e79f5cdff9`
 
-- Public state repo: `momentum448-glitch/Magic-state`.
-- `channels/test01.json` exists.
-- Spectator reads are unauthenticated.
-- Performer writes require a fine-grained PAT scoped only to `Magic-state` with `Contents: Read and write`.
-- Token is stored only in `sessionStorage` for the current browser session.
-- Never paste the PAT into ChatGPT or commit it.
+Five-tap deploy run:
+`36700487226` — SUCCESS
 
-## QC checkpoint
+## Next S2 work
 
-- User confirmed the 5-tap setup activation works correctly on device.
-- Visible prototype hotspot behavior: **PASS**.
-- Long-press issue: **RESOLVED**.
-
-## Immediate next QC
-
-1. On performer phone, open setup with 5 taps.
-2. Choose an obvious card, recommended `7H` (7♥).
-3. Press Done.
-4. Confirm the performer UI reports `Đã sẵn sàng.`
-5. On a second device open `https://momentum448-glitch.github.io/Magic/?c=test01`.
-6. Confirm 7♥ appears after a fresh load.
-7. Repeat with 2–3 different cards to observe latency and any stale reads.
-
-## Remaining acceptance tests
-
-- performer browser write;
-- second-device fresh read;
-- 50 sequential card changes;
-- rate-limit observation;
-- 409 retry;
-- token absence from source/build;
-- test01/test02 isolation;
-- final concealment of the setup hotspot after activation QC passes.
+1. Run several sequential card changes and check for any wrong/stale card after refresh.
+2. Verify `test01` and `test02` isolation.
+3. Observe practical update latency.
+4. Check public API rate-limit behavior.
+5. Confirm performer PAT is absent from source/build.
+6. Once core QC is complete, visually hide the setup hotspot while keeping the same 5-tap gesture.
+7. Only after stability passes, move to spectator visual polish / photographic card presentation.
 
 ## Sync status
 
 - GitHub: **SYNCED**
-- Drive: **SYNCED after five-tap QC pass**
+- Drive: **SYNCED**
 - Pending sync: **NONE**
