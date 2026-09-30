@@ -83,3 +83,34 @@
 **Decision:** Setup uses a 52-card grid; performer taps one card and presses Done.
 
 **Consequence:** Setup is optimized for fast mobile operation with minimal interaction steps.
+
+
+## D-014 — 2026-09-30
+
+**Decision:** Trick 01 v1 will use Firebase Realtime Database for shared cross-device state.
+
+**Reason:** It directly supports small realtime shared state, server-enforced read/write rules, and a web write Promise that resolves when synchronization to the server completes.
+
+## D-015 — 2026-09-30
+
+**Decision:** Firebase Authentication protects performer writes; spectators remain unauthenticated readers.
+
+**Consequence:** Discovering the hidden gesture on an unauthenticated device must not grant setup/write access.
+
+## D-016 — 2026-09-30
+
+**Decision:** Firebase Hosting will host the v1 frontend and card reveal assets.
+
+**Consequence:** v1 uses one integrated Firebase stack for static delivery, auth, and shared state.
+
+## D-017 — 2026-09-30
+
+**Decision:** Initial performer provisioning is manual.
+
+**Consequence:** Self-service registration/admin tooling is deliberately excluded from the first vertical slice.
+
+## D-018 — 2026-09-30
+
+**Decision:** Cloudflare Durable Objects is the fallback backend if two-device Firebase testing shows unacceptable latency, stale reads, authorization friction, or operational constraints.
+
+**Consequence:** Backend choice is locked for implementation but remains evidence-reversible after prototype testing.
