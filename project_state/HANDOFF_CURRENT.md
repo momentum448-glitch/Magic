@@ -3,11 +3,12 @@
 Handoff ID: **H-0011**  
 Last updated: **2026-09-30**  
 Current stage: **S2 — GitHub-only vertical slice**  
-Status: **HIDDEN FIVE-TAP SETUP DEPLOYED — STABILITY QC NEXT**
+Status: **HIDDEN FIVE-TAP SETUP QC PASSED — STABILITY QC NEXT**
 
 ## Passed on user devices
 
 - Five-tap setup activation: **PASS**.
+- Hidden five-tap hotspot after concealment: **PASS**.
 - Performer setup opens correctly.
 - Performer selects a card and presses Done.
 - GitHub state write succeeds.
@@ -48,13 +49,12 @@ Pages URL:
 
 ## Next S2 work
 
-1. Reconfirm hidden 5-tap activation on performer device.
-2. Run several sequential card changes and check for any wrong/stale card after refresh.
-3. Verify `test01` and `test02` isolation.
-4. Observe practical update latency.
-5. Check public API rate-limit behavior.
-6. Confirm performer PAT is absent from source/build.
-7. After stability passes, move to spectator visual polish / photographic card presentation.
+1. Run several sequential card changes and check for any wrong/stale card after refresh.
+2. Verify `test01` and `test02` isolation.
+3. Observe practical update latency.
+4. Check public API rate-limit behavior.
+5. Confirm performer PAT is absent from source/build.
+6. After stability passes, move to spectator visual polish / photographic card presentation.
 
 ## Execution access note
 
