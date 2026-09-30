@@ -20,7 +20,7 @@ Locked product outcome:
 
 ## S2 — Architecture / Execution Planning
 
-Status: **ACTIVE — SETUP ACTIVATION QC PASSED / DEVICE WRITE QC PENDING**
+Status: **ACTIVE — CORE CROSS-DEVICE FLOW PASSED / STABILITY QC PENDING**
 
 Locked v1 stack:
 - application repository: `momentum448-glitch/Magic`;
@@ -75,15 +75,18 @@ Performer one-time arm page:
 
 - Five-tap visible setup hotspot: **PASS on user device**.
 - Setup activation blocker from long-press: **RESOLVED**.
+- Performer write through GitHub API: **PASS**.
+- Second-device reveal correctness after fresh load/manual refresh: **PASS**.
+- Already-open spectator page does not auto-update: **ACCEPTED v1 behavior**.
+- Automatic polling/realtime refresh: **DEFERRED / NOT NEEDED FOR v1**.
 
 ### Remaining S2 validation
 
-1. Verify performer browser write after selecting a card and pressing Done.
-2. Verify second-device fresh read after Done.
-3. Run sequential card-change correctness test.
-4. Verify `test01` and `test02` isolation.
-5. Observe latency and public API rate-limit headers.
-6. Confirm PAT never appears in source/build artifact.
+1. Run sequential card-change correctness test.
+2. Verify `test01` and `test02` isolation.
+3. Observe latency and public API rate-limit headers.
+4. Confirm PAT never appears in source/build artifact.
+5. After activation/QC is complete, visually hide the setup hotspot while keeping the 5-tap gesture.
 
 ### Known constraints
 
