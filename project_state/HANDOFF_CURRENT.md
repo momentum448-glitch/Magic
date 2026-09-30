@@ -1,48 +1,69 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0003**  
+Handoff ID: **H-0004**  
 Last updated: **2026-09-30**  
-Current stage: **S1 — Core Project Discovery**  
-Status: **BACKEND RESEARCH REMAINS**
+Current stage: **S2 — Architecture / Execution Planning**  
+Status: **READY TO BUILD VERTICAL SLICE**
 
-## New decisions locked
+## Completed in this checkpoint
 
-- QR model: one stable QR per performer-specific channel.
-- Hidden setup entry: long-press an invisible hotspot for roughly 2–3 seconds.
-- Reveal lifecycle: selected card persists until performer explicitly changes it.
-- No automatic reset or expiry in the first design.
-- Spectator presentation: natural photographic-looking reveal, not app-like controls.
-- Setup UI: 52-card grid + Done.
+- Researched Firebase Realtime Database, Firebase Auth/Hosting, Cloudflare Durable Objects, and Supabase.
+- Selected Firebase stack for Trick 01 v1.
+- Added backend research and architecture files to GitHub.
+- Added `MAGIC — TRICK_01_BACKEND_ARCHITECTURE` to Drive.
+- Updated `PROJECT_CANON.md`, `PROJECT_STAGE.md`, and `DECISION_LOG.md`.
+- S1 Core Project Discovery is **COMPLETE**.
+- S2 is **ACTIVE**.
 
-## Current Trick 01 flow
+## Locked v1 backend architecture
 
-1. Spectator names any card.
-2. Performer secretly long-presses hidden hotspot.
-3. Performer taps the card in the 52-card grid and presses Done.
-4. Shared performer-channel state changes to that card.
-5. Spectator scans the performer’s fixed QR.
-6. Spectator sees a natural-looking photo of that exact card.
-7. State remains that card until performer changes it.
+- Firebase Hosting: frontend and card assets.
+- Firebase Realtime Database: shared performer-channel card state.
+- Firebase Authentication: performer-only write access.
+- Spectator: unauthenticated public read.
+- Stable QR per performer-specific channel.
+- Performer auth persists on their own browser/device.
+- Done only succeeds after server synchronization completes.
+- Initial performer/channel provisioning is manual.
+- Cloudflare Durable Objects is fallback if Firebase fails two-device testing.
 
-## Technical implication
+## Suggested channel state
 
-A purely static/local-only website is insufficient because performer and spectator use different devices. Shared state must propagate reliably across devices while remaining isolated between performer channels.
+```
+channelOwners/<channelId> = <firebaseUid>
 
-## Remaining research
+channels/<channelId>/
+  cardCode
+  updatedAt
+  version
+```
 
-- backend/shared-state service;
-- hosting/deployment platform;
-- performer-channel provisioning/authentication;
-- two-device latency and consistency;
-- channel-isolation test.
+## Vertical-slice acceptance tests
 
-## Candidate first implementation milestone
+1. 50 card changes, zero wrong reveal after Done resolves.
+2. Refresh preserves current selected card.
+3. Two channels produce zero cross-channel leakage.
+4. Unauthorized writes are rejected.
+5. Spectator long-press exposes no setup when unauthenticated.
+6. Measure Done-resolved → second-device fresh-read latency; working p95 target under 1 second on normal Wi-Fi/4G.
+7. Performer offline/failure must not falsely report success.
 
-Build a two-device vertical slice proving fixed QR → hidden setup → card selection → Done → correct spectator reveal → later performer change updates the next reveal.
+## Current blocker/dependency
+
+A real Firebase project/config is required before live backend integration and deployment can be verified.
+
+Repository code can be bootstrapped before credentials are available.
 
 ## Exact next action
 
-Research current backend/shared-state options and recommend a minimal architecture based on latency, consistency, simplicity, cost, and deployability. Then lock S1 and move to S2.
+Bootstrap the web frontend in the Magic repository, implement environment-based Firebase wiring, channel routing, hidden setup UI, 52-card selection, spectator reveal shell, and Firebase Security Rules. Then connect a real Firebase project and deploy for two-device QC.
+
+## Key files
+
+- `project_state/RESEARCH_BACKEND_TRICK_01.md`
+- `project_state/ARCHITECTURE_TRICK_01.md`
+- `project_state/PROJECT_CANON.md`
+- `project_state/PROJECT_STAGE.md`
 
 ## Sync status
 
