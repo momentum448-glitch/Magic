@@ -73,13 +73,19 @@ Locked for the vertical slice:
 - shared state: Firebase Realtime Database;
 - performer authentication: Firebase Authentication;
 - spectator authentication: none;
-- frontend/static assets: Firebase Hosting;
+- frontend/static assets: GitHub Pages deployed from the Magic repository via GitHub Actions;
 - one stable channel ID per performer;
 - performer writes only their own channel under Firebase Security Rules;
 - spectator reads the public current card state for the scanned channel;
 - Done is considered successful only after the Firebase write Promise confirms server synchronization;
 - performer auth should persist locally on the performer's device to minimize show-time friction;
 - v1 performer provisioning is manual rather than self-service.
+
+GitHub Pages is the locked frontend host for v1. Firebase remains backend-only for Realtime Database and performer Authentication.
+
+The default project-site URL is expected to be `https://momentum448-glitch.github.io/Magic/`. For reliability on static hosting, v1 uses query-based channel URLs such as `https://momentum448-glitch.github.io/Magic/?c=<channelId>` rather than requiring server-side dynamic route handling.
+
+If Firebase Authentication is used from the GitHub Pages origin, that Pages domain must be included in Firebase Authentication's authorized domains.
 
 Architecture details are recorded in `project_state/ARCHITECTURE_TRICK_01.md`.
 
