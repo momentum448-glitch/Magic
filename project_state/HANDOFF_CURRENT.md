@@ -1,78 +1,53 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0007**  
-Last updated: **2026-09-30**  
-Current stage: **S2 — Architecture / Execution Planning**  
-Status: **VERTICAL SLICE DEPLOYED — PAT + TWO-DEVICE QC PENDING**
+Handoff ID: H-0007
+Last updated: 2026-09-30
+Stage: S2 — GitHub-only vertical slice
+Status: IMPLEMENTED — WAITING FOR PAGES ENABLE + PAT + LIVE QC
 
-## Completed this checkpoint
+Actual repository state
+- Magic-state exists and is public.
+- Magic-state/channels/test01.json exists with cardCode AS, version 1.
+- Magic/index.html implemented.
+- Magic/app.css implemented.
+- Magic/app.js implemented.
+- Magic/.github/workflows/pages.yml implemented.
 
-- Verified `momentum448-glitch/Magic-state` exists, is public, uses `main`, and is writable by the connected GitHub account.
-- Initialized `channels/test01.json` with `AS`.
-- Initialized `channels/test02.json` with `KH` for isolation QC.
-- Bootstrapped static GitHub Pages app under `site/`.
-- Implemented spectator public read from GitHub Contents API.
-- Implemented hidden long-press performer setup.
-- Implemented 52-card selector + Done.
-- Implemented performer device arming through `#arm`.
-- Performer token is stored only in `sessionStorage` by default.
-- Implemented GET current file SHA + PUT updated JSON.
-- Implemented one retry on HTTP 409 conflict.
-- Added GitHub Pages Actions workflow.
-- Added `node --check site/app.js` deployment gate.
-- GitHub Actions run `36696469456`: **SUCCESS**.
-- GitHub Pages deployment step: **SUCCESS**.
-- Workflow commit: `47fd8543fa665e1a525877c3c690469e289d9bca`.
+Implemented behavior
+- fixed QR/query channel model
+- public spectator state read through GitHub Contents API
+- cache-bypass request
+- hidden hotspot long press 2.2 seconds
+- 52-card setup grid
+- local performer token storage
+- Done GETs current SHA then PUTs new state
+- HTTP 409 causes one SHA refresh + retry
+- Done never reports success on failed write
+- spectator never sends performer token
 
-## Current URLs
+Current verification
+- state repo access: PASS
+- state file initialization: PASS
+- app code committed: PASS
+- Pages workflow committed: PASS
+- public Pages URL: NOT VERIFIED / currently inaccessible from external check
+- live performer write: NOT TESTED
+- two-device QC: NOT TESTED
 
-Spectator:
+User action required
+1. Magic repository → Settings → Pages → Build and deployment → Source = GitHub Actions.
+2. Create fine-grained PAT:
+   - repository access: only momentum448-glitch/Magic-state
+   - repository permission: Contents = Read and write
+   - no other write permission
+3. Do not paste token into chat. Enter it only into performer setup UI after Pages is live.
 
-`https://momentum448-glitch.github.io/Magic/?c=test01`
+Expected QC URL
+https://momentum448-glitch.github.io/Magic/?c=test01
 
-Performer one-time arm:
+Next execution
+After Pages is enabled, verify deploy URL, enter PAT on performer device, change card, then scan/reload from second device and measure correctness/latency.
 
-`https://momentum448-glitch.github.io/Magic/?c=test01#arm`
-
-## State repository
-
-`https://github.com/momentum448-glitch/Magic-state`
-
-Current test state:
-- `test01`: `AS`
-- `test02`: `KH`
-
-## Current dependency
-
-A fine-grained GitHub PAT must be created for the performer device:
-
-- Repository access: only `Magic-state`
-- Repository permission: **Contents = Read and write**
-- Do not grant Administration, Actions, Secrets, or Workflow permissions
-- Never commit the token to either repository
-
-## Exact next action
-
-1. Create the fine-grained PAT.
-2. Open the performer arm URL on the performer phone.
-3. Paste the token and arm that browser session.
-4. Long-press the hidden top-left hotspot for ~2.2 seconds.
-5. Select a card and press Done.
-6. Open the spectator URL on a second device and verify the new card.
-7. Continue the repeated-write, latency, rate-limit, and channel-isolation acceptance tests.
-
-## Remaining S2 validation
-
-- browser-side PAT write from Pages;
-- second-device fresh read after Done;
-- repeated card-change correctness;
-- `test01` / `test02` isolation;
-- public API rate-limit observation;
-- token absence from source/build artifact;
-- live latency measurement.
-
-## Sync status
-
-- GitHub: **SYNCED**
-- Drive: **SYNCED**
-- Pending sync: **NONE**
+Sync status
+Drive: SYNCED
+GitHub: handoff update will be final repo write.
