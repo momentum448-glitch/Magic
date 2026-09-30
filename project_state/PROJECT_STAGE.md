@@ -20,7 +20,7 @@ Locked product outcome:
 
 ## S2 — Architecture / Execution Planning
 
-Status: **ACTIVE — CORE CROSS-DEVICE FLOW PASSED / STABILITY QC PENDING**
+Status: **COMPLETE — GITHUB-ONLY PROTOTYPE ACCEPTED**
 
 Locked v1 stack:
 - application repository: `momentum448-glitch/Magic`;
@@ -81,12 +81,14 @@ Performer one-time arm page:
 - Already-open spectator page does not auto-update: **ACCEPTED v1 behavior**.
 - Automatic polling/realtime refresh: **DEFERRED / NOT NEEDED FOR v1**.
 
-### Remaining S2 validation
+### Final S2 validation
 
-1. Run sequential card-change correctness test.
-2. Verify `test01` and `test02` isolation.
-3. Observe latency and public API rate-limit headers.
-4. Confirm PAT never appears in source/build artifact.
+- Sequential card-change correctness on user devices: **PASS**.
+- Channel isolation: **PASS**. Actual state checkpoint: `test01` version 6; `test02` version 1.
+- Snapshot-on-load latency/behavior: **ACCEPTED for v1**.
+- Public REST rate-limit posture: **ACCEPTED for prototype/small-show use**; unauthenticated reads remain an explicit scale constraint.
+- PAT source/build exposure check: **PASS**. Pages publishes only `site/`; no performer PAT value is embedded in deployed source.
+- HTTP 409 retry path: **IMPLEMENTED**; forced collision remains a non-blocking resilience check.
 
 ### Known constraints
 
@@ -97,6 +99,18 @@ Performer one-time arm page:
 
 ## S3 — Trick 01 Production Polish
 
-Status: **NOT STARTED**
+Status: **ACTIVE**
 
-Entry condition: GitHub-only S2 vertical slice passes correctness, latency, rate-limit, token-safety, and conflict tests.
+Objective:
+- replace the CSS placeholder card with a natural photographic-looking spectator reveal;
+- remove remaining app-like visual cues from spectator mode;
+- preserve the hidden five-tap performer flow and the accepted snapshot-on-load backend behavior.
+
+Immediate next work:
+1. define the photographic reveal visual direction;
+2. prepare a complete 52-card visual asset strategy;
+3. implement responsive image mapping by `cardCode`;
+4. QC spectator appearance on mobile without altering the proven performer/backend flow.
+
+Residual non-blocking S2 check:
+- deliberately force an HTTP 409 update collision when convenient to empirically confirm the existing one-retry recovery path.
