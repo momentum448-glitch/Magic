@@ -18,6 +18,8 @@ Before taking execution ownership:
 
 Do not ask the user to repeat information that is already present in these files or verifiable in the repository.
 
+Before claiming GitHub execution/write access is unavailable, verify the actual connected GitHub integration and repository permissions first. For this project, execute GitHub changes directly whenever the connected integration permits them; do not assume manual user action is required without checking.
+
 ## Source-of-truth hierarchy
 
 ### Execution facts
