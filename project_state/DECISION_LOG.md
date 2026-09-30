@@ -189,3 +189,14 @@
 **Production intent:** After the setup flow passes QC, visually hide the hotspot while preserving the 5-tap gesture.
 
 **Consequence:** D-010 is superseded. If the device has not been armed with a performer token, the 5th tap opens the Arm dialog instead of failing silently; after successful Arm, setup opens automatically.
+
+
+## D-029 — 2026-09-30
+
+**Decision:** Accept snapshot-on-load spectator behavior for v1.
+
+**Observed QC:** The second device shows the correct selected card after a fresh page load / manual refresh. An already-open spectator page does not update automatically.
+
+**Reason:** The live trick sequence prepares the card before the spectator scans the QR, so a fresh load naturally retrieves the intended state.
+
+**Consequence:** Do not add polling or realtime refresh in v1. If a spectator page was already open before a performer update, manual refresh is required.
