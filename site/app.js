@@ -5,7 +5,8 @@
   const STATE_REPO = "Magic-state";
   const API_VERSION = "2022-11-28";
   const TOKEN_KEY = "magic_state_pat_session";
-  const LONG_PRESS_MS = 2200;
+  const SETUP_TAPS_REQUIRED = 5;
+  const SETUP_TAP_WINDOW_MS = 2500;
 
   const params = new URLSearchParams(location.search);
   const channelId = (params.get("c") || "test01").trim();
@@ -33,10 +34,13 @@
   const saveTokenButton = document.getElementById("saveTokenButton");
   const clearTokenButton = document.getElementById("clearTokenButton");
   const armStatus = document.getElementById("armStatus");
+  const tapProgress = document.getElementById("tapProgress");
 
   let currentState = null;
   let selectedCode = null;
-  let holdTimer = null;
+  let tapCount = 0;
+  let tapResetTimer = null;
+  let pendingSetupAfterArm = false;
 
   function statePath() {
     return `channels/${channelId}.json`;
@@ -161,7 +165,16 @@
   }
 
   function openSetup() {
-    if (!token() || !validChannel) return;
+    if (!validChannel) return;
+
+    if (!token()) {
+      pendingSetupAfterArm = true;
+      tokenInput.value = "";
+      armStatus.textContent = "Arm thiết bị để mở setup.";
+      if (!armDialog.open) armDialog.showModal();
+      return;
+    }
+
     buildDeck();
     if (currentState?.cardCode) selectCard(currentState.cardCode);
     setupDialog.showModal();
@@ -236,22 +249,29 @@
     }
   }
 
-  function startHold(e) {
-    if (!token()) return;
+  function resetSetupTapSequence() {
+    tapCount = 0;
+    clearTimeout(tapResetTimer);
+    tapResetTimer = null;
+    tapProgress.textContent = "0/5";
+  }
+
+  function registerSetupTap(e) {
     e.preventDefault();
-    clearTimeout(holdTimer);
-    holdTimer = setTimeout(openSetup, LONG_PRESS_MS);
+    clearTimeout(tapResetTimer);
+    tapCount += 1;
+    tapProgress.textContent = `${tapCount}/${SETUP_TAPS_REQUIRED}`;
+
+    if (tapCount >= SETUP_TAPS_REQUIRED) {
+      resetSetupTapSequence();
+      openSetup();
+      return;
+    }
+
+    tapResetTimer = setTimeout(resetSetupTapSequence, SETUP_TAP_WINDOW_MS);
   }
 
-  function cancelHold() {
-    clearTimeout(holdTimer);
-    holdTimer = null;
-  }
-
-  hotspot.addEventListener("pointerdown", startHold);
-  hotspot.addEventListener("pointerup", cancelHold);
-  hotspot.addEventListener("pointercancel", cancelHold);
-  hotspot.addEventListener("pointerleave", cancelHold);
+  hotspot.addEventListener("click", registerSetupTap);
   doneButton.addEventListener("click", commitSelection);
 
   saveTokenButton.addEventListener("click", async () => {
@@ -263,19 +283,27 @@
     sessionStorage.setItem(TOKEN_KEY, value);
     armStatus.textContent = "Device armed cho session hiện tại.";
     history.replaceState(null, "", location.pathname + location.search);
-    setTimeout(() => armDialog.close(), 350);
+    setTimeout(() => {
+      armDialog.close();
+      if (pendingSetupAfterArm) {
+        pendingSetupAfterArm = false;
+        openSetup();
+      }
+    }, 350);
   });
 
   clearTokenButton.addEventListener("click", () => {
     sessionStorage.removeItem(TOKEN_KEY);
     tokenInput.value = "";
+    pendingSetupAfterArm = false;
     armStatus.textContent = "Đã xóa token khỏi session.";
   });
 
   function maybeOpenArm() {
     if (location.hash === "#arm") {
+      pendingSetupAfterArm = false;
       tokenInput.value = token();
-      armDialog.showModal();
+      if (!armDialog.open) armDialog.showModal();
     }
   }
 
