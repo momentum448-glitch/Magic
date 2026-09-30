@@ -1,83 +1,81 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0008**  
+Handoff ID: **H-0009**  
 Last updated: **2026-09-30**  
 Current stage: **S2 — GitHub-only vertical slice**  
-Status: **PAGES DEPLOYED — WAITING FOR PERFORMER PAT + TWO-DEVICE QC**
+Status: **FIVE-TAP SETUP DEPLOYED — PERFORMER WRITE QC PENDING**
 
-## Verified actual state
+## Latest user-driven UX change
 
-- `momentum448-glitch/Magic-state`: public and accessible.
-- `channels/test01.json`: initialized and readable, currently `AS`, version 1.
-- Canonical deployed app source: `Magic/site/`.
-- Hidden long-press setup: implemented at 2.2 seconds.
-- 52-card setup grid: implemented.
-- Performer arm UI: implemented via URL hash `#arm`.
-- Performer token storage: `sessionStorage` only for the current browser session.
-- Done flow: GET current SHA → PUT updated JSON → success only on successful GitHub response.
-- HTTP 409: one re-fetch + retry.
-- Spectator read: unauthenticated GitHub Contents API with cache bypass.
-- Pages workflow: `.github/workflows/pages.yml`.
-- Workflow only redeploys for `site/**` or workflow-file changes.
-- Pages artifact publishes only `site/`; project control docs are not deployed.
-- Duplicate root app and obsolete duplicate Pages workflow were removed.
+- The previous 2–3 second long-press setup gesture has been removed.
+- Setup activation is now **5 taps** on the setup hotspot.
+- During prototype/QC the hotspot is intentionally visible.
+- Current visible label: `SETUP ×5`.
+- Tap progress is shown as `0/5` through `5/5`.
+- After the setup flow is proven, the hotspot will be visually hidden while preserving the same 5-tap gesture.
+- D-010 is superseded by D-028.
 
-## Deployment verification
+## Five-tap behavior
 
-Latest verified deployment commit:
+1. Open the normal channel URL.
+2. Tap the visible `SETUP ×5` hotspot 5 times.
+3. If a performer token is already armed in the current browser session, the 52-card setup opens.
+4. If no token is armed, the 5th tap opens the Arm dialog instead of failing silently.
+5. After a successful Arm from this path, the 52-card setup opens automatically.
+6. Select a card and press Done.
+7. Done GETs the current state SHA and PUTs the new JSON.
+8. Success is shown only after GitHub confirms the write.
+9. HTTP 409 causes one SHA refresh + retry.
 
-`a14e73077055693d3831805f48081bcbe7abb934`
+## Verified deployment
 
-GitHub Actions result: **SUCCESS**
+Latest deployed app commit:
 
-GitHub Pages environment URL:
+`bc553ffe46569497092cd1ea9b6ec4e79f5cdff9`
 
-`https://momentum448-glitch.github.io/Magic/`
+GitHub Actions run:
 
-QC spectator URL:
+`36700487226`
+
+Result: **SUCCESS**
+
+Pages URL:
 
 `https://momentum448-glitch.github.io/Magic/?c=test01`
 
-Performer one-time arm URL for the current browser session:
+## State backend
 
-`https://momentum448-glitch.github.io/Magic/?c=test01#arm`
+- Public state repo: `momentum448-glitch/Magic-state`.
+- `channels/test01.json` exists.
+- Spectator reads are unauthenticated.
+- Performer writes require a fine-grained PAT scoped only to `Magic-state` with `Contents: Read and write`.
+- Token is stored only in `sessionStorage` for the current browser session.
+- Never paste the PAT into ChatGPT or commit it.
 
-## User action required
+## Immediate QC
 
-Create one fine-grained personal access token:
-
-- Resource owner: `momentum448-glitch`
-- Repository access: **Only select repositories**
-- Repository: **Magic-state**
-- Repository permissions → **Contents: Read and write**
-- No other write permission needed.
-- Prefer a short expiration for prototype testing.
-- Do not paste the token into ChatGPT or commit it anywhere.
-
-Then open the performer arm URL on the performer's phone, enter the token, and tap **Arm device**.
-
-## Next QC
-
-1. Performer opens arm URL and arms device.
-2. Performer long-presses top-left invisible hotspot for ~2.2s.
-3. Select a card, press Done.
-4. Confirm “Đã sẵn sàng.”
-5. On a second device open the spectator QC URL.
-6. Verify the same card appears.
-7. Repeat several cards and record latency/failures.
-8. Check state repo version increments.
+1. Open `https://momentum448-glitch.github.io/Magic/?c=test01` on the performer phone.
+2. Confirm the visible `SETUP ×5` box appears at top-left.
+3. Tap it 5 times.
+4. If Arm dialog opens, enter the fine-grained PAT and tap Arm device.
+5. Confirm the 52-card grid opens automatically.
+6. Select a test card and press Done.
+7. Confirm `Đã sẵn sàng.`
+8. On another device open the same spectator URL and verify the selected card.
 
 ## Remaining acceptance tests
 
-- 50 sequential card changes with zero wrong reveal.
-- fresh read from second device after each successful Done.
-- rate-limit observation.
-- 409 retry behavior.
-- token absence from source/build.
-- two-channel isolation.
+- performer browser write;
+- second-device fresh read;
+- 50 sequential card changes;
+- rate-limit observation;
+- 409 retry;
+- token absence from source/build;
+- test01/test02 isolation;
+- final concealment of the setup hotspot after activation QC passes.
 
 ## Sync status
 
 - GitHub: **SYNCED**
-- Drive: update follows this checkpoint.
+- Drive: **SYNCED**
 - Pending sync: **NONE**
