@@ -176,3 +176,16 @@
 **Decision:** State file format is one JSON file per performer channel, e.g. `channels/<channelId>.json`.
 
 **Consequence:** Multiple performer channels are isolated by path and can be tested independently.
+
+
+## D-028 — 2026-09-30
+
+**Decision:** Replace the 2–3 second long-press setup gesture with 5 taps on the setup hotspot.
+
+**Reason:** Long-press was unreliable during device QC.
+
+**Prototype behavior:** The hotspot is intentionally visible and displays tap progress so activation can be verified easily.
+
+**Production intent:** After the setup flow passes QC, visually hide the hotspot while preserving the 5-tap gesture.
+
+**Consequence:** D-010 is superseded. If the device has not been armed with a performer token, the 5th tap opens the Arm dialog instead of failing silently; after successful Arm, setup opens automatically.
