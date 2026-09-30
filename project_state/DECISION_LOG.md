@@ -31,3 +31,24 @@
 **Decision:** “Auto-update” is implemented as a mandatory in-session completion protocol.
 
 **Consequence:** No state update is claimed unless the relevant tool actually wrote it during the active session.
+
+
+## D-006 — 2026-09-30
+
+**Decision:** Magic is a project for digital tools that support live magic performance.
+
+**Consequence:** Product decisions prioritize performer speed, concealment, reliability, and spectator-facing naturalness.
+
+## D-007 — 2026-09-30
+
+**Decision:** Trick 01 is a QR-based playing-card reveal.
+
+**Effect:** The spectator names any playing card, scans a QR code, and sees an image matching the named card.
+
+## D-008 — 2026-09-30
+
+**Decision:** Trick 01 uses one web product with a normal/reveal mode and a hidden performer setup mode.
+
+**Performer flow:** Secretly enter setup mode, select the named card, press Done, then let the spectator scan.
+
+**Consequence:** The implementation must support state transfer across devices without exposing setup controls to the spectator.
