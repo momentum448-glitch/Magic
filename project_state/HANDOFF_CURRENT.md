@@ -1,69 +1,47 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0004**  
+Handoff ID: **H-0005**  
 Last updated: **2026-09-30**  
 Current stage: **S2 — Architecture / Execution Planning**  
-Status: **READY TO BUILD VERTICAL SLICE**
+Status: **READY TO BUILD ON GITHUB PAGES**
 
-## Completed in this checkpoint
+## Hosting decision updated
 
-- Researched Firebase Realtime Database, Firebase Auth/Hosting, Cloudflare Durable Objects, and Supabase.
-- Selected Firebase stack for Trick 01 v1.
-- Added backend research and architecture files to GitHub.
-- Added `MAGIC — TRICK_01_BACKEND_ARCHITECTURE` to Drive.
-- Updated `PROJECT_CANON.md`, `PROJECT_STAGE.md`, and `DECISION_LOG.md`.
-- S1 Core Project Discovery is **COMPLETE**.
-- S2 is **ACTIVE**.
+- Use GitHub + GitHub Pages for frontend delivery.
+- Use existing repo `momentum448-glitch/Magic`.
+- No new repo required for v1.
+- Default Pages project URL: `https://momentum448-glitch.github.io/Magic/`.
+- Fixed QR channel URL: `https://momentum448-glitch.github.io/Magic/?c=<channelId>`.
+- Deploy built static app artifact via GitHub Actions.
+- Do not depend on dynamic server routes.
 
-## Locked v1 backend architecture
+## Backend remains
 
-- Firebase Hosting: frontend and card assets.
-- Firebase Realtime Database: shared performer-channel card state.
-- Firebase Authentication: performer-only write access.
-- Spectator: unauthenticated public read.
-- Stable QR per performer-specific channel.
-- Performer auth persists on their own browser/device.
-- Done only succeeds after server synchronization completes.
-- Initial performer/channel provisioning is manual.
-- Cloudflare Durable Objects is fallback if Firebase fails two-device testing.
+- Firebase Realtime Database for shared state.
+- Firebase Authentication for performer-only write access.
+- Spectator remains unauthenticated read-only.
+- GitHub Pages origin must be added to Firebase Auth authorized domains.
+- Cloudflare Durable Objects remains backend fallback if Firebase fails live tests.
 
-## Suggested channel state
+## Superseded decision
 
-```
-channelOwners/<channelId> = <firebaseUid>
+Firebase Hosting is no longer used for v1 frontend hosting.
 
-channels/<channelId>/
-  cardCode
-  updatedAt
-  version
-```
+## Why no new repo
 
-## Vertical-slice acceptance tests
-
-1. 50 card changes, zero wrong reveal after Done resolves.
-2. Refresh preserves current selected card.
-3. Two channels produce zero cross-channel leakage.
-4. Unauthorized writes are rejected.
-5. Spectator long-press exposes no setup when unauthenticated.
-6. Measure Done-resolved → second-device fresh-read latency; working p95 target under 1 second on normal Wi-Fi/4G.
-7. Performer offline/failure must not falsely report success.
-
-## Current blocker/dependency
-
-A real Firebase project/config is required before live backend integration and deployment can be verified.
-
-Repository code can be bootstrapped before credentials are available.
+The current `Magic` repo can host a GitHub Pages project site. A separate `momentum448-glitch.github.io` repository is only useful if a root account site is specifically desired later.
 
 ## Exact next action
 
-Bootstrap the web frontend in the Magic repository, implement environment-based Firebase wiring, channel routing, hidden setup UI, 52-card selection, spectator reveal shell, and Firebase Security Rules. Then connect a real Firebase project and deploy for two-device QC.
-
-## Key files
-
-- `project_state/RESEARCH_BACKEND_TRICK_01.md`
-- `project_state/ARCHITECTURE_TRICK_01.md`
-- `project_state/PROJECT_CANON.md`
-- `project_state/PROJECT_STAGE.md`
+1. bootstrap static frontend in `Magic` repo;
+2. configure `/Magic/` base path;
+3. add GitHub Actions Pages workflow;
+4. implement `?c=<channelId>` routing;
+5. add Firebase environment/config wiring;
+6. implement hidden setup, 52-card selector, Done, reveal shell, and Security Rules;
+7. enable/configure a real Firebase project and authorize the GitHub Pages domain;
+8. deploy to Pages;
+9. run two-device QC.
 
 ## Sync status
 
