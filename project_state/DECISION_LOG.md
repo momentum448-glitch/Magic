@@ -114,3 +114,32 @@
 **Decision:** Cloudflare Durable Objects is the fallback backend if two-device Firebase testing shows unacceptable latency, stale reads, authorization friction, or operational constraints.
 
 **Consequence:** Backend choice is locked for implementation but remains evidence-reversible after prototype testing.
+
+
+## D-019 — 2026-09-30
+
+**Decision:** GitHub Pages, not Firebase Hosting, will host the Trick 01 v1 frontend and card assets.
+
+**Reason:** The project owner explicitly wants GitHub + GitHub Pages as the web delivery platform.
+
+**Consequence:** Firebase is retained only for Realtime Database and Authentication. D-016 is superseded for frontend hosting.
+
+## D-020 — 2026-09-30
+
+**Decision:** The existing public repository `momentum448-glitch/Magic` will be used for the first GitHub Pages deployment; no new repository is required for v1.
+
+**Consequence:** The default project site can use `https://momentum448-glitch.github.io/Magic/`. A new `momentum448-glitch.github.io` repository is only useful later if a root account site is specifically desired.
+
+## D-021 — 2026-09-30
+
+**Decision:** v1 uses a static-host-safe query channel URL, e.g. `?c=<channelId>`.
+
+**Reason:** GitHub Pages is static hosting and the project site naturally lives under the `/Magic/` base path.
+
+**Consequence:** The fixed QR does not depend on server-side dynamic routing or SPA rewrite hacks.
+
+## D-022 — 2026-09-30
+
+**Decision:** GitHub Pages deployment should publish a built static artifact through GitHub Actions rather than exposing the repository tree as the site source.
+
+**Consequence:** Application deployment is decoupled from project-control files and future build tooling can handle the `/Magic/` base path cleanly.
