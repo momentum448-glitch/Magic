@@ -29,7 +29,7 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
   - normal/reveal mode for the spectator;
   - hidden setup mode for the performer.
 - Setup mode is not exposed as an ordinary visible navigation option.
-- Setup mode is activated by a secret long-press on an invisible hotspot for roughly 2–3 seconds.
+- Setup mode is activated by tapping the designated setup hotspot 5 times. During prototype/QC the hotspot is intentionally visible; after the setup flow is proven, the hotspot will be visually hidden without changing the 5-tap gesture.
 - In setup mode, the performer sees a 52-card grid, taps the named card, then presses Done.
 - After Done, the spectator-facing reveal resolves to that selected card.
 - The selected card remains active until the performer explicitly changes it. There is no automatic reset or expiry.
@@ -50,7 +50,7 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
 ### Durable UX principles
 
 - The QR path should feel ordinary to a spectator.
-- The setup interaction should be fast enough for live performance.
+- The setup interaction should be fast enough for live performance. The current locked activation gesture is 5 taps on the setup hotspot.
 - The setup UI should minimize taps and cognitive load.
 - The reveal must not visibly expose performer controls.
 - The system must prioritize reliability under real show conditions over decorative complexity.
