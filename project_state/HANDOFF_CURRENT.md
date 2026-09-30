@@ -1,67 +1,63 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0011**  
+Handoff ID: **H-0012**  
 Last updated: **2026-09-30**  
-Current stage: **S2 — GitHub-only vertical slice**  
-Status: **HIDDEN FIVE-TAP SETUP QC PASSED — STABILITY QC NEXT**
+Current stage: **S3 — Trick 01 Production Polish**  
+Status: **S2 PROTOTYPE ACCEPTED — SPECTATOR VISUAL POLISH NEXT**
 
-## Passed on user devices
+## User-device QC passed
 
-- Five-tap setup activation: **PASS**.
-- Hidden five-tap hotspot after concealment: **PASS**.
+- Hidden five-tap setup activation: **PASS**.
 - Performer setup opens correctly.
-- Performer selects a card and presses Done.
-- GitHub state write succeeds.
-- Spectator device shows the correct selected card after a fresh page load / manual refresh.
-- Snapshot-on-load behavior is accepted for v1.
+- Card selection + Done: **PASS**.
+- GitHub state write: **PASS**.
+- Spectator fresh load/manual refresh shows the correct selected card: **PASS**.
+- Sequential card-change stability: **PASS** per user.
+- Snapshot-on-load behavior remains accepted for v1.
 
-## Current setup behavior
+## Technical S2 verification
 
-- Setup activation remains **5 taps**.
-- Hotspot location remains top-left.
-- The hotspot is now visually hidden.
-- The previous `SETUP ×5` label and tap counter are no longer visible.
-- If the device has no performer token, the 5th tap still opens the Arm dialog.
-- After Arm, the 52-card setup opens automatically.
+- Actual state checkpoint:
+  - `Magic-state/channels/test01.json`: version 6.
+  - `Magic-state/channels/test02.json`: version 1.
+- This supports channel isolation during the completed test sequence.
+- Pages workflow publishes only `site/`.
+- No performer PAT value is embedded in the deployed site source.
+- Performer token remains runtime-only in `sessionStorage`.
+- Public spectator reads are unauthenticated. GitHub documents a primary limit of 60 requests/hour per originating IP.
+- v1 makes one public read per fresh load/manual refresh and does not poll.
+- GitHub-only v1 is accepted for prototype/small-show use, not high-volume public traffic.
+- HTTP 409 re-fetch + retry is implemented. A deliberately forced collision remains a non-blocking resilience check.
 
-## Verified deployment
+## Current deployed app
 
-Hidden-hotspot app commit:
-
-`79562256985a6cb0a5a3986253ae26c18b71e201`
-
-GitHub Actions run:
-
-`36703904941`
-
-Result: **SUCCESS**
-
-Pages URL:
-
+Pages:
 `https://momentum448-glitch.github.io/Magic/?c=test01`
 
-## Locked v1 spectator behavior
+Hidden-hotspot app commit:
+`79562256985a6cb0a5a3986253ae26c18b71e201`
 
-- Spectator state is snapshot-on-load.
-- No automatic polling/realtime refresh.
-- If spectator opens/scans after performer presses Done, latest state is fetched.
-- If the page was already open before the change, manual refresh/F5 is required.
+Deploy run:
+`36703904941` — SUCCESS
 
-## Next S2 work
+## S3 objective
 
-1. Run several sequential card changes and check for any wrong/stale card after refresh.
-2. Verify `test01` and `test02` isolation.
-3. Observe practical update latency.
-4. Check public API rate-limit behavior.
-5. Confirm performer PAT is absent from source/build.
-6. After stability passes, move to spectator visual polish / photographic card presentation.
+Turn the spectator page from a CSS card mockup into a natural photographic-looking reveal while preserving the proven performer/backend flow.
+
+## Immediate next work
+
+1. Define the spectator photographic visual direction.
+2. Choose the 52-card asset strategy.
+3. Implement cardCode → image mapping.
+4. Remove remaining app-like spectator cues.
+5. QC on mobile while leaving performer setup and backend behavior untouched.
 
 ## Execution access note
 
-GitHub execution is available through the connected GitHub integration. AGENTS.md now explicitly requires verifying the actual connector permissions/state before claiming repository write access is unavailable. Operational rule commit: `8815d28d673ba75899642c2af1b031d263cf8ca7`.
+GitHub execution is available through the connected GitHub integration. AGENTS.md requires verifying actual connector permissions before claiming write access is unavailable.
 
 ## Sync status
 
 - GitHub: **SYNCED**
-- Drive: **SYNCED**.
+- Drive: mirror follows this handoff checkpoint.
 - Pending sync: **NONE**
