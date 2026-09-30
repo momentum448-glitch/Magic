@@ -6,75 +6,66 @@ Last updated: 2026-09-30
 
 Status: **COMPLETE**
 
-Objective: establish reliable cross-chat continuity using GitHub + Google Drive.
-
 ## S1 — Core Project Discovery
 
 Status: **COMPLETE**
 
-Objective: define Trick 01 sufficiently to choose a vertical-slice architecture.
-
-### Locked outcome
-
-- Product domain: digital tools for live magic performance.
-- Trick 01: QR Card Reveal.
-- One stable QR per performer-specific channel.
+Locked product outcome:
+- Trick 01 is QR Card Reveal.
+- Stable QR per performer channel.
 - Hidden long-press setup entry.
 - 52-card grid + Done.
 - Selected card persists until performer changes it.
 - Natural photographic spectator reveal.
-- Shared state: Firebase Realtime Database.
-- Performer auth: Firebase Authentication.
-- Frontend/static assets: GitHub Pages from the existing `Magic` repository.
-- Spectator remains unauthenticated.
-- Cloudflare Durable Objects is the fallback only if prototype evidence disproves Firebase.
-
-### S1 exit status
-
-- effect and performer flow: PASS;
-- state/channel model: PASS;
-- hidden setup behavior: PASS;
-- lifecycle: PASS;
-- backend/hosting direction: PASS;
-- first milestone: PASS;
-- test plan: PASS.
-
-Research notes: `project_state/RESEARCH_BACKEND_TRICK_01.md`  
-Architecture: `project_state/ARCHITECTURE_TRICK_01.md`
 
 ## S2 — Architecture / Execution Planning
 
-Status: **ACTIVE**
+Status: **ACTIVE — GITHUB-ONLY**
 
-Objective: turn the locked v1 architecture into an executable vertical slice and prove it on two devices.
+Locked v1 stack:
+- application repository: `momentum448-glitch/Magic`;
+- frontend/static assets: GitHub Pages;
+- deploy: GitHub Actions;
+- shared state: GitHub REST Contents API;
+- performer credential: fine-grained PAT;
+- spectator: unauthenticated public read;
+- recommended dedicated state repository: `momentum448-glitch/Magic-state`;
+- state files: `channels/<channelId>.json`.
 
-### First milestone
+### Why a separate state repo is required for the recommended design
 
-Build a two-device prototype that proves:
+A fine-grained PAT with `Contents: write` is scoped to a repository, not a single file path. A separate state repo limits a leaked performer token to mutable trick state instead of giving it write access to the main application source.
 
-1. performer opens their stable channel;
-2. authenticated performer enters setup by hidden long-press;
-3. performer selects a card and presses Done;
-4. Done waits for server commit;
-5. spectator scans fixed QR on another device;
-6. spectator receives the correct card image;
-7. performer changes the card and the next spectator load follows;
-8. unauthorized writes are rejected;
-9. two channel IDs do not leak state.
+### First vertical-slice milestone
 
-### Current next work
+1. GitHub Pages serves the app.
+2. Performer enters hidden setup.
+3. Performer selects one of 52 cards and presses Done.
+4. App GETs the current state file to obtain its blob SHA.
+5. App PUTs the new JSON through GitHub Contents API using the fine-grained PAT.
+6. Done succeeds only after the GitHub API confirms the update.
+7. Spectator scans the fixed QR.
+8. App fetches the public state JSON from GitHub API with browser cache bypassed.
+9. Correct card photo renders.
+10. Repeat across two channel files and verify isolation.
 
-1. bootstrap the frontend in the existing `Magic` repository;
-2. add a GitHub Actions workflow that builds and deploys only the static app artifact to GitHub Pages;
-3. use a Pages-safe channel URL such as `?c=<channelId>`;
-4. create Firebase project/configuration or obtain project credentials;
-5. add the GitHub Pages domain to Firebase Auth authorized domains;
-6. implement Firebase Auth/RTDB integration, Security Rules, hidden setup, 52-card grid, and spectator reveal;
-7. deploy to GitHub Pages;
-8. run the two-device acceptance suite.
+### Required validation
+
+- 50 sequential writes with zero wrong reveal after successful Done;
+- stale-read testing from a second device;
+- handling of HTTP 409 update conflicts by re-fetching SHA and retrying once;
+- unauthenticated read rate-limit observation;
+- token never present in repository/build/network calls except the authenticated GitHub write request;
+- cold-load Pages path works under `/Magic/?c=...`.
+
+### Current dependency
+
+Create the dedicated public state repository `momentum448-glitch/Magic-state`.
+
+The current GitHub connector can edit existing repositories but does not expose repository creation, so this one repository must be created by the user in GitHub UI before the final live write path can be connected.
 
 ## S3 — Trick 01 Production Polish
 
 Status: **NOT STARTED**
 
-Entry condition: S2 vertical slice passes correctness, isolation, auth, and latency tests.
+Entry condition: GitHub-only S2 vertical slice passes correctness, latency, rate-limit, token-safety, and conflict tests.
