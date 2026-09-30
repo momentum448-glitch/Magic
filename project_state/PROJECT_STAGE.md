@@ -8,33 +8,35 @@ Status: **COMPLETE**
 
 Objective: establish reliable cross-chat continuity using GitHub + Google Drive.
 
-Exit criteria:
-- dedicated Drive folder exists;
-- repository control protocol exists;
-- canon, stage, handoff, and decision-log files exist;
-- source-of-truth and update rules are defined.
-
 ## S1 — Core Project Discovery
 
-Status: **ACTIVE / WAITING FOR USER INPUT**
+Status: **ACTIVE**
 
-Objective: define what Magic is actually building, for whom, and what outcome proves success.
+Objective: define the first production-ready magic effect and lock the few architecture decisions that materially affect implementation.
 
-High-impact decisions to resolve:
-- real problem to solve;
-- primary user/stakeholder;
-- target outcome and success measure;
-- scope boundaries;
-- main usage environment/platform;
-- highest-risk assumption requiring research or testing.
+### Confirmed
 
-Exit criteria:
-- concise problem statement;
-- target user/stakeholder defined;
-- measurable or observable target outcome;
-- in-scope / out-of-scope boundaries;
-- first execution milestone agreed;
-- major unknowns tagged as assumption vs research/test.
+- Project domain: tools for live magic performance.
+- Trick 01: QR-based playing-card reveal.
+- Spectator uses the public/reveal flow.
+- Performer secretly enters setup mode, selects a card, presses Done, then spectator scanning the QR sees that card.
+- A single website product exposes both normal and hidden setup behavior.
+
+### Remaining high-impact decisions
+
+1. shared-state model between performer and spectator devices;
+2. performer/channel/session model for the QR;
+3. secret setup activation gesture;
+4. reveal/reset lifecycle;
+5. spectator reveal presentation;
+6. first deployment/backend approach.
+
+### Exit criteria
+
+- the six decisions above are locked;
+- first implementation milestone is defined;
+- architecture is sufficient to build a vertical-slice prototype;
+- test plan covers cross-device state, accidental setup discovery, and reset behavior.
 
 ## S2 — Architecture / Execution Planning
 
