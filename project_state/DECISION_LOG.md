@@ -143,3 +143,36 @@
 **Decision:** GitHub Pages deployment should publish a built static artifact through GitHub Actions rather than exposing the repository tree as the site source.
 
 **Consequence:** Application deployment is decoupled from project-control files and future build tooling can handle the `/Magic/` base path cleanly.
+
+
+## D-023 — 2026-09-30
+
+**Decision:** Trick 01 v1 will be GitHub-only: GitHub Pages + GitHub REST API, with no Firebase/Supabase/Cloudflare dependency in the active architecture.
+
+**Consequence:** D-014, D-015, D-017, and D-018 are superseded for v1. D-019 through D-022 remain applicable for Pages hosting/deployment.
+
+## D-024 — 2026-09-30
+
+**Decision:** Performer writes current card state through GitHub's repository Contents API using a fine-grained personal access token with `Contents: write`.
+
+**Consequence:** Done is successful only when GitHub returns a successful file update response. Every card change creates a repository commit.
+
+## D-025 — 2026-09-30
+
+**Decision:** Use a separate public state repository, recommended name `momentum448-glitch/Magic-state`, rather than storing mutable state in the main `Magic` code repository.
+
+**Reason:** Fine-grained PAT contents permission is repository-scoped, not path-scoped.
+
+**Consequence:** The performer token can be restricted to state only and cannot modify the application source repository.
+
+## D-026 — 2026-09-30
+
+**Decision:** Spectators read the current channel JSON without authentication from the public state repository.
+
+**Consequence:** v1 must account for GitHub's unauthenticated REST API rate limit and verify fresh-read latency/cache behavior under real two-device testing.
+
+## D-027 — 2026-09-30
+
+**Decision:** State file format is one JSON file per performer channel, e.g. `channels/<channelId>.json`.
+
+**Consequence:** Multiple performer channels are isolated by path and can be tested independently.
