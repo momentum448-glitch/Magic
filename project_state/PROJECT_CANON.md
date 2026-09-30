@@ -79,6 +79,7 @@ Locked for the vertical slice:
 - recommended state repository: public `momentum448-glitch/Magic-state`;
 - the performer token must never be committed to GitHub or bundled into the Pages build;
 - spectator reads current state from the public state repository through the GitHub Contents API;
+- v1 spectator behavior is snapshot-on-load: no automatic polling/realtime refresh; if the page was already open before a performer change, a manual page refresh is required to fetch the new card;
 - Done is successful only after GitHub confirms the file update;
 - each performer channel is represented by a separate JSON state file;
 - v1 channel URL remains `https://momentum448-glitch.github.io/Magic/?c=<channelId>`.
