@@ -58,10 +58,10 @@ Pages URL:
 
 ## Execution access note
 
-GitHub execution is available through the connected GitHub integration. Before claiming repository write access is unavailable, verify the actual connector permissions/state first.
+GitHub execution is available through the connected GitHub integration. AGENTS.md now explicitly requires verifying the actual connector permissions/state before claiming repository write access is unavailable. Operational rule commit: `8815d28d673ba75899642c2af1b031d263cf8ca7`.
 
 ## Sync status
 
 - GitHub: **SYNCED**
-- Drive: mirror follows this checkpoint.
+- Drive: **SYNCED**.
 - Pending sync: **NONE**
