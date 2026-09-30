@@ -73,7 +73,8 @@ Performer one-time arm page:
 
 ### QC checkpoint
 
-- Five-tap visible setup hotspot: **PASS on user device**.
+- Five-tap setup activation: **PASS on user device**.
+- Hidden top-left five-tap hotspot after visual concealment: **PASS on user device**.
 - Setup activation blocker from long-press: **RESOLVED**.
 - Performer write through GitHub API: **PASS**.
 - Second-device reveal correctness after fresh load/manual refresh: **PASS**.
@@ -86,7 +87,6 @@ Performer one-time arm page:
 2. Verify `test01` and `test02` isolation.
 3. Observe latency and public API rate-limit headers.
 4. Confirm PAT never appears in source/build artifact.
-5. Reconfirm hidden 5-tap activation on the performer device after deployment.
 
 ### Known constraints
 
