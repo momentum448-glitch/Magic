@@ -52,3 +52,34 @@
 **Performer flow:** Secretly enter setup mode, select the named card, press Done, then let the spectator scan.
 
 **Consequence:** The implementation must support state transfer across devices without exposing setup controls to the spectator.
+
+
+## D-009 — 2026-09-30
+
+**Decision:** Trick 01 uses one stable QR per performer-specific channel.
+
+**Consequence:** The QR can be printed and reused across performances, while shared state remains isolated between performers.
+
+## D-010 — 2026-09-30
+
+**Decision:** Hidden setup mode is activated by a long-press on an invisible hotspot for roughly 2–3 seconds.
+
+**Consequence:** Setup remains absent from ordinary visible navigation and can be entered with one discreet action.
+
+## D-011 — 2026-09-30
+
+**Decision:** The selected card remains active until the performer explicitly changes it.
+
+**Consequence:** There is no automatic reset, expiry, or one-scan consumption in the first design.
+
+## D-012 — 2026-09-30
+
+**Decision:** Spectator reveal uses a natural photographic-looking presentation rather than an app-like control/result screen.
+
+**Consequence:** The QR destination should feel like an ordinary pre-existing image.
+
+## D-013 — 2026-09-30
+
+**Decision:** Setup uses a 52-card grid; performer taps one card and presses Done.
+
+**Consequence:** Setup is optimized for fast mobile operation with minimal interaction steps.
