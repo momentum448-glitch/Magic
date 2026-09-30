@@ -1,162 +1,133 @@
 # Trick 01 — Architecture v1
 
 Date: 2026-09-30
-Status: **LOCKED FOR VERTICAL-SLICE IMPLEMENTATION**
+Status: **LOCKED FOR GITHUB-ONLY VERTICAL SLICE**
 
 ## Stack
 
-- Source repository: GitHub, `momentum448-glitch/Magic`.
-- Frontend/static hosting: GitHub Pages.
-- Deployment: GitHub Actions builds and publishes only the static app artifact.
-- Shared state: Firebase Realtime Database.
-- Performer authentication: Firebase Authentication.
+- Main code repo: `momentum448-glitch/Magic`.
+- Frontend/static assets: GitHub Pages.
+- Deploy: GitHub Actions.
+- Mutable shared state: GitHub REST Contents API.
+- State repo: dedicated public repo, recommended `momentum448-glitch/Magic-state`.
+- Performer credential: fine-grained GitHub PAT scoped only to the state repo with `Contents: write`.
 - Spectator authentication: none.
-- Card images: static assets bundled with the Pages deployment.
+- External backend/database: none.
 
-## Repository decision
-
-No new repository is required for v1.
-
-Use the existing `Magic` repository. The default project Pages URL is expected to be:
-
-`https://momentum448-glitch.github.io/Magic/`
-
-A separate repository named `momentum448-glitch.github.io` is only needed later if the product specifically needs the GitHub account root site rather than a project site.
-
-## URL/channel model
-
-Each performer owns one stable public channel ID.
-
-Pages-safe v1 URL:
+## Public QR URL
 
 `https://momentum448-glitch.github.io/Magic/?c=<channelId>`
 
-The QR encodes that stable URL and can be printed/reused.
+The QR is stable and reusable.
 
-Why query-based routing:
-- GitHub Pages is static hosting;
-- the current repository is a project site under `/Magic/`;
-- query parameters do not require server-side rewrites;
-- avoids relying on SPA 404 fallback tricks for a live-show tool.
+## State repository
 
-A future custom domain can preserve the same query model without changing backend state.
-
-## State model
-
-Suggested logical structure:
+Recommended layout:
 
 ```
-channelOwners/
-  <channelId>: <firebaseUid>
-
-channels/
-  <channelId>/
-    cardCode: "7D"
-    updatedAt: <server timestamp>
-    version: <integer>
+Magic-state/
+  channels/
+    performer01.json
+    performer02.json
 ```
 
-## Access model
+Example:
 
-### Spectator
+```json
+{
+  "cardCode": "7D",
+  "version": 12,
+  "updatedAt": "2026-09-30T09:20:00Z"
+}
+```
 
-- Opens the GitHub Pages URL.
-- Channel ID comes from `?c=<channelId>`.
-- Can read current public state for that channel.
-- Does not authenticate.
-- Cannot write.
+## Performer token model
 
-### Performer
+The performer uses a fine-grained PAT:
+- repository access: only `Magic-state`;
+- repository permission: `Contents: write`;
+- no Actions, Administration, Secrets, or Workflow permission;
+- never committed to either repository;
+- never included in the GitHub Pages artifact.
 
-- Uses the same GitHub Pages app on their own device.
-- Firebase Auth session persists locally unless explicitly signed out.
-- Can write only the channel they own.
-- Hidden setup gesture opens setup only when the authenticated UID owns the current channel.
-- On an unauthenticated spectator device, the same long-press exposes no setup controls.
+For v1, the app may store the token locally on the performer's own device after explicit opt-in. This is a convenience/security trade-off to validate during QC. Repo isolation limits the blast radius if that token is exposed.
 
-The GitHub Pages origin must be added to Firebase Authentication authorized domains.
+## Hidden setup flow
 
-## Firebase Security Rule intent
+1. Performer opens the same Pages URL/channel on their own phone.
+2. Long-press invisible hotspot ~2–3 seconds.
+3. Setup UI opens.
+4. Performer selects one of 52 cards.
+5. Press Done.
+6. App calls GET Contents API for `channels/<channelId>.json` to obtain current blob SHA.
+7. App sends PUT Contents API with the new Base64-encoded JSON and that SHA, authenticated with the PAT.
+8. On HTTP 200/201, Done succeeds and setup closes.
+9. On HTTP 409, app re-fetches SHA and retries once.
+10. On failure, setup stays open and does not claim success.
 
-- `channels/<channelId>`: public read.
-- Writes allowed only when `auth.uid` equals the owner UID recorded for that channel.
-- Owner mapping is not publicly writable.
-- Card values are validated against the supported deck.
-- Ownership cannot be modified through the spectator/public path.
+GitHub requires `Contents: write` for create/update file contents.
 
-## Performance-critical write flow
+## Spectator flow
 
-1. Performer enters hidden setup.
-2. Performer taps one of 52 cards.
-3. Performer presses Done.
-4. Client writes `cardCode`, `updatedAt`, and version.
-5. UI waits for the Firebase write Promise to resolve.
-6. Only after server commit is confirmed does setup report success/close.
+1. Spectator scans QR.
+2. GitHub Pages app loads.
+3. Parse `?c=<channelId>`.
+4. Perform unauthenticated GET Contents API request against public `Magic-state`.
+5. Use browser `cache: "no-store"` and fresh request behavior.
+6. Decode JSON.
+7. Map `cardCode` to local static photograph.
+8. Render only the photographic reveal.
 
-## Spectator read flow
+No token is sent from the spectator device.
 
-1. Spectator scans the fixed QR.
-2. GitHub Pages serves the static app.
-3. App parses `channelId` from `?c=`.
-4. App performs a fresh one-time Firebase read.
-5. Map `cardCode` to the corresponding local static photo asset.
-6. Render the image without performer controls or app-like result chrome.
+## Rate-limit model
 
-## GitHub Pages deployment shape
+GitHub's current primary REST API limit for unauthenticated public requests is 60 requests/hour per originating IP.
 
-Recommended:
-- static frontend source in the existing repository;
-- a build step configured for base path `/Magic/`;
-- GitHub Actions workflow uploads only the built output as the Pages artifact;
-- card assets use base-path-safe URLs;
-- no dependency on a backend web server for routing.
+Implication:
+- acceptable for v0/small-show testing;
+- venue Wi-Fi can aggregate many spectators behind one public IP;
+- rate-limit behavior is an explicit S2 acceptance test;
+- this architecture is not yet approved for high-volume public deployment.
+
+Authenticated performer API calls have a much higher primary limit, so performer writes are not expected to be rate-limited in ordinary show use.
+
+## Security model
+
+- Main repo token exposure risk is avoided by using a separate state repo.
+- PAT is never embedded in source or build output.
+- State repo is public because spectator reads are unauthenticated.
+- Public state should contain only minimal trick state, never secrets or personal data.
+- Knowing the state repo/API can reveal the current card to a technically inspecting spectator; v1 relies on obscurity of implementation, not cryptographic secrecy.
+- If stronger secrecy becomes required, GitHub-only client architecture will no longer be sufficient and a backend-controlled design should be reconsidered.
+
+## GitHub Pages deployment
+
+- Existing `Magic` repo.
+- Base path `/Magic/`.
+- GitHub Actions publishes only built static artifact.
+- Static route uses query string, no server rewrite dependency.
 
 ## State lifecycle
 
-Selected card persists until performer explicitly changes it.
+- Card persists until performer changes it.
+- No TTL.
+- No one-scan consumption.
+- No automatic reset.
 
-No automatic expiry.
-No scan consumption.
-No automatic reset.
+## Vertical-slice acceptance
 
-## Performer provisioning v1
+1. 50 consecutive card changes, zero wrong reveal after successful Done.
+2. Second device must fetch latest card after Done.
+3. Refresh preserves selected card.
+4. Two channel files show zero leakage.
+5. Simulated update conflict is recovered by SHA re-fetch + one retry.
+6. Token is absent from repository and Pages artifact.
+7. Spectator makes no authenticated request.
+8. Observe GitHub `x-ratelimit-remaining` during public reads.
+9. Pages cold-load at `/Magic/?c=...` succeeds.
+10. Measure Done-success → fresh spectator read latency.
 
-For the first vertical slice:
-- create performer Firebase Auth account manually;
-- create one channel ID manually;
-- bind channel owner UID manually;
-- add the GitHub Pages domain to Firebase Auth authorized domains.
+## Evidence-based fallback
 
-Do not build self-service performer registration yet.
-
-## Failure behavior
-
-### Performer offline / failed commit
-
-- Done must not report success.
-- Keep setup visible and show a discreet performer-only connection/error state.
-- Never assume a queued local write is live for the audience.
-
-### Spectator read failure
-
-- Do not expose technical/backend details.
-- Show a neutral image-load failure/retry state.
-- Do not reveal performer controls.
-
-## Vertical-slice acceptance tests
-
-1. Correctness: 50 consecutive card changes, zero incorrect reveal after Done has resolved.
-2. Persistence: reload spectator page and still obtain the current selected card.
-3. Isolation: two channel IDs operated in parallel, zero cross-channel leakage.
-4. Authorization: unauthenticated and wrong-owner write attempts are rejected.
-5. Hidden setup: unauthenticated spectator long-press exposes no setup UI.
-6. Latency target: measure Done-resolved → second-device fresh read; working target is p95 under 1 second on normal Wi-Fi/4G.
-7. Reconnect: temporarily disconnect performer device; Done must not falsely indicate live success.
-8. Pages pathing: direct QR load under `/Magic/?c=...` must load correctly from a cold browser session.
-9. Auth origin: Firebase Auth must operate correctly from the GitHub Pages domain.
-
-## Fallback trigger
-
-Reconsider Cloudflare Durable Objects if Firebase testing shows unacceptable stale reads, propagation latency, access-control friction, or operational constraints.
-
-GitHub Pages remains the preferred frontend host unless live testing shows a hosting-specific blocker.
+If GitHub API latency, caching, rate limits, commit churn, or client-side token handling fail live-show QC, revisit a small real backend. That fallback is not active in v1.
