@@ -209,3 +209,14 @@
 **Reason:** The visible prototype trigger has passed device QC and should no longer be exposed in the spectator-facing experience.
 
 **Consequence:** The active build has no visible `SETUP ×5` label or tap counter. The tappable top-left hotspot remains active for five taps, and all existing Arm/setup behavior is unchanged.
+
+
+## D-031 — 2026-09-30
+
+**Decision:** Accept the GitHub-only backend for Trick 01 prototype/show-small v1 and advance to Production Polish.
+
+**Evidence:** User-device sequential card-change QC passed. Actual state shows `test01` at version 6 while `test02` remains version 1, supporting channel isolation. The Pages workflow publishes only `site/`, and the deployed source contains no performer PAT value; the token is entered at runtime and stored in sessionStorage only.
+
+**Rate-limit posture:** Spectator reads are unauthenticated and GitHub documents a 60 requests/hour primary limit per originating IP. v1 performs one public read per fresh page load/manual refresh and intentionally does not poll.
+
+**Consequence:** This is acceptable for prototype and small-show use, but not approved as a high-volume public architecture. A deliberately forced HTTP 409 collision remains a non-blocking resilience test because the retry path is implemented but has not been empirically forced during device QC.
