@@ -29,9 +29,23 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
   - normal/reveal mode for the spectator;
   - hidden setup mode for the performer.
 - Setup mode is not exposed as an ordinary visible navigation option.
-- Setup mode is activated by a secret interaction known to the performer.
-- In setup mode, the performer selects the named card from the deck and presses Done.
-- After Done, the next spectator-facing reveal must resolve to that selected card.
+- Setup mode is activated by a secret long-press on an invisible hotspot for roughly 2–3 seconds.
+- In setup mode, the performer sees a 52-card grid, taps the named card, then presses Done.
+- After Done, the spectator-facing reveal resolves to that selected card.
+- The selected card remains active until the performer explicitly changes it. There is no automatic reset or expiry.
+
+### QR / channel model
+
+- Each performer has a stable performer-specific channel.
+- Each performer can use one fixed QR code bound to that channel repeatedly across performances.
+- The QR does not need to be regenerated for every performance.
+- State must be isolated between performer channels.
+
+### Spectator reveal presentation
+
+- The spectator should see a natural photographic-looking reveal rather than an app-like control screen.
+- Avoid explicit UI such as “Your card is…” unless later testing proves it improves the effect.
+- The result should feel like a pre-existing image reached through an ordinary QR scan.
 
 ### Durable UX principles
 
@@ -40,6 +54,7 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
 - The setup UI should minimize taps and cognitive load.
 - The reveal must not visibly expose performer controls.
 - The system must prioritize reliability under real show conditions over decorative complexity.
+- Mobile-first behavior is assumed for both performer and spectator flows.
 
 ## Durable continuity architecture
 
@@ -55,12 +70,12 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
 ## Open architecture decisions for Trick 01
 
 The following are not yet canon:
-- how the performer state is shared with the spectator device;
-- whether state is global, performer-specific, or session-specific;
-- the exact secret setup gesture;
-- reveal/reset lifecycle after a successful scan;
-- visual style of the spectator reveal;
-- deployment/backend choice.
+- exact backend/shared-state service;
+- hosting/deployment platform;
+- authentication/provisioning mechanism for performer-specific channels;
+- implementation details for cross-device latency and consistency.
+
+These items require research and/or prototype testing before being locked.
 
 ## Canon update rule
 
