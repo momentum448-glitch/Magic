@@ -1,46 +1,48 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0002**  
+Handoff ID: **H-0003**  
 Last updated: **2026-09-30**  
 Current stage: **S1 — Core Project Discovery**  
-Status: **WAITING FOR FOUNDATIONAL DECISIONS**
+Status: **BACKEND RESEARCH REMAINS**
 
-## Completed in this checkpoint
+## New decisions locked
 
-- Verified repository continuity files before changing project state.
-- Locked project domain: digital tools for live magic performance.
-- Locked Trick 01: QR Card Reveal.
-- Locked audience effect: spectator names any card, scans QR, sees the matching card image.
-- Locked performer flow: secretly enter setup mode, select named card, press Done, then spectator scans.
-- Locked two-mode model: normal/reveal mode and hidden setup mode in one web product.
-- Updated `PROJECT_CANON.md`, `PROJECT_STAGE.md`, and `DECISION_LOG.md`.
-- Mirrored canon, stage, decision, and handoff state to Drive.
+- QR model: one stable QR per performer-specific channel.
+- Hidden setup entry: long-press an invisible hotspot for roughly 2–3 seconds.
+- Reveal lifecycle: selected card persists until performer explicitly changes it.
+- No automatic reset or expiry in the first design.
+- Spectator presentation: natural photographic-looking reveal, not app-like controls.
+- Setup UI: 52-card grid + Done.
 
-## Important technical implication
+## Current Trick 01 flow
 
-The performer and spectator use different devices. Trick 01 therefore requires shared cross-device state. A purely static/local-only implementation cannot satisfy the effect reliably.
+1. Spectator names any card.
+2. Performer secretly long-presses hidden hotspot.
+3. Performer taps the card in the 52-card grid and presses Done.
+4. Shared performer-channel state changes to that card.
+5. Spectator scans the performer’s fixed QR.
+6. Spectator sees a natural-looking photo of that exact card.
+7. State remains that card until performer changes it.
 
-## Open foundational decisions
+## Technical implication
 
-1. QR/state model: global shared slot vs performer-specific channel vs session-specific QR.
-2. Exact hidden gesture for setup entry.
-3. Reveal lifecycle/reset/expiry behavior.
-4. Spectator-facing reveal presentation.
-5. Setup selection UI details.
-6. Backend/deployment choice, to be verified for latency and consistency.
+A purely static/local-only website is insufficient because performer and spectator use different devices. Shared state must propagate reliably across devices while remaining isolated between performer channels.
 
-## Preliminary recommendation
+## Remaining research
 
-- performer-specific channel bound to a stable QR;
-- one hidden long-press hotspot for setup;
-- 52-card grid + Done;
-- short server-side armed TTL rather than indefinite stale state;
-- spectator page should look like a normal photo/reveal, not an app control panel;
-- research a small low-latency shared backend before locking deployment.
+- backend/shared-state service;
+- hosting/deployment platform;
+- performer-channel provisioning/authentication;
+- two-device latency and consistency;
+- channel-isolation test.
+
+## Candidate first implementation milestone
+
+Build a two-device vertical slice proving fixed QR → hidden setup → card selection → Done → correct spectator reveal → later performer change updates the next reveal.
 
 ## Exact next action
 
-User answers or approves the recommended choices for the 5–6 high-impact decisions above. After that, advance to S2 and design/build the vertical-slice prototype.
+Research current backend/shared-state options and recommend a minimal architecture based on latency, consistency, simplicity, cost, and deployability. Then lock S1 and move to S2.
 
 ## Sync status
 
