@@ -20,7 +20,7 @@ Locked product outcome:
 
 ## S2 — Architecture / Execution Planning
 
-Status: **ACTIVE — VERTICAL SLICE DEPLOYED / DEVICE WRITE QC PENDING**
+Status: **ACTIVE — SETUP ACTIVATION QC PASSED / DEVICE WRITE QC PENDING**
 
 Locked v1 stack:
 - application repository: `momentum448-glitch/Magic`;
@@ -71,16 +71,19 @@ Spectator:
 Performer one-time arm page:
 `https://momentum448-glitch.github.io/Magic/?c=test01#arm`
 
+### QC checkpoint
+
+- Five-tap visible setup hotspot: **PASS on user device**.
+- Setup activation blocker from long-press: **RESOLVED**.
+
 ### Remaining S2 validation
 
-1. Create a fine-grained PAT restricted to `Magic-state` with `Contents: write`.
-2. Arm the performer device with that token.
-3. Verify browser-side write from GitHub Pages.
-4. Verify second-device fresh read after Done.
-5. Run sequential card-change correctness test.
-6. Verify `test01` and `test02` isolation.
-7. Observe latency and public API rate-limit headers.
-8. Confirm PAT never appears in source/build artifact.
+1. Verify performer browser write after selecting a card and pressing Done.
+2. Verify second-device fresh read after Done.
+3. Run sequential card-change correctness test.
+4. Verify `test01` and `test02` isolation.
+5. Observe latency and public API rate-limit headers.
+6. Confirm PAT never appears in source/build artifact.
 
 ### Known constraints
 
