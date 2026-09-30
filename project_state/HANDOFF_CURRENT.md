@@ -18,6 +18,7 @@ Status: **PAGES DEPLOYED — WAITING FOR PERFORMER PAT + TWO-DEVICE QC**
 - HTTP 409: one re-fetch + retry.
 - Spectator read: unauthenticated GitHub Contents API with cache bypass.
 - Pages workflow: `.github/workflows/pages.yml`.
+- Workflow only redeploys for `site/**` or workflow-file changes.
 - Pages artifact publishes only `site/`; project control docs are not deployed.
 - Duplicate root app and obsolete duplicate Pages workflow were removed.
 
@@ -25,7 +26,7 @@ Status: **PAGES DEPLOYED — WAITING FOR PERFORMER PAT + TWO-DEVICE QC**
 
 Latest verified deployment commit:
 
-`c5809362886f0f89ec50cdb7955ba7be17b63634`
+`a14e73077055693d3831805f48081bcbe7abb934`
 
 GitHub Actions result: **SUCCESS**
 
