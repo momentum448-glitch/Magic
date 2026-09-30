@@ -13,7 +13,7 @@ Status: **COMPLETE**
 Locked product outcome:
 - Trick 01 is QR Card Reveal.
 - Stable QR per performer channel.
-- Five-tap setup entry. Hotspot stays visible during prototype/QC and will be hidden after the flow passes.
+- Five-tap setup entry with a visually hidden top-left hotspot.
 - 52-card grid + Done.
 - Selected card persists until performer changes it.
 - Natural photographic spectator reveal.
@@ -46,7 +46,7 @@ Locked v1 stack:
 - Implemented:
   - public state read from GitHub Contents API;
   - query-channel routing via `?c=<channelId>`;
-  - visible 5-tap setup gate for prototype/QC;
+  - hidden 5-tap setup gate;
   - 52-card setup grid;
   - performer device arming via `#arm`, plus automatic Arm fallback when the 5-tap trigger is used without a token;
   - session-only PAT storage;
@@ -86,7 +86,7 @@ Performer one-time arm page:
 2. Verify `test01` and `test02` isolation.
 3. Observe latency and public API rate-limit headers.
 4. Confirm PAT never appears in source/build artifact.
-5. After activation/QC is complete, visually hide the setup hotspot while keeping the 5-tap gesture.
+5. Reconfirm hidden 5-tap activation on the performer device after deployment.
 
 ### Known constraints
 
