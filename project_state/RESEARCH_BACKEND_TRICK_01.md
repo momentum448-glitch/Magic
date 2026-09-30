@@ -4,7 +4,9 @@ Date: 2026-09-30
 
 ## Decision summary
 
-Selected for v1: **Firebase Realtime Database + Firebase Authentication + Firebase Hosting**.
+Selected backend for v1: **Firebase Realtime Database + Firebase Authentication**.
+
+Frontend hosting is **GitHub Pages** per the project owner's explicit platform preference.
 
 Fallback if prototype evidence disproves the choice: **Cloudflare Workers + Durable Objects**.
 
@@ -20,7 +22,7 @@ Supabase remains a valid later option if the Magic project grows into a more rel
 6. Low prototype cost.
 7. Straightforward mobile web deployment.
 
-## Firebase Realtime Database
+## Firebase Realtime Database + Authentication
 
 ### Strengths
 
@@ -28,12 +30,11 @@ Supabase remains a valid later option if the Magic project grows into a more rel
 - Browser SDK `set()` / `update()` returns a Promise that resolves when synchronization to the server completes.
 - Security Rules can allow public reads while restricting writes by Firebase Auth UID.
 - Firebase Auth supports email/password and persistent browser sessions.
-- Hosting provides SSL, CDN delivery, and custom-domain support.
 - Small v1 data footprint is comfortably within prototype-scale usage.
 
 ### Fit for Trick 01
 
-Excellent. Trick 01 needs only one tiny authoritative state object per performer channel, not a relational data model.
+Excellent for backend state/auth. Trick 01 needs only one tiny authoritative state object per performer channel, not a relational data model. Frontend delivery is handled separately by GitHub Pages.
 
 ## Cloudflare Durable Objects
 
@@ -85,3 +86,19 @@ The architecture is selected for v1, but production confidence requires a two-de
 - test two performer channels in parallel;
 - verify unauthorized write attempts fail;
 - verify refresh preserves the currently selected card.
+
+
+## GitHub Pages hosting decision
+
+GitHub Pages is used for the frontend and static card assets.
+
+Why it fits:
+- the app is client-side HTML/CSS/JS;
+- Firebase Realtime Database and Auth are callable from the browser;
+- the existing public `Magic` repository can host a project Pages site;
+- a query-based channel URL avoids server rewrite requirements.
+
+Pages URL for v1:
+`https://momentum448-glitch.github.io/Magic/?c=<channelId>`
+
+Firebase Auth configuration must authorize the GitHub Pages origin.
