@@ -67,29 +67,36 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
 7. Meaningful decisions are preserved in `DECISION_LOG.md`.
 8. State documents are updated during the active work session, not promised for later.
 
-## Trick 01 — Backend architecture v1
+## Trick 01 — GitHub-only architecture v1
 
 Locked for the vertical slice:
-- shared state: Firebase Realtime Database;
-- performer authentication: Firebase Authentication;
+- frontend/static assets: GitHub Pages from `momentum448-glitch/Magic`;
+- deployment: GitHub Actions publishes only the built static app artifact;
+- shared state transport/storage: GitHub REST Contents API;
 - spectator authentication: none;
-- frontend/static assets: GitHub Pages deployed from the Magic repository via GitHub Actions;
-- one stable channel ID per performer;
-- performer writes only their own channel under Firebase Security Rules;
-- spectator reads the public current card state for the scanned channel;
-- Done is considered successful only after the Firebase write Promise confirms server synchronization;
-- performer auth should persist locally on the performer's device to minimize show-time friction;
-- v1 performer provisioning is manual rather than self-service.
+- performer write credential: fine-grained GitHub personal access token;
+- performer token must be scoped only to a dedicated state repository with `Contents: write`;
+- recommended state repository: public `momentum448-glitch/Magic-state`;
+- the performer token must never be committed to GitHub or bundled into the Pages build;
+- spectator reads current state from the public state repository through the GitHub Contents API;
+- Done is successful only after GitHub confirms the file update;
+- each performer channel is represented by a separate JSON state file;
+- v1 channel URL remains `https://momentum448-glitch.github.io/Magic/?c=<channelId>`.
 
-GitHub Pages is the locked frontend host for v1. Firebase remains backend-only for Realtime Database and performer Authentication.
+Reason for a separate state repository:
+a fine-grained token with `Contents: write` is repository-scoped, not path-scoped. Isolating mutable show state in `Magic-state` prevents the performer token from being able to modify the application source repository.
 
-The default project-site URL is expected to be `https://momentum448-glitch.github.io/Magic/`. For reliability on static hosting, v1 uses query-based channel URLs such as `https://momentum448-glitch.github.io/Magic/?c=<channelId>` rather than requiring server-side dynamic route handling.
+Firebase, Supabase, and Cloudflare are no longer part of the active v1 architecture. They remain historical researched alternatives only.
 
-If Firebase Authentication is used from the GitHub Pages origin, that Pages domain must be included in Firebase Authentication's authorized domains.
+GitHub-only v1 must be validated for:
+- fresh-read latency after a successful Done;
+- stale-cache behavior;
+- GitHub API rate-limit behavior;
+- update conflicts;
+- token handling on the performer device;
+- two-channel isolation.
 
 Architecture details are recorded in `project_state/ARCHITECTURE_TRICK_01.md`.
-
-Production confidence still requires two-device latency, stale-read, authorization, and channel-isolation tests. Cloudflare Durable Objects is the designated fallback if Firebase fails those tests.
 
 ## Canon update rule
 
