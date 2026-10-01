@@ -21,7 +21,7 @@
   const RANKS = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
   const VALID_CODES = new Set(SUITS.flatMap(s => RANKS.map(r => r + s.code)));
 
-  const cardEl = document.getElementById("card");
+  const cardPhoto = document.getElementById("cardPhoto");
   const statusText = document.getElementById("statusText");
   const hotspot = document.getElementById("secretHotspot");
   const setupDialog = document.getElementById("setupDialog");
@@ -83,15 +83,29 @@
     return p ? `${p.rank}${p.suit.symbol} · ${p.suit.name}` : "Không hợp lệ";
   }
 
+  function assetCode(code) {
+    return code.startsWith("10") ? "T" + code.slice(2) : code;
+  }
+
+  function cardAssetUrl(code) {
+    return `https://raw.githubusercontent.com/block52/cards/main/${assetCode(code)}.svg`;
+  }
+
   function renderCard(code) {
     const p = cardParts(code);
     if (!p) throw new Error("Invalid card code");
-    cardEl.classList.remove("is-loading", "red");
-    if (p.suit.red) cardEl.classList.add("red");
-    cardEl.querySelectorAll(".rank").forEach(el => el.textContent = p.rank);
-    cardEl.querySelectorAll(".suit").forEach(el => el.textContent = p.suit.symbol);
-    cardEl.querySelector(".pip").textContent = p.suit.symbol;
-    cardEl.setAttribute("aria-label", labelFor(code));
+
+    cardPhoto.classList.add("is-loading");
+    cardPhoto.alt = labelFor(code);
+    cardPhoto.onload = () => {
+      cardPhoto.classList.remove("is-loading");
+      statusText.textContent = "";
+    };
+    cardPhoto.onerror = () => {
+      cardPhoto.classList.add("is-loading");
+      statusText.textContent = "Ảnh chưa tải được. Hãy thử mở lại.";
+    };
+    cardPhoto.src = cardAssetUrl(code);
   }
 
   async function getState(token = null) {
@@ -126,10 +140,9 @@
       currentState = result.data;
       selectedCode = currentState.cardCode;
       renderCard(currentState.cardCode);
-      statusText.textContent = "";
     } catch (err) {
       console.error(err);
-      cardEl.classList.add("is-loading");
+      cardPhoto.classList.add("is-loading");
       statusText.textContent = "Ảnh chưa tải được. Hãy thử mở lại.";
     }
   }
