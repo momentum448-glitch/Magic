@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0020**  
+Handoff ID: **H-0021**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 PHOTO ASSET SCALE-UP ACTIVE — 8H DEPLOYED**
+Status: **S3 FULL 52-CARD PHOTO DECK DEPLOYED — AWAITING MOBILE QC**
 
 ## User-device QC passed
 
@@ -224,3 +224,23 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - 9♥ render asset has already been generated locally but has **not yet** been uploaded to Drive, mapped in `site/app.js`, or deployed.
 - Performer/backend behavior remains unchanged.
 - Next execution step: upload/map/deploy 9♥, then continue 10♥ and onward one card at a time using the deterministic identity-preserving render pipeline.
+
+
+## H-0021 checkpoint — full 52-card photo deck deployed
+
+- Completed independent reveal assets for all 52 standard playing cards.
+- `site/app.js` `PHOTO_ASSETS` contains **52 unique card codes** covering every valid card; no standard card now needs the Block52 SVG fallback.
+- Remaining assets were rendered with the deterministic identity-preserving pipeline after image-generation rank/pip drift was observed.
+- All generated files are stored under Drive folder `Trick01_Reveal_Assets` (folder ID `1izQtvZxIa4_j0ZAk2X1lUy8jWlJST5g6`). Spot checks on newly uploaded files confirmed inherited `anyone / reader` permission.
+- Full-map app commit: `f74d7124434a6bb61e59d1d2ed3e098a6f3d2f06`.
+- Final cache-bust commit: `5e6af967f9f5787a03b501727320227f807394f3` using version `20261001-24`.
+- GitHub Pages run `36894000832`: **SUCCESS**.
+- Current test channel state: `KS`, version 36, so the stable QC URL currently exercises the new K♠ court asset.
+- Stable QC URL: `https://momentum448-glitch.github.io/Magic/?c=test01`.
+- Performer/backend behavior remains unchanged.
+
+### Next execution step
+
+1. Mobile-QC a representative sweep across suits and card types, especially newly deterministic court cards and high-pip cards.
+2. If visual QC passes, mark S3 photo-reveal asset work complete and move to the next Trick 01 production-polish item.
+3. If any individual card fails visual QC, replace only that card asset while preserving its card code and Drive-backed mapping.
