@@ -3,7 +3,7 @@
 Handoff ID: **H-0012**  
 Last updated: **2026-09-30**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 VISUAL DIRECTION SAMPLED — ASSET INTEGRATION PENDING**
+Status: **S3 PHOTO-SCENE DEPLOYED — MOBILE VISUAL QC PENDING**
 
 ## User-device QC passed
 
@@ -46,24 +46,40 @@ Turn the spectator page from a CSS card mockup into a natural photographic-looki
 
 ## S3 progress
 
-- Locked working visual direction: casual phone-photo look, warm wooden tabletop, one physical-looking card slightly rotated, no visible app UI.
-- Generated 4 representative samples:
-  - A♠
-  - 7♥
-  - Q♦
-  - K♣
-- These samples are conversation artifacts only at this checkpoint.
-- No image asset has been committed to GitHub yet.
-- The live Pages build still uses the CSS-rendered placeholder card.
+- Working visual direction: casual warm tabletop photo.
+- CSS placeholder card: **REMOVED**.
+- Spectator card rendering: **exact SVG image by cardCode**.
+- Asset source for QC build: Block52 52-card SVG set, MIT.
+- Rank mapping handles Magic `10H`/etc. → Block52 `TH`/etc.
+- Spectator styling now includes:
+  - warm wood tabletop scene;
+  - slight card rotation and perspective;
+  - soft cast shadow;
+  - vignette/light falloff;
+  - subtle texture/grain layers;
+  - no success-state text or app-like result label.
+- Performer 5-tap setup and backend state flow were not changed.
+
+## Verified S3 deployment
+
+App/content commits:
+- spectator markup: `771b39c95bcd58ef57f90f69ef3c06a164b45151`
+- tabletop styling: `ea8e806974cc490e78a0b5127afcb522acd9fc63`
+- cardCode → SVG mapping: `196e8c2886c618fcc1b1afc49057e0de210621e2`
+- third-party license notice: `f1369e8b323e8c529c9d6a034c8e2b36754b2863`
+
+GitHub Actions run:
+`36807187180` — **SUCCESS**
+
+QC URL:
+`https://momentum448-glitch.github.io/Magic/?c=test01`
 
 ## Immediate next work
 
-1. Treat the 4-sample direction as the working style lock unless revised.
-2. Produce/prepare the full 52-card image asset set.
-3. Commit image assets under `site/`.
-4. Implement `cardCode` → image mapping.
-5. Remove the CSS spectator card rendering.
-6. Deploy and QC on mobile while leaving performer setup/backend behavior untouched.
+1. User mobile visual QC of the new spectator reveal.
+2. Test A♠, 7♥, Q♦, K♣ and at least one 10-rank card.
+3. If visual QC passes, mirror the 52 SVGs into `site/assets/cards/` so production no longer depends on the external raw GitHub asset host.
+4. Preserve performer/backend behavior.
 
 ## Execution access note
 
