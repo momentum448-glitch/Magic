@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0018**  
+Handoff ID: **H-0019**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 3S COMPLETE — 45 PHOTO ASSETS REMAIN**
+Status: **S3 5S COMPLETE — 6S GENERATION BLOCKER UNDER INVESTIGATION**
 
 ## User-device QC passed
 
@@ -198,3 +198,17 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - test01 state advanced to `3S` for live QC, version 11.
 - Completed photo mappings now include A♠, 2♠, 3♠, 7♥, Q♦, K♣, 10♠.
 - Next card in sequence: 4♠.
+
+
+## H-0019 checkpoint — 5♠ deployed, 6♠ generation blocker
+
+- User approved the standalone 5♠ photo asset.
+- Uploaded Drive asset: `Magic_Trick01_5S.png` — file ID `14XixqbS55JijLi4UtSRYuCUgoZlQiS-g`.
+- Verified public permission: `anyone / reader`.
+- Added `5S` to `PHOTO_ASSETS` in `site/app.js`.
+- Cache-bust version advanced to `20261001-7`.
+- GitHub app commits: `d72d56e017f089d50a928d1ea656cb4422139d2b` and `2f2297fc625bed5fb65ecaf0861d9cab6750d4cd`.
+- GitHub Pages run `36882117683`: **SUCCESS**.
+- test01 state advanced to `5S`.
+- Multiple image-generation attempts for 6♠ incorrectly repeated 5♠, including an attempted edit path. Those outputs were rejected and were not uploaded or mapped.
+- Next action: switch 6♠ generation to a fresh-context/deterministic identity-preserving method before continuing 7♠ onward.
