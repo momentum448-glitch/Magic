@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0014**  
+Handoff ID: **H-0015**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 DRIVE PHOTO VERTICAL SLICE DEPLOYED — MOBILE QC NEXT**
+Status: **S3 AS PHOTO FIX DEPLOYED — MOBILE QC REQUIRED**
 
 ## User-device QC passed
 
@@ -140,3 +140,12 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 1. User reloads QC URL and verifies A♠ now appears as a real-photo scene.
 2. If PASS, complete deterministic photo assets for K♣ and 10♠ and map all five QC cards.
 3. Only then decide whether to scale the approved visual pipeline to all 52 cards.
+
+
+## H-0015 checkpoint — cache-busted AS photo deploy
+
+- Added cache-busting query versions to `site/index.html` for `styles.css` and `app.js` so mobile browsers do not keep the legacy SVG renderer during QC.
+- Commit: `d29dbaef0ef3f855d046cb781119d9d2f9394075`.
+- GitHub Pages run `36854476124`: **SUCCESS**.
+- Current channel state remains A♠, so the QC URL should now exercise the A♠ Drive photo path directly.
+- Immediate next action is user mobile QC of the same stable URL; if A♠ still falls back, inspect the Drive image request on-device rather than changing card generation again.
