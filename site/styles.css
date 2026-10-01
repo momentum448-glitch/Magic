@@ -178,3 +178,25 @@ button{touch-action:manipulation}
   .deck-grid{grid-template-columns:repeat(4,1fr);gap:7px}
   .deck-card{min-height:51px}
 }
+
+
+/* Drive-hosted full-scene photo reveal */
+.photo-frame.scene-photo{
+  position:absolute;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  aspect-ratio:auto;
+  transform:none;
+  filter:none;
+  z-index:2;
+}
+.photo-frame.scene-photo::after{display:none}
+.photo-frame.scene-photo .card-photo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  border-radius:0;
+  filter:none;
+}
