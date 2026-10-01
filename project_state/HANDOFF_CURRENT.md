@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0016**  
+Handoff ID: **H-0017**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 FIVE-CARD PHOTO QC SET DEPLOYED**
+Status: **S3 2S COMPLETE — 46 PHOTO ASSETS REMAIN**
 
 ## User-device QC passed
 
@@ -170,3 +170,17 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 1. User performs mobile QC across the five mapped cards.
 2. If the five-card set passes, scale the same one-card-at-a-time asset pipeline to the remaining 47 cards.
 3. Preserve performer/backend behavior unchanged.
+
+
+## H-0017 checkpoint — 2♠ completed
+
+- Generated and self-QC'd standalone 2♠ photo asset using the one-card-at-a-time pipeline.
+- Uploaded Drive asset: `Magic_Trick01_2S.png` — file ID `1nHGhxCHHUTyZ3VhqFKjIH8GnqcMMmEM7`.
+- Verified public permission: `anyone / reader`.
+- Added `2S` to `PHOTO_ASSETS` in `site/app.js`.
+- Cache-bust version advanced to `20261001-4`.
+- GitHub app commits: `c48aa8e27b1f2eb6fa825d43eed6440e2c0646a8` and `72c093afe4e1231c446f84e479b01f84e5eb4cd0`.
+- GitHub Pages run `36873357019`: **SUCCESS**.
+- test01 state advanced to `2S` for live QC, version 10.
+- Completed photo mappings now: A♠, 2♠, 7♥, Q♦, K♣, 10♠.
+- Next card in sequence: 3♠.
