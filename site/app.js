@@ -87,25 +87,49 @@
     return code.startsWith("10") ? "T" + code.slice(2) : code;
   }
 
-  function cardAssetUrl(code) {
+  const PHOTO_ASSETS = {
+    "7H": "https://drive.google.com/uc?export=view&id=1ddxzYL7srwp4muqlk3oJ6ETNEe4KoyN-"
+  };
+
+  function vectorCardAssetUrl(code) {
     return `https://raw.githubusercontent.com/block52/cards/main/${assetCode(code)}.svg`;
+  }
+
+  function cardAsset(code) {
+    return PHOTO_ASSETS[code]
+      ? { url: PHOTO_ASSETS[code], isPhoto: true }
+      : { url: vectorCardAssetUrl(code), isPhoto: false };
   }
 
   function renderCard(code) {
     const p = cardParts(code);
     if (!p) throw new Error("Invalid card code");
 
+    const frame = cardPhoto.closest(".photo-frame");
+    const asset = cardAsset(code);
+    let fallbackTried = false;
+
+    frame?.classList.toggle("scene-photo", asset.isPhoto);
     cardPhoto.classList.add("is-loading");
     cardPhoto.alt = labelFor(code);
+
     cardPhoto.onload = () => {
       cardPhoto.classList.remove("is-loading");
       statusText.textContent = "";
     };
+
     cardPhoto.onerror = () => {
+      if (asset.isPhoto && !fallbackTried) {
+        fallbackTried = true;
+        frame?.classList.remove("scene-photo");
+        cardPhoto.src = vectorCardAssetUrl(code);
+        return;
+      }
       cardPhoto.classList.add("is-loading");
       statusText.textContent = "Ảnh chưa tải được. Hãy thử mở lại.";
     };
-    cardPhoto.src = cardAssetUrl(code);
+
+    cardPhoto.src = asset.url;
   }
 
   async function getState(token = null) {
