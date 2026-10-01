@@ -233,3 +233,14 @@
 **Current implementation:** The QC build loads the SVGs from Block52's public GitHub raw endpoint and maps internal rank `10` to source rank `T`.
 
 **Consequence:** After visual QC passes, prefer mirroring the 52 SVG files into Magic's own `site/assets/cards/` so the production reveal is self-contained.
+
+
+## D-033 — 2026-10-01
+
+**Decision:** Reject the SVG-on-synthetic-table spectator presentation as insufficiently photographic.
+
+**Observed QC:** On a real Android device the result reads as a vector card placed on a web-generated wood background rather than a genuine photograph.
+
+**Locked visual requirement:** The spectator reveal must look like an ordinary phone photo of a physical playing card in a real environment. Natural material texture, lighting, perspective, contact shadow, lens/phone-photo cues and small imperfections are part of the illusion.
+
+**Consequence:** Do not treat CSS texture, perspective and SVG alone as final visual production. Use pre-rendered photo-real reveal images (or an equivalent render pipeline) while preserving deterministic card identity. Scale to all 52 only after a small representative photo-real QC set passes.
