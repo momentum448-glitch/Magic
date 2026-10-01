@@ -255,3 +255,12 @@
 **QC rollout:** Start with a 7♥ vertical slice, then add A♠, Q♦, K♣ and 10♠ after the Drive-host path is verified on a spectator device.
 
 **Operational constraint:** Spectator access requires the asset folder/files to be shared as “Anyone with the link — Viewer”. The connected Drive API currently cannot create that public permission for a consumer Google account, so this one sharing setting must be enabled in the Drive UI before public-device QC.
+
+
+### D-035 — Deterministic one-card render pipeline for full 52-card deck
+
+**Decision:** After repeated image-generation rank/pip drift, all remaining card assets are rendered as independent one-card images with deterministic rank/suit/pip geometry on the approved photographed-card scene. Number cards use exact deterministic pip layouts; court cards use deterministic mirrored court glyph artwork in the suit color. No collage/cropping workflow is used.
+
+**Integration:** Once individual assets were rendered and self-QC'd, the remaining Drive uploads and final web mapping were batched to reduce GitHub Pages churn. The production invariant is exact one-file-per-card identity, not one deploy per asset.
+
+**Result:** `PHOTO_ASSETS` now contains all 52 valid card codes and spectator mode no longer depends on SVG fallback for any standard card.
