@@ -115,11 +115,17 @@ Progress:
 - The card is presented inside a warm wood tabletop scene with perspective, soft shadow, vignette and grain-like texture.
 - Performer setup, hidden five-tap trigger and GitHub state flow were left unchanged.
 
+Mobile visual QC result:
+- The deployed SVG-on-CSS tabletop scene is **REJECTED** for spectator presentation.
+- User requirement clarified: the spectator result must read as a genuine phone photograph, not a vector card placed on a synthetic web background.
+- A new realistic-photo proof image was generated for 7♥ and is the current direction reference, but it is not yet integrated into the site.
+
 Immediate next work:
-1. QC the new spectator photo-scene on mobile.
-2. Verify several ranks/suits, especially A♠, 7♥, Q♦, K♣ and a 10-rank card.
-3. If visual QC passes, mirror/self-host the 52 SVG files inside `site/assets/cards/` to remove the external asset dependency.
-4. Keep performer/backend behavior unchanged.
+1. replace the runtime SVG-on-CSS composition with pre-rendered photo-real reveal images;
+2. preserve exact rank/suit correctness while adding real-photo card material, natural light, lens/perspective cues, contact shadow and imperfect tabletop texture;
+3. build a small locked QC set first (A♠, 7♥, Q♦, K♣, 10♠);
+4. deploy that photo-real QC set without changing performer/backend behavior;
+5. only after visual QC passes, scale the same render pipeline to all 52 cards.
 
 Residual non-blocking S2 check:
 - deliberately force an HTTP 409 update collision when convenient to empirically confirm the existing one-retry recovery path.
