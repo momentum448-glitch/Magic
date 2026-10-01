@@ -220,3 +220,16 @@
 **Rate-limit posture:** Spectator reads are unauthenticated and GitHub documents a 60 requests/hour primary limit per originating IP. v1 performs one public read per fresh page load/manual refresh and intentionally does not poll.
 
 **Consequence:** This is acceptable for prototype and small-show use, but not approved as a high-volume public architecture. A deliberately forced HTTP 409 collision remains a non-blocking resilience test because the retry path is implemented but has not been empirically forced during device QC.
+
+
+## D-032 — 2026-10-01
+
+**Decision:** Use the Block52 52-card SVG set as the exact card-face source for the first S3 visual QC build.
+
+**Reason:** AI-generated card faces can introduce incorrect ranks, suits, pip counts, or court details. The SVG set provides deterministic 52/52 card correctness while the photographic feeling is created by the surrounding tabletop scene, perspective, shadow, vignette, and texture.
+
+**License:** MIT, Copyright (c) 2026 Block52. The notice is included in `site/THIRD_PARTY.md`.
+
+**Current implementation:** The QC build loads the SVGs from Block52's public GitHub raw endpoint and maps internal rank `10` to source rank `T`.
+
+**Consequence:** After visual QC passes, prefer mirroring the 52 SVG files into Magic's own `site/assets/cards/` so the production reveal is self-contained.
