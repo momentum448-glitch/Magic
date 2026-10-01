@@ -3,7 +3,7 @@
 Handoff ID: **H-0012**  
 Last updated: **2026-09-30**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 PHOTO-SCENE DEPLOYED — MOBILE VISUAL QC PENDING**
+Status: **S3 SVG VISUAL REJECTED — TRUE PHOTO REVEAL IN PROGRESS**
 
 ## User-device QC passed
 
@@ -74,12 +74,21 @@ GitHub Actions run:
 QC URL:
 `https://momentum448-glitch.github.io/Magic/?c=test01`
 
+## Mobile visual QC result
+
+- Current live SVG-on-tabletop build: **REJECTED visually**.
+- User's clarified requirement: spectator must see something that reads as a real phone photograph of a physical card.
+- The current live build is still technically correct but visually too synthetic.
+- A new 7♥ realistic-photo proof was generated after this QC and is the current visual reference only; it has not yet been deployed.
+
 ## Immediate next work
 
-1. User mobile visual QC of the new spectator reveal.
-2. Test A♠, 7♥, Q♦, K♣ and at least one 10-rank card.
-3. If visual QC passes, mirror the 52 SVGs into `site/assets/cards/` so production no longer depends on the external raw GitHub asset host.
-4. Preserve performer/backend behavior.
+1. Build a true photo-real pre-rendered QC set for A♠, 7♥, Q♦, K♣ and 10♠.
+2. Ensure exact card identity is preserved while adding real card-stock texture, natural lighting, perspective, contact shadow and phone-photo imperfections.
+3. Integrate those pre-rendered reveal images into spectator mode.
+4. Deploy for mobile QC.
+5. Scale to all 52 only after this visual set passes.
+6. Preserve performer/backend behavior unchanged.
 
 ## Execution access note
 
