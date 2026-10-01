@@ -244,3 +244,14 @@
 **Locked visual requirement:** The spectator reveal must look like an ordinary phone photo of a physical playing card in a real environment. Natural material texture, lighting, perspective, contact shadow, lens/phone-photo cues and small imperfections are part of the illusion.
 
 **Consequence:** Do not treat CSS texture, perspective and SVG alone as final visual production. Use pre-rendered photo-real reveal images (or an equivalent render pipeline) while preserving deterministic card identity. Scale to all 52 only after a small representative photo-real QC set passes.
+
+
+## D-034 — 2026-10-01
+
+**Decision:** Use Google Drive as the image host for the pre-rendered photo-real spectator reveal assets during S3 QC.
+
+**Implementation:** Assets live under the Drive project folder in `Trick01_Reveal_Assets`. GitHub Pages will reference direct-view image URLs; performer/backend behavior remains unchanged.
+
+**QC rollout:** Start with a 7♥ vertical slice, then add A♠, Q♦, K♣ and 10♠ after the Drive-host path is verified on a spectator device.
+
+**Operational constraint:** Spectator access requires the asset folder/files to be shared as “Anyone with the link — Viewer”. The connected Drive API currently cannot create that public permission for a consumer Google account, so this one sharing setting must be enabled in the Drive UI before public-device QC.
