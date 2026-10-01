@@ -114,7 +114,8 @@
     "QH": "https://drive.google.com/thumbnail?id=1qTHd_XwipULLKgsgrpapgtM-JXOCwqTT&sz=w1600",
     "KH": "https://drive.google.com/thumbnail?id=12poeZ528nKf61wweea8g5-o9xJIb7buB&sz=w1600",
     "AD": "https://drive.google.com/thumbnail?id=1P0s1mQ-yHIOKsMRNuBvrtywvZgvZFJpp&sz=w1600",
-    "2D": "https://drive.google.com/thumbnail?id=1vRhjfQTzffWNAmhphNkfSuEH52V1Rtxf&sz=w1600"
+    "2D": "https://drive.google.com/thumbnail?id=1vRhjfQTzffWNAmhphNkfSuEH52V1Rtxf&sz=w1600",
+    "3D": "https://drive.google.com/thumbnail?id=192wzyo9STpMYk6HmGtSfozcEvh-uCAnb&sz=w1600"
   };
 
   function vectorCardAssetUrl(code) {
