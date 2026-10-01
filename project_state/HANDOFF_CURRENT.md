@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0019**  
+Handoff ID: **H-0020**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 5S COMPLETE — 6S GENERATION BLOCKER UNDER INVESTIGATION**
+Status: **S3 PHOTO ASSET SCALE-UP ACTIVE — 8H DEPLOYED**
 
 ## User-device QC passed
 
@@ -212,3 +212,15 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - test01 state advanced to `5S`.
 - Multiple image-generation attempts for 6♠ incorrectly repeated 5♠, including an attempted edit path. Those outputs were rejected and were not uploaded or mapped.
 - Next action: switch 6♠ generation to a fresh-context/deterministic identity-preserving method before continuing 7♠ onward.
+
+
+## H-0020 checkpoint — deterministic scale-up through 8♥
+
+- Actual GitHub state verified on 2026-10-01.
+- Photo mappings currently deployed: A♠, 2♠, 3♠, 4♠, 5♠, 6♠, 7♠, 8♠, 9♠, 10♠, A♥, 2♥, 3♥, 4♥, 5♥, 6♥, 7♥, 8♥, Q♦, K♣.
+- Total deployed photo mappings: **20 cards**.
+- Latest successful Pages run: `36887645912` — **SUCCESS** for 8♥.
+- Current test channel state: `8H`, version 27.
+- 9♥ render asset has already been generated locally but has **not yet** been uploaded to Drive, mapped in `site/app.js`, or deployed.
+- Performer/backend behavior remains unchanged.
+- Next execution step: upload/map/deploy 9♥, then continue 10♥ and onward one card at a time using the deterministic identity-preserving render pipeline.
