@@ -88,7 +88,9 @@
   }
 
   const PHOTO_ASSETS = {
-    "7H": "https://drive.google.com/uc?export=view&id=1ddxzYL7srwp4muqlk3oJ6ETNEe4KoyN-"
+    "AS": "https://drive.google.com/uc?export=view&id=1zOSL_PvKGOuvVYcntrlUdwFMLqMIyoPX",
+    "7H": "https://drive.google.com/uc?export=view&id=1ddxzYL7srwp4muqlk3oJ6ETNEe4KoyN-",
+    "QD": "https://drive.google.com/uc?export=view&id=1AqI0eDInTZduNS01SEpHZQwXN24q2yfe"
   };
 
   function vectorCardAssetUrl(code) {
