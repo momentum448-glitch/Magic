@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0015**  
+Handoff ID: **H-0016**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 AS PHOTO FIX DEPLOYED — MOBILE QC REQUIRED**
+Status: **S3 FIVE-CARD PHOTO QC SET DEPLOYED**
 
 ## User-device QC passed
 
@@ -149,3 +149,24 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - GitHub Pages run `36854476124`: **SUCCESS**.
 - Current channel state remains A♠, so the QC URL should now exercise the A♠ Drive photo path directly.
 - Immediate next action is user mobile QC of the same stable URL; if A♠ still falls back, inspect the Drive image request on-device rather than changing card generation again.
+
+
+## H-0016 checkpoint — five-card photo QC set deployed
+
+- User approved the standalone K♣ and 10♠ photo assets.
+- Uploaded to Drive folder `Trick01_Reveal_Assets`:
+  - `Magic_Trick01_KC_QC.png` — file ID `1-J7WPJ-OoAnhiV8JmuFLh0qthE2w4TEm`
+  - `Magic_Trick01_10S_QC.png` — file ID `11Xoi6Z1lPZfzCPCVCzuNeehzqRZ-rgc-`
+- Verified both inherit public `anyone / reader` permission.
+- `site/app.js` now maps all five S3 QC cards to Drive photo assets: A♠, 7♥, Q♦, K♣, 10♠.
+- Added cache bust version `20261001-3` in `site/index.html`.
+- App commit: `b7d9690d5c18a30c6b54a2ad43c690e6dfe1e88b`.
+- Cache-bust commit: `bf97e7a8e8b39f07a4182e1bf1e457af4b6a875a`.
+- GitHub Pages run `36869253731`: **SUCCESS**.
+- Current stable QC URL remains `https://momentum448-glitch.github.io/Magic/?c=test01`.
+
+### Next execution step
+
+1. User performs mobile QC across the five mapped cards.
+2. If the five-card set passes, scale the same one-card-at-a-time asset pipeline to the remaining 47 cards.
+3. Preserve performer/backend behavior unchanged.
