@@ -106,11 +106,19 @@ Objective:
 - remove remaining app-like visual cues from spectator mode;
 - preserve the hidden five-tap performer flow and the accepted snapshot-on-load backend behavior.
 
+Progress:
+- Photographic visual direction selected: casual phone-photo look, warm wooden tabletop, one card slightly rotated, no visible app UI.
+- Four representative style-lock samples generated: A♠, 7♥, Q♦, K♣.
+- Samples are currently conversation artifacts only; they are not yet committed to the repository.
+- Deployed spectator page still renders the CSS placeholder card.
+
 Immediate next work:
-1. define the photographic reveal visual direction;
-2. prepare a complete 52-card visual asset strategy;
-3. implement responsive image mapping by `cardCode`;
-4. QC spectator appearance on mobile without altering the proven performer/backend flow.
+1. lock the 4-sample visual direction;
+2. create/prepare the full 52-card asset set;
+3. commit assets under `site/`;
+4. implement responsive `cardCode` → image mapping;
+5. remove the CSS placeholder spectator card;
+6. QC spectator appearance on mobile without altering the proven performer/backend flow.
 
 Residual non-blocking S2 check:
 - deliberately force an HTTP 409 update collision when convenient to empirically confirm the existing one-retry recovery path.
