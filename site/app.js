@@ -99,7 +99,8 @@
     "5S": "https://drive.google.com/thumbnail?id=14XixqbS55JijLi4UtSRYuCUgoZlQiS-g&sz=w1600",
     "6S": "https://drive.google.com/thumbnail?id=1ex-tJgkwUtrYk--hO-mMIeQaWwUW_f6_&sz=w1600",
     "7S": "https://drive.google.com/thumbnail?id=11x1dKN9yysFTCkbIhtIyoWruew6EsbsV&sz=w1600",
-    "8S": "https://drive.google.com/thumbnail?id=1ptq93_AG2ERj_1yTqFwEWzIJ6j3GEWp-&sz=w1600"
+    "8S": "https://drive.google.com/thumbnail?id=1ptq93_AG2ERj_1yTqFwEWzIJ6j3GEWp-&sz=w1600",
+    "9S": "https://drive.google.com/thumbnail?id=13-v2yyELZc5cBJ08rrpNBAW_3OIy7U5J&sz=w1600"
   };
 
   function vectorCardAssetUrl(code) {
