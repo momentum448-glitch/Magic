@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0012**  
-Last updated: **2026-09-30**  
+Handoff ID: **H-0013**  
+Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 SVG VISUAL REJECTED — TRUE PHOTO REVEAL IN PROGRESS**
+Status: **S3 DRIVE-HOSTED PHOTO REVEAL — PUBLIC SHARE GATE PENDING**
 
 ## User-device QC passed
 
@@ -99,3 +99,23 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - GitHub: **SYNCED**
 - Drive: mirror follows this handoff checkpoint.
 - Pending sync: **NONE**
+
+
+## H-0013 checkpoint — Drive-hosted photo assets
+
+- User selected Google Drive as the image host for S3 photo-real reveal assets.
+- Created Drive folder: `Trick01_Reveal_Assets` under `Magic — Project Control`.
+- Uploaded first vertical-slice asset: `Magic_Trick01_7H_QC.jpg`.
+- Drive file ID: `1ddxzYL7srwp4muqlk3oJ6ETNEe4KoyN-`.
+- Folder ID: `1izQtvZxIa4_j0ZAk2X1lUy8jWlJST5g6`.
+- Connected Drive API can upload/move the images, but cannot create an Internet-wide `anyone` permission for this consumer Google account. Domain-sharing attempt returned HTTP 400 because no Workspace domain applies.
+- Before spectator integration/QC, user must set `Trick01_Reveal_Assets` to **Anyone with the link — Viewer** in Drive UI.
+- Do not replace the live SVG renderer until the public Drive URL is verified, so the current spectator build remains functional.
+
+### Next execution step
+
+1. Verify public access to the Drive asset folder/file after the one-time sharing change.
+2. Wire 7♥ to the Drive direct-view URL with safe fallback.
+3. Deploy Pages and test on an unauthenticated spectator path/device.
+4. If PASS, add A♠, Q♦, K♣ and 10♠ to the same Drive folder and repeat QC.
+5. Preserve performer/backend behavior unchanged.
