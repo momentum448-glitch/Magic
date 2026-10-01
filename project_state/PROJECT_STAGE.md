@@ -109,16 +109,17 @@ Objective:
 Progress:
 - Photographic visual direction selected: casual phone-photo look, warm wooden tabletop, one card slightly rotated, no visible app UI.
 - Four representative style-lock samples generated: A♠, 7♥, Q♦, K♣.
-- Samples are currently conversation artifacts only; they are not yet committed to the repository.
-- Deployed spectator page still renders the CSS placeholder card.
+- CSS placeholder spectator card has been removed.
+- Spectator now renders the exact selected card as an SVG image.
+- Current QC build uses the Block52 52-card SVG set from its public GitHub repository under MIT license.
+- The card is presented inside a warm wood tabletop scene with perspective, soft shadow, vignette and grain-like texture.
+- Performer setup, hidden five-tap trigger and GitHub state flow were left unchanged.
 
 Immediate next work:
-1. lock the 4-sample visual direction;
-2. create/prepare the full 52-card asset set;
-3. commit assets under `site/`;
-4. implement responsive `cardCode` → image mapping;
-5. remove the CSS placeholder spectator card;
-6. QC spectator appearance on mobile without altering the proven performer/backend flow.
+1. QC the new spectator photo-scene on mobile.
+2. Verify several ranks/suits, especially A♠, 7♥, Q♦, K♣ and a 10-rank card.
+3. If visual QC passes, mirror/self-host the 52 SVG files inside `site/assets/cards/` to remove the external asset dependency.
+4. Keep performer/backend behavior unchanged.
 
 Residual non-blocking S2 check:
 - deliberately force an HTTP 409 update collision when convenient to empirically confirm the existing one-retry recovery path.
