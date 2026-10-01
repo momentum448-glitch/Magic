@@ -3,7 +3,7 @@
 Handoff ID: **H-0012**  
 Last updated: **2026-09-30**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S2 PROTOTYPE ACCEPTED — SPECTATOR VISUAL POLISH NEXT**
+Status: **S3 VISUAL DIRECTION SAMPLED — ASSET INTEGRATION PENDING**
 
 ## User-device QC passed
 
@@ -44,13 +44,26 @@ Deploy run:
 
 Turn the spectator page from a CSS card mockup into a natural photographic-looking reveal while preserving the proven performer/backend flow.
 
+## S3 progress
+
+- Locked working visual direction: casual phone-photo look, warm wooden tabletop, one physical-looking card slightly rotated, no visible app UI.
+- Generated 4 representative samples:
+  - A♠
+  - 7♥
+  - Q♦
+  - K♣
+- These samples are conversation artifacts only at this checkpoint.
+- No image asset has been committed to GitHub yet.
+- The live Pages build still uses the CSS-rendered placeholder card.
+
 ## Immediate next work
 
-1. Define the spectator photographic visual direction.
-2. Choose the 52-card asset strategy.
-3. Implement cardCode → image mapping.
-4. Remove remaining app-like spectator cues.
-5. QC on mobile while leaving performer setup and backend behavior untouched.
+1. Treat the 4-sample direction as the working style lock unless revised.
+2. Produce/prepare the full 52-card image asset set.
+3. Commit image assets under `site/`.
+4. Implement `cardCode` → image mapping.
+5. Remove the CSS spectator card rendering.
+6. Deploy and QC on mobile while leaving performer setup/backend behavior untouched.
 
 ## Execution access note
 
