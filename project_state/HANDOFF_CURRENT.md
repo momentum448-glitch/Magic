@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0013**  
+Handoff ID: **H-0014**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 DRIVE-HOSTED PHOTO REVEAL — PUBLIC SHARE GATE PENDING**
+Status: **S3 DRIVE PHOTO VERTICAL SLICE DEPLOYED — MOBILE QC NEXT**
 
 ## User-device QC passed
 
@@ -119,3 +119,24 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 3. Deploy Pages and test on an unauthenticated spectator path/device.
 4. If PASS, add A♠, Q♦, K♣ and 10♠ to the same Drive folder and repeat QC.
 5. Preserve performer/backend behavior unchanged.
+
+
+## H-0014 checkpoint — AS photo mapping fix
+
+- User mobile screenshot showed A♠ still rendering via legacy SVG fallback.
+- Verified actual state: `Magic-state/channels/test01.json` is `AS`, version 8.
+- Root cause: previous photo mapping only covered 7♥; A♠ legitimately fell back to Block52 SVG.
+- Uploaded public Drive photo assets for A♠ and Q♦ into `Trick01_Reveal_Assets`; inherited permission verified as `anyone / reader`.
+- Restored A♠ to the portrait photo asset for mobile presentation.
+- Updated spectator photo URLs to Drive `thumbnail?...&sz=w1600` endpoints for more reliable direct image embedding.
+- Current mapped photo cards: A♠, 7♥, Q♦.
+- Latest app commit: `9be2dbfc60c38f57b16d177cb7a19a70bf9bb1a9`.
+- GitHub Pages run `36854345616`: **SUCCESS**.
+- QC target remains `https://momentum448-glitch.github.io/Magic/?c=test01` with current state A♠.
+- K♣ and 10♠ photo assets remain pending. Image-generation attempts for K♣ drifted back to A♠ and were not accepted or uploaded.
+
+### Next execution step
+
+1. User reloads QC URL and verifies A♠ now appears as a real-photo scene.
+2. If PASS, complete deterministic photo assets for K♣ and 10♠ and map all five QC cards.
+3. Only then decide whether to scale the approved visual pipeline to all 52 cards.
