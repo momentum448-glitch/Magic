@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0017**  
+Handoff ID: **H-0018**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 2S COMPLETE — 46 PHOTO ASSETS REMAIN**
+Status: **S3 3S COMPLETE — 45 PHOTO ASSETS REMAIN**
 
 ## User-device QC passed
 
@@ -184,3 +184,17 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - test01 state advanced to `2S` for live QC, version 10.
 - Completed photo mappings now: A♠, 2♠, 7♥, Q♦, K♣, 10♠.
 - Next card in sequence: 3♠.
+
+
+## H-0018 checkpoint — 3♠ completed
+
+- Generated and self-QC'd standalone 3♠ photo asset.
+- Uploaded Drive asset: `Magic_Trick01_3S.png` — file ID `1BES-zoasXvuK_BCYst6u1fVyWo--7UeQ`.
+- Verified public permission: `anyone / reader`.
+- Added `3S` to `PHOTO_ASSETS` in `site/app.js`.
+- Cache-bust version advanced to `20261001-5`.
+- GitHub app commits: `a91ff62116f24186bb64014701b4e0bee3d64093` and `2974bfcc4b5c1fdd48c3d48b13b3739733acd2eb`.
+- GitHub Pages run `36874028211`: **SUCCESS**.
+- test01 state advanced to `3S` for live QC, version 11.
+- Completed photo mappings now include A♠, 2♠, 3♠, 7♥, Q♦, K♣, 10♠.
+- Next card in sequence: 4♠.
