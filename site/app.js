@@ -88,7 +88,7 @@
   }
 
   const PHOTO_ASSETS = {
-    "AS": "https://drive.google.com/thumbnail?id=1zOSL_PvKGOuvVYcntrlUdwFMLqMIyoPX&sz=w1600",
+    "AS": "https://drive.google.com/thumbnail?id=1BJYNHV0vAyNZxyVZQ-5ae75gHJNXnZh-&sz=w1600",
     "2S": "https://drive.google.com/thumbnail?id=1nHGhxCHHUTyZ3VhqFKjIH8GnqcMMmEM7&sz=w1600",
     "3S": "https://drive.google.com/thumbnail?id=1BES-zoasXvuK_BCYst6u1fVyWo--7UeQ&sz=w1600",
     "4S": "https://drive.google.com/thumbnail?id=1ZGZ-AspDRQ9xU8H8F5qFctwaP9Z-r3W3&sz=w1600",
@@ -108,11 +108,11 @@
     "4H": "https://drive.google.com/thumbnail?id=1mKu5zqzpSoTl-1CW3VNW6XuonJkcfn19&sz=w1600",
     "5H": "https://drive.google.com/thumbnail?id=1Xd8Ge36FwcqQgGMyJpBiJuJePcX7zPPN&sz=w1600",
     "6H": "https://drive.google.com/thumbnail?id=12en70t51pW1KCrIiftHeNK_s6DIhVM3R&sz=w1600",
-    "7H": "https://drive.google.com/thumbnail?id=1ddxzYL7srwp4muqlk3oJ6ETNEe4KoyN-&sz=w1600",
+    "7H": "https://drive.google.com/thumbnail?id=1-u8pkWMf0iC3xeH1VL8cCHdqClanIscn&sz=w1600",
     "8H": "https://drive.google.com/thumbnail?id=15T7OJ_JU8XCvEQF0lAdKjsKRPxSyUaKq&sz=w1600",
     "9H": "https://drive.google.com/thumbnail?id=1vgNK--KwlZeDI-l1mbiz2GmhtVct3e2n&sz=w1600",
-    "10H": "https://drive.google.com/thumbnail?id=1sr6tuTZr7rtL004T2elbHnR8EW3MTHW3&sz=w1600",
-    "JH": "https://drive.google.com/thumbnail?id=1FprGMAdkD4IKViyKqdElLi4mW3PRF8Yt&sz=w1600",
+    "10H": "https://drive.google.com/thumbnail?id=1dRV5ibYH0D2a8Q-y19_iIf5c7UCPKiQo&sz=w1600",
+    "JH": "https://drive.google.com/thumbnail?id=1Mh3FmbAIjnFO_Ig7CdlfXyvJpE1O4GeF&sz=w1600",
     "QH": "https://drive.google.com/thumbnail?id=1qTHd_XwipULLKgsgrpapgtM-JXOCwqTT&sz=w1600",
     "KH": "https://drive.google.com/thumbnail?id=12poeZ528nKf61wweea8g5-o9xJIb7buB&sz=w1600",
 
@@ -127,7 +127,7 @@
     "9D": "https://drive.google.com/thumbnail?id=1GuDFulQXB4F7pcDht2HmIy-r8CQWzUer&sz=w1600",
     "10D": "https://drive.google.com/thumbnail?id=1Iuan5KH189vhDQLLAylXWKx-kFae2J6Y&sz=w1600",
     "JD": "https://drive.google.com/thumbnail?id=1g6Ky_CiMirLfJqpSs2PPTguRXNcufLRJ&sz=w1600",
-    "QD": "https://drive.google.com/thumbnail?id=1AqI0eDInTZduNS01SEpHZQwXN24q2yfe&sz=w1600",
+    "QD": "https://drive.google.com/thumbnail?id=1vEXUBmTQdLYzH2zC1faSqOd2D0LNQsFd&sz=w1600",
     "KD": "https://drive.google.com/thumbnail?id=1XI4bDzqYlYCwnv6k9f9YdSVee09xZyVG&sz=w1600",
 
     "AC": "https://drive.google.com/thumbnail?id=1HXodcJmBxicPJ419EOVIV0JmR4AIoMec&sz=w1600",
@@ -142,7 +142,7 @@
     "10C": "https://drive.google.com/thumbnail?id=12xJRxdBg61kcxyYg-YWKRF4Vmf3bSWhq&sz=w1600",
     "JC": "https://drive.google.com/thumbnail?id=1ezlMDsLCcVpd6_9zJ0aMAuY_SVMiQllA&sz=w1600",
     "QC": "https://drive.google.com/thumbnail?id=1YyV88--jYwr3xVFAzML9lyU2X7BrZbIx&sz=w1600",
-    "KC": "https://drive.google.com/thumbnail?id=1-J7WPJ-OoAnhiV8JmuFLh0qthE2w4TEm&sz=w1600"
+    "KC": "https://drive.google.com/thumbnail?id=1rhUKiJ9GCHfSordFQ9E0jpqKBqGyAjU1&sz=w1600"
   };
 
   function vectorCardAssetUrl(code) {
