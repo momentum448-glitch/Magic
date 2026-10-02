@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0022**  
+Handoff ID: **H-0023**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 BICYCLE-STYLE ROLLOUT ACTIVE — 44/52 UPDATED**
+Status: **S3 FULL 52-CARD BICYCLE-STYLE DECK DEPLOYED — FINAL MOBILE QC**
 
 ## User-device QC passed
 
@@ -264,3 +264,39 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 1. Replace the 8 remaining court cards one by one with Bicycle-standard-like full two-headed court artwork.
 2. Preserve the approved wood-table photo scene, light wear, safe margins, and exact rank/suit identity.
 3. After all 52 are Bicycle-style v2, run a final mobile QC sweep for edge overflow, pip count, corner index, and court-card resemblance.
+
+
+## H-0023 checkpoint — full 52-card Bicycle-style deck deployed
+
+- User feedback identified two production defects in the previous deck: some number-card indices/pips crossed the safe margin, and J/Q/K did not resemble Bicycle Standard closely enough.
+- Locked visual target: Bicycle Standard visual language, light wear, photorealistic dark-wood tabletop, conventional pip layouts, safe margins, and full classic two-headed court artwork.
+- Rebuilt all **40 Ace/number cards (A–10)** using a deterministic safe-zone template system.
+- Replaced all **12 court cards (J/Q/K)** with Bicycle-standard-like classic court assets.
+- Rejected intermediate court composites that showed rectangular patch seams; those files were not mapped to production.
+- Final `PHOTO_ASSETS` verification: **52 mappings / 52 unique card codes**.
+- Final court mappings:
+  - JS `1k8iCsU4bGctw3tw0dpLi4sDrHdslN18z`
+  - QS `16WQeAdEGqb-mrGZ3HNPnt11kVckK47qt`
+  - KS `1XkSfjFD5XIUzQLBN7uipVOG02ZVdUz9l`
+  - JH `1Mh3FmbAIjnFO_Ig7CdlfXyvJpE1O4GeF`
+  - QH `1CWsuoyHz-s3PKQRluGoluDVE2Zhm9p95`
+  - KH `1tKNQSktIZ9YDXS3oitJ39JUP88sRXbY1`
+  - JD `1l3tHHmIzeqbR4iF-ewl3KAXyC6EsOeo1`
+  - QD `1vEXUBmTQdLYzH2zC1faSqOd2D0LNQsFd`
+  - KD `1B_GEoGdXBd4pAd_VawVtSP82wrQl6qPr`
+  - JC `1X8vhjEqlnip0Asr3vjjM1s7Rd50AE385`
+  - QC `1zdICR-FA1oOvcOslB8TRwurEkyCayEUL`
+  - KC `1rhUKiJ9GCHfSordFQ9E0jpqKBqGyAjU1`
+- All newly uploaded remaining court files verified with inherited `anyone / reader` permission.
+- Full court rollout app commit: `2a69b9802fce3a3e1e57c992358fa57988ad4586`.
+- Final cache-bust commit: `91155623ba30d2bb240bbd2f4441efd38b1f66d3`, cache version `20261002-4`.
+- GitHub Pages run `36967691609`: **SUCCESS**.
+- Current test channel state: `QS`, version 45.
+- Stable QC URL: `https://momentum448-glitch.github.io/Magic/?c=test01`.
+- Performer/backend behavior remains unchanged.
+
+### Next execution step
+
+1. User performs final mobile QC, starting with QS and checking representative A/number/high-pip/court cards across all four suits.
+2. If any individual asset still fails, replace only that asset while preserving its card code and backend behavior.
+3. If the sweep passes, mark S3 spectator reveal visual polish complete and move to the next Trick 01 production-polish item.
