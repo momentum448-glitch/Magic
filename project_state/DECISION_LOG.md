@@ -264,3 +264,10 @@
 **Integration:** Once individual assets were rendered and self-QC'd, the remaining Drive uploads and final web mapping were batched to reduce GitHub Pages churn. The production invariant is exact one-file-per-card identity, not one deploy per asset.
 
 **Result:** `PHOTO_ASSETS` now contains all 52 valid card codes and spectator mode no longer depends on SVG fallback for any standard card.
+
+
+### D-036 — Bicycle Standard visual target for reveal deck
+
+**Decision:** Trick 01 reveal cards now target the visual language of Bicycle Standard: classic poker pip/index proportions, safe margins, conventional pip layouts, full two-headed traditional court artwork, lightly worn physical cardstock, and a photorealistic dark-wood tabletop scene.
+
+**Implementation rule:** Exact card identity and safe-zone geometry are deterministic. AI generations that mutate rank/suit, introduce brand text unexpectedly, create collage outputs, or push indices/pips outside the card margin are rejected. Number/Ace faces use a fixed template system; court cards use classic two-headed court references and are replaced individually.
