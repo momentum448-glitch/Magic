@@ -98,7 +98,7 @@
     "8S": "https://drive.google.com/thumbnail?id=1tggeNlzBS-Xlgfb6ctzTrVV31heNIpTV&sz=w1600",
     "9S": "https://drive.google.com/thumbnail?id=1EpQv-3LXYjq9OSquvBqs2KymCf4V_XSD&sz=w1600",
     "10S": "https://drive.google.com/thumbnail?id=1TaaY-SHK3EO-4Ye75KJmCx9P4QMlIMmR&sz=w1600",
-    "JS": "https://drive.google.com/thumbnail?id=1tAy3qURj37ILXhJsHJ9EbXSeE_rD5Xrn&sz=w1600",
+    "JS": "https://drive.google.com/thumbnail?id=1k8iCsU4bGctw3tw0dpLi4sDrHdslN18z&sz=w1600",
     "QS": "https://drive.google.com/thumbnail?id=1aiWRXNg0kFmZG2MEduCOlzK4DjMaEd7-&sz=w1600",
     "KS": "https://drive.google.com/thumbnail?id=1j27jBVMDxGDnC4PxehVKhRWybAZw_4P2&sz=w1600",
 
