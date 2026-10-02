@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0021**  
+Handoff ID: **H-0022**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 FULL 52-CARD PHOTO DECK DEPLOYED — AWAITING MOBILE QC**
+Status: **S3 BICYCLE-STYLE ROLLOUT ACTIVE — 44/52 UPDATED**
 
 ## User-device QC passed
 
@@ -244,3 +244,23 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 1. Mobile-QC a representative sweep across suits and card types, especially newly deterministic court cards and high-pip cards.
 2. If visual QC passes, mark S3 photo-reveal asset work complete and move to the next Trick 01 production-polish item.
 3. If any individual card fails visual QC, replace only that card asset while preserving its card code and Drive-backed mapping.
+
+
+## H-0022 checkpoint — Bicycle-style rollout at 44/52
+
+- Actual GitHub state verified on 2026-10-02.
+- All **40 Ace/number cards (A–10)** are now mapped to Bicycle-style v2 photo assets with deterministic safe margins and conventional pip layouts.
+- Updated court cards currently deployed: `JS`, `JH`, `QD`, `KC`.
+- Total Bicycle-style v2 mappings deployed: **44 / 52**.
+- Remaining old court assets to replace: `QS`, `KS`, `QH`, `KH`, `JD`, `KD`, `JC`, `QC`.
+- Latest successful GitHub Pages run: `36962713281` — **SUCCESS** for `JS` Bicycle-style court.
+- Current cache version: `20261002-3`.
+- Current test channel state: `JS`, version 44.
+- JS Drive asset: `Magic_Trick01_JS_Bicycle_v2.png`, file ID `1k8iCsU4bGctw3tw0dpLi4sDrHdslN18z`, verified `anyone / reader`.
+- Stable QC URL remains `https://momentum448-glitch.github.io/Magic/?c=test01`.
+
+### Next execution step
+
+1. Replace the 8 remaining court cards one by one with Bicycle-standard-like full two-headed court artwork.
+2. Preserve the approved wood-table photo scene, light wear, safe margins, and exact rank/suit identity.
+3. After all 52 are Bicycle-style v2, run a final mobile QC sweep for edge overflow, pip count, corner index, and court-card resemblance.
