@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0023**  
+Handoff ID: **H-0024**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 FULL 52-CARD BICYCLE-STYLE DECK DEPLOYED — FINAL MOBILE QC**
+Status: **S3 BICYCLE-STYLE DECK CLEANED — 52/52 PRODUCTION ASSETS ONLY**
 
 ## User-device QC passed
 
@@ -300,3 +300,19 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 1. User performs final mobile QC, starting with QS and checking representative A/number/high-pip/court cards across all four suits.
 2. If any individual asset still fails, replace only that asset while preserving its card code and backend behavior.
 3. If the sweep passes, mark S3 spectator reveal visual polish complete and move to the next Trick 01 production-polish item.
+
+
+## H-0024 checkpoint — Drive asset cleanup complete
+
+- User requested removal of duplicate/obsolete reveal assets from Drive.
+- Source of truth used for cleanup: the 52 Drive file IDs currently referenced by `site/app.js` `PHOTO_ASSETS`.
+- Drive folder `Trick01_Reveal_Assets` contained **104 PNG files** before cleanup: 52 production assets + 52 obsolete/duplicate assets.
+- Permanently deleted all 52 obsolete/duplicate `Magic_Trick01_*.png` files that were not referenced by the live app.
+- Post-cleanup verification:
+  - Drive folder file count: **52**
+  - Active app mappings: **52**
+  - Active unique Drive IDs: **52**
+  - Missing active assets: **0**
+  - Extra/unreferenced assets in folder: **0**
+- No application code or backend behavior changed during cleanup.
+- Stable asset folder: `https://drive.google.com/drive/folders/1izQtvZxIa4_j0ZAk2X1lUy8jWlJST5g6`.
