@@ -88,9 +88,9 @@
   }
 
   const PHOTO_ASSETS = {
-    "AS": "https://drive.google.com/thumbnail?id=1BJYNHV0vAyNZxyVZQ-5ae75gHJNXnZh-&sz=w1600",
-    "2S": "https://drive.google.com/thumbnail?id=1F-GPKybddz4jxwROSIoAQqN-ZFJdFB9N&sz=w1600",
-    "3S": "https://drive.google.com/thumbnail?id=1DdDXfULGFjQzpqHxE8un7cKJqkmoW1t8&sz=w1600",
+    "AS": "https://drive.google.com/thumbnail?id=1okWmuD3WoPHZKlAOGZ7rcrtrTE5hU_tb&sz=w1600",
+    "2S": "https://drive.google.com/thumbnail?id=1USY7O0iZa-SwnOj1G5ywxzkW3NpcfDF9&sz=w1600",
+    "3S": "https://drive.google.com/thumbnail?id=1qoD1jRMDUf5XyG525bVxAv_UVMOZMcYd&sz=w1600",
     "4S": "https://drive.google.com/thumbnail?id=1K629WH9IYnd7IQUsDJZZ30NTsNdBAVpa&sz=w1600",
     "5S": "https://drive.google.com/thumbnail?id=1jmYd4MXH2Pqs8_evO2d1H5jBsvqMXYjm&sz=w1600",
     "6S": "https://drive.google.com/thumbnail?id=1ZScbrM5cotOhFr90LEH-uYJ11jxKcu4-&sz=w1600",
