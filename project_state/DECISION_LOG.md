@@ -271,3 +271,10 @@
 **Decision:** Trick 01 reveal cards now target the visual language of Bicycle Standard: classic poker pip/index proportions, safe margins, conventional pip layouts, full two-headed traditional court artwork, lightly worn physical cardstock, and a photorealistic dark-wood tabletop scene.
 
 **Implementation rule:** Exact card identity and safe-zone geometry are deterministic. AI generations that mutate rank/suit, introduce brand text unexpectedly, create collage outputs, or push indices/pips outside the card margin are rejected. Number/Ace faces use a fixed template system; court cards use classic two-headed court references and are replaced individually.
+
+
+### D-037 — One-card approval-to-production loop
+
+**Decision:** Rebuild the deck one card at a time. For each card: generate candidate → user QC → if approved, immediately upload the approved asset to the production Drive folder → update the live web mapping → delete the superseded Drive asset → only then generate the next card.
+
+**Quality rule:** Continue using the approved newer/cleaner physical-card look, Bicycle Standard reference guidance, one card per image, and no batch rollout before QC.
