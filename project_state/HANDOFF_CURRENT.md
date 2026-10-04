@@ -1,6 +1,6 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0025**  
+Handoff ID: **H-0026**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
 Status: **S3 BICYCLE-STYLE DECK CLEANED — 52/52 PRODUCTION ASSETS ONLY**
@@ -327,3 +327,15 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - 5S app commit: `ff9ee25779c33c720a060bccec475ac7a107837f`.
 - Cache version bumped to `20261004-2`.
 - Next execution step: generate `6S` in the same approved visual direction and wait for user QC before production replacement.
+
+
+## H-0026 checkpoint — approved through 6S v3
+
+- Locked one-card loop remains active: generate → user QC → if approved upload to production Drive → update live web mapping → delete superseded Drive asset → generate next card.
+- Approved and production-mapped v3 Spades now: `AS`, `2S`, `3S`, `4S`, `5S`, `6S`.
+- `6S` approved with a slightly aged look: subtly worn edges/paper, but not heavily distressed.
+- Production Drive file: `Magic_Trick01_6S_v3.png`, file ID `1Afgj183CcaHkrT7NioaGm03GRp2OwAJ_`.
+- Superseded `6S` Drive asset deleted.
+- App commit: `2e254e224d88b7b7c7d49ff1f180077305235b48`.
+- Cache version bumped to `20261004-3`.
+- Next execution step: generate `7S` matching the approved slightly-aged visual direction and wait for user QC.
