@@ -1,6 +1,6 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0024**  
+Handoff ID: **H-0025**  
 Last updated: **2026-10-01**  
 Current stage: **S3 — Trick 01 Production Polish**  
 Status: **S3 BICYCLE-STYLE DECK CLEANED — 52/52 PRODUCTION ASSETS ONLY**
@@ -316,3 +316,14 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
   - Extra/unreferenced assets in folder: **0**
 - No application code or backend behavior changed during cleanup.
 - Stable asset folder: `https://drive.google.com/drive/folders/1izQtvZxIa4_j0ZAk2X1lUy8jWlJST5g6`.
+
+
+## H-0025 checkpoint — one-card rebuild loop locked
+
+- New locked workflow for reveal assets: generate one card → user QC → if approved, immediately upload to production Drive → update `site/app.js` mapping → delete superseded Drive asset → generate the next card.
+- Approved and production-mapped v3 Spades so far: `AS`, `2S`, `3S`, `4S`, `5S`.
+- `5S` approved asset: `Magic_Trick01_5S_v3.png`, Drive ID `1HMm5wvys9kWuTZDcVyIIVLFgjpERNy0i`.
+- Superseded `5S` Drive asset was deleted.
+- 5S app commit: `ff9ee25779c33c720a060bccec475ac7a107837f`.
+- Cache version bumped to `20261004-2`.
+- Next execution step: generate `6S` in the same approved visual direction and wait for user QC before production replacement.
