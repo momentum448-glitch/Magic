@@ -1,6 +1,6 @@
 # Magic — Project Stage
 
-Last updated: 2026-09-30
+Last updated: 2026-10-12
 
 ## S0 — Continuity Infrastructure
 
@@ -99,33 +99,28 @@ Performer one-time arm page:
 
 ## S3 — Trick 01 Production Polish
 
-Status: **ACTIVE**
+Status: **ACTIVE — PHOTO DECK 52/52 LIVE, V3 15/52; MOBILE LAYOUT QC PENDING**
 
 Objective:
-- replace the CSS placeholder card with a natural photographic-looking spectator reveal;
-- remove remaining app-like visual cues from spectator mode;
-- preserve the hidden five-tap performer flow and the accepted snapshot-on-load backend behavior.
+- Show a natural photographic card-reveal with exact rank/suit on all 52 cards and no visible performer controls.
+- Upgrade individual photos to user-approved v3 realism; do not replace an unapproved image.
+- Preserve the verified five-tap performer setup and GitHub-only snapshot-on-load state.
 
-Progress:
-- Photographic visual direction selected: casual phone-photo look, warm wooden tabletop, one card slightly rotated, no visible app UI.
-- Four representative style-lock samples generated: A♠, 7♥, Q♦, K♣.
-- CSS placeholder spectator card has been removed.
-- Spectator now renders the exact selected card as an SVG image.
-- Current QC build uses the Block52 52-card SVG set from its public GitHub repository under MIT license.
-- The card is presented inside a warm wood tabletop scene with perspective, soft shadow, vignette and grain-like texture.
-- Performer setup, hidden five-tap trigger and GitHub state flow were left unchanged.
-
-Mobile visual QC result:
-- The deployed SVG-on-CSS tabletop scene is **REJECTED** for spectator presentation.
-- User requirement clarified: the spectator result must read as a genuine phone photograph, not a vector card placed on a synthetic web background.
-- A new realistic-photo proof image was generated for 7♥ and is the current direction reference, but it is not yet integrated into the site.
+Production milestones (verified 2026-10-12):
+- All **52/52** playing-card codes have active, unique Drive photo URLs in `site/app.js`; no normal card depends on SVG fallback.
+- The Drive production image folder has **52** active files, matching **52** mapping IDs with none missing.
+- Approved and deployed v3: **AS, 2S–10S, JS, QS, KS, 2H, 3H** = **15/52**.
+- Approved 3H photo `Magic_Trick01_3H_v3.png`, Drive file `1iS7eW73GBLu2dtfawf4naM4LPJQ5avk1`; 3H old v2 deleted after successful deploy.
+- 3H cache version `20261012-6`, app mapping commit `150c96cfa27aae05bc74570a72c4f0409088db2a`, cache commit `076009c3fb1cc99ed5297fb7dbca5b86975eb399`, GitHub Pages run #109 `38229966329` **SUCCESS**.
+- Full-photograph mobile fix is deployed globally with `object-fit: contain` and same-photo letterbox backdrop. **Actual user Android screenshot QC remains PENDING**, not PASS.
+- The user requested very short prompts for next-card candidates: `4 of Hearts` only, no extra descriptors.
 
 Immediate next work:
-1. replace the runtime SVG-on-CSS composition with pre-rendered photo-real reveal images;
-2. preserve exact rank/suit correctness while adding real-photo card material, natural light, lens/perspective cues, contact shadow and imperfect tabletop texture;
-3. build a small locked QC set first (A♠, 7♥, Q♦, K♣, 10♠);
-4. deploy that photo-real QC set without changing performer/backend behavior;
-5. only after visual QC passes, scale the same render pipeline to all 52 cards.
+1. Confirm Android user-device QC of the global no-crop mobile layout (6S/KS as convenient).
+2. QC 4H candidate. Current minimal-prompt white-card candidate is **NOT approved** and NOT deployed. Generate one new 4H candidate using only the card name if necessary.
+3. Only after user approval, upload 4H v3 to the same Drive folder; verify `anyone / reader`, replace only `4H` `PHOTO_ASSETS` mapping, cache-bust and deploy.
+4. Verify deploy success and 52/52 mapping coverage; delete obsolete 4H Drive image; then progress to 5H.
+5. Continue the one-card-per-approval loop; maintain `project_state/HANDOFF_CURRENT.md` and Drive control mirrors after meaningful checkpoints.
 
-Residual non-blocking S2 check:
-- deliberately force an HTTP 409 update collision when convenient to empirically confirm the existing one-retry recovery path.
+Residual non-blocking check:
+- Deliberately force an HTTP 409 update collision when convenient to validate existing one-retry recovery.
