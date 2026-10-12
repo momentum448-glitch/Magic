@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0026**  
-Last updated: **2026-10-01**  
+Handoff ID: **H-0027**  
+Last updated: **2026-10-12**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 BICYCLE-STYLE DECK CLEANED — 52/52 PRODUCTION ASSETS ONLY**
+Status: **S3 PHOTO DECK 52/52 LIVE — APPROVED v3 REBUILD AT 12/52; NEXT KS QC**
 
 ## User-device QC passed
 
@@ -339,3 +339,20 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - App commit: `2e254e224d88b7b7c7d49ff1f180077305235b48`.
 - Cache version bumped to `20261004-3`.
 - Next execution step: generate `7S` matching the approved slightly-aged visual direction and wait for user QC.
+
+
+## H-0027 checkpoint — approved QS v3 deployed, next KS v3 QC
+
+- Actual verified date: **2026-10-12** (UTC+7).
+- GitHub repositories: `momentum448-glitch/Magic` (site) and `momentum448-glitch/Magic-state` (performer channel state).
+- Current production renderer: `site/app.js` PHOTO_ASSETS has **52 unique card codes and 52 Drive file IDs**. The Drive asset folder has 52 files, no missing or extra mapped file based on live folder listing/readback before QS replacement; no standard card relies on fallback.
+- Approved and production-mapped v3 cards: `AS`, `2S`, `3S`, `4S`, `5S`, `6S`, `7S`, `8S`, `9S`, `10S`, `JS`, `QS` (**12/52**). Remaining cards use the previously deployed Bicycle-style v2 assets.
+- `QS` candidate rendered on 2026-10-12, user approved. Uploaded approved exact image to Drive as `Magic_Trick01_QS_v3.png`, file ID `1WK3888r_Vf-5bu6V9ZCJ_vURmB82lAk_`; inherited public `anyone/reader` permission verified.
+- Changed `QS` PHOTO_ASSETS mapping: app commit `57690e2e70e5740d64db86bda6990b19ce2d9393`. Cache version `20261012-2`: commit `cbb08fcb5c6b2e7fad9a0e0d980dbb699e687ba0`.
+- GitHub Pages deploy **run #100 `38204684340` SUCCESS**, on commit `cbb08fc`.
+- Old `QS` v2 asset `16WQeAdEGqb-mrGZ3HNPnt11kVckK47qt` permanently deleted only after verifying new PHOTO_ASSETS mapping, public permission and successful deploy.
+- Test channel state unchanged: `Magic-state/channels/test01.json` = `KS`, version 48 at last read; opening the stable spectator QC URL still requests KS, NOT the newly deployed QS. Do not claim channel was moved.
+- Stable site link: https://momentum448-glitch.github.io/Magic/?c=test01
+- Google Drive human-readable `MAGIC — HANDOFF_CURRENT` mirror updated with 2026-10-12 checkpoint. GitHub is canonical.
+- **Next executable action:** generate exactly one `KS` (King of Spades) v3 visual candidate with an authentic traditional two-headed court, correct `K` and black spade indices, light aging, full card and dark wood photo; ask user to QC the image. Only if approved, upload it to Drive, verify public access, update one `KS` mapping, deploy/cache-bust, delete superseded asset and update handoff.
+- Do not modify performer/backend flow or change the active state merely for asset QC.
