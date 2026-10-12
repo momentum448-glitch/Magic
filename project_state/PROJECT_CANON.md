@@ -46,6 +46,7 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
 - The spectator should see a natural photographic-looking reveal rather than an app-like control screen.
 - Avoid explicit UI such as “Your card is…” unless later testing proves it improves the effect.
 - The result should feel like a pre-existing image reached through an ordinary QR scan.
+- On all phone aspect ratios, the spectator must see the **entire original photo of the card**, including all physical card corners and margins. The mobile layout must preserve the whole photo (contain), never crop it (cover). Any extra viewport area may use a subdued extension of the same photographic scene.
 
 - For one-card v3 images, prefer short card-identity-first generation requests (e.g. `3 of Hearts`) to over-specified descriptive prompts. Aim for a convincingly photographed genuine playing card, Bicycle-like standard face geometry, with no excessive artificial aging. Rank/suit/pip/corner correctness is non-negotiable.
 
