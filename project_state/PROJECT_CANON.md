@@ -47,6 +47,8 @@ Magic is a collection of practical digital tools/tricks for magicians. The first
 - Avoid explicit UI such as “Your card is…” unless later testing proves it improves the effect.
 - The result should feel like a pre-existing image reached through an ordinary QR scan.
 
+- For one-card v3 images, prefer short card-identity-first generation requests (e.g. `3 of Hearts`) to over-specified descriptive prompts. Aim for a convincingly photographed genuine playing card, Bicycle-like standard face geometry, with no excessive artificial aging. Rank/suit/pip/corner correctness is non-negotiable.
+
 ### Durable UX principles
 
 - The QR path should feel ordinary to a spectator.
