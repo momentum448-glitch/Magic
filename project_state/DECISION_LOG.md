@@ -294,3 +294,14 @@
 **Decision:** Present the full Drive-hosted photograph with `object-fit: contain` for all 52 cards on any screen ratio. Keep a subdued blurred backdrop based on the same approved photo for unused screen area. Avoid per-card regenerated images, changes to card codes, or changes to performer/backend logic.
 
 **Validation:** GitHub Pages deploy #107 (run 38224958509), commit `f75084864264bd8bba11b2aa9f2397de671ea27b` succeeded; CSS/JS source readback confirms the full-image layout. Real Android screenshot QC after this deploy is still pending; do not label the user-device QC PASS until confirmed.
+
+
+### D-040 — 2026-10-12 — Minimal prompts and 3H approval-to-production
+
+**Decision:** For each next-card v3 generation, issue only the card identity (e.g. `4 of Hearts`) without a descriptive photographic prompt unless the user later requests a change. The identity must still be checked against the true number/suit and output must pass visual QC.
+
+**3H approval:** User accepted the directly displayed authentic photo of 3 of Hearts on a wooden tabletop (not the prior infographic/cropped previews). This exact approved source was uploaded as `Magic_Trick01_3H_v3.png`, Drive ID `1iS7eW73GBLu2dtfawf4naM4LPJQ5avk1`, mapped in production, deployed and the old 3H v2 asset removed.
+
+**4H:** The most recent minimal-prompt result is an unapproved QC candidate. No 4H production replacement is authorized yet.
+
+**Practical release rule:** User approval of 3H is not approval of 4H. Preserve the one-card-at-a-time production deployment sequence, and do not claim phone QC without user validation.
