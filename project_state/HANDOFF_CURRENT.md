@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0030**  
+Handoff ID: **H-0031**  
 Last updated: **2026-10-12**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 PHOTO DECK 52/52 LIVE — APPROVED v3 REBUILD AT 14/52; 3H GENERATION IDENTITY BLOCKER**
+Status: **S3 PHOTO DECK 52/52 LIVE — GLOBAL FULL-CARD PHOTO FIT DEPLOYED; MOBILE QC PENDING; 14/52 V3**
 
 ## User-device QC passed
 
@@ -390,3 +390,17 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - Verified stable prod snapshot remains after H-0029: 52/52 total live mappings, 14/52 v3 including newly approved/deployed 2H; Pages run #104 SUCCESS.
 - Correct next deliverable: a single true `3H` candidate with numeral 3 in both corner indices and exactly three red heart pips, convincingly photographed with subtle normal wear. Use fresh generation context due to repeated previous-card contamination; do not reuse the incorrectly generated 2H assets.
 - Drive mirror `MAGIC — HANDOFF_CURRENT` updated with H-0030. Backend and channel state unchanged.
+
+
+## H-0031 checkpoint — Fix spectator photo cut-off on tall Android screens
+
+- 2026-10-12: User Android Chrome screenshots for `KS` and `6S` showed photos zoomed in and physical card corners/sides clipped.
+- Verified actual source: `site/styles.css` selected `.photo-frame.scene-photo .card-photo { object-fit: cover; }`. On narrow portrait screens it deliberately cropped the full-scene photograph to fill `100vw x 100vh`. Original approved `KS` and `6S` Drive photos contain the full card, confirming this is primarily a mobile layout defect, not a damaged asset.
+- Solution implemented for **every card**: photo foreground uses `object-fit: contain`, centered, with a blurred subdued backdrop sampled from **the same selected photo** using `--reveal-photo-url`. Safe viewport handling uses `height: 100dvh` with `100vh` fallback. No photo assets or code-to-card mappings were changed, and no performer state/write logic was changed.
+- Commits: CSS `05fe89cb996a0f83868bd0b2744e1e898bdd25cc`; JS backdrop `bb73e738f781e0dbd79b4f050b5e7546aa629555`; cache bust `f75084864264bd8bba11b2aa9f2397de671ea27b`.
+- GitHub Pages **run #107 `38224958509`: SUCCESS** on commit `f7508486`. Verified committed CSS/JS/index.html content, `object-fit: contain`, `20261012-5` version and continued **52/52** photo mappings; no evidence of changed state logic.
+- Source-photo check: local copy of approved KS v3 and Drive production 6S v3 shows all four card corners complete. At a 390x820 portrait viewport, mathematical image-fit check: old cover crops approx 113 px each side of a 1086x1448 source; new contain yields full 390x520 source view with no cropped source pixels. A representative layout mockup was rendered in a local offline preview; **real mobile browser screenshot QC is still PENDING**, not yet PASS.
+- Latest observed `Magic-state/channels/test01.json`: `6S`, version 51. Current spectator QC URL: `https://momentum448-glitch.github.io/Magic/?c=test01&qc=107`, safe to use, since `c=test01` remains unchanged. Permanent performer QR URL stays `?c=test01`.
+- Remaining 3H visual candidate generated in the user's separate request has correct 3H index and 3 hearts by visual inspection, but has **not been approved/deployed**. Keep v3 count **14/52**; no generated photo is deployed without user approval.
+- Durable full-photo display principle in `PROJECT_CANON.md` and new decision `D-039` in `DECISION_LOG.md`. Google Drive mirror `MAGIC — HANDOFF_CURRENT` updated through H-0031.
+- **Next action:** user mobile QC for 6S and KS showing the full four edges/corners, including scroll/orientation check as desired. If PASS, resume visual QC/production one-card-at-a-time for 3H. If clipped regions remain, first determine if asset-native or other viewport behavior before changing any Drive image.
