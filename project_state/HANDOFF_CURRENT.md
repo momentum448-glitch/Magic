@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0027**  
+Handoff ID: **H-0028**  
 Last updated: **2026-10-12**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 PHOTO DECK 52/52 LIVE — APPROVED v3 REBUILD AT 12/52; NEXT KS QC**
+Status: **S3 PHOTO DECK 52/52 LIVE — APPROVED v3 REBUILD AT 13/52; NEXT AH QC (GENERATION BLOCKED)**
 
 ## User-device QC passed
 
@@ -356,3 +356,17 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - Google Drive human-readable `MAGIC — HANDOFF_CURRENT` mirror updated with 2026-10-12 checkpoint. GitHub is canonical.
 - **Next executable action:** generate exactly one `KS` (King of Spades) v3 visual candidate with an authentic traditional two-headed court, correct `K` and black spade indices, light aging, full card and dark wood photo; ask user to QC the image. Only if approved, upload it to Drive, verify public access, update one `KS` mapping, deploy/cache-bust, delete superseded asset and update handoff.
 - Do not modify performer/backend flow or change the active state merely for asset QC.
+
+
+## H-0028 checkpoint — KS v3 approved/deployed, AH generation blocker
+
+- Current date: **2026-10-12**. User replied "Tiếp đi em" after receiving KS v3 QC image; approval inferred from the active one-card QC/approval loop.
+- Approved KS v3 image: `Magic_Trick01_KS_v3.png` in Drive folder `Trick01_Reveal_Assets`, ID `1Ww7EEu8XISAhkrMW7ZPwtyk93acOl19W`, `anyone/reader` verified.
+- Site `site/app.js` KS mapping commit: `d2ca491798dfeb4572b63fb6ee91a86020d128e5`.
+- CSS/JS cache version `20261012-3` in `site/index.html`, commit `d84bd3ed806a0786f8698d0296da09558cceff70`.
+- Pages deployment **run #102 `38207754634`: SUCCESS** for `d84bd3e`. Old KS v2 Drive file `1XkSfjFD5XIUzQLBN7uipVOG02ZVdUz9l` was deleted only after site mapping, public permission and successful deploy were verified.
+- Post-cleanup exact readback: **52 unique production mappings, 52 unique Drive files, 0 missing and 0 extras.** 13/52 approved v3: `AS`, `2S`, `3S`, `4S`, `5S`, `6S`, `7S`, `8S`, `9S`, `10S`, `JS`, `QS`, `KS`.
+- Spectator channel `test01` remains `KS` version 48 at last known check; no state changes were made.
+- Next card `AH` (Ace of Hearts) v3: **NOT GENERATED SUCCESSFULLY / NOT APPROVED / NOT DEPLOYED.** Two image-generation attempts made in this conversation instead returned new KS images. Both must be discarded; do not relabel them AH or upload them.
+- Current blocker: generation context repeatedly inherits the previous king artwork. Next execution step: use fresh image generation context or deterministic identity-preserving image method using explicit AH rank/suit reference. Candidate must have red A + heart indices in opposite corners, one large central red heart, no people and no J/Q/K indices. Present exactly one correct AH v3 candidate to user for visual QC; **only after user approves** upload, map, deploy/cache-bust, delete old AH.
+- Google Drive mirror `MAGIC — HANDOFF_CURRENT` updated with H-0028. Project remains in S3 production visual polish; performer/backend unchanged.
