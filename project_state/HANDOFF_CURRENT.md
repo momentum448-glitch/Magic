@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0031**  
+Handoff ID: **H-0032**  
 Last updated: **2026-10-12**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 PHOTO DECK 52/52 LIVE — GLOBAL FULL-CARD PHOTO FIT DEPLOYED; MOBILE QC PENDING; 14/52 V3**
+Status: **S3 PHOTO DECK 52/52 LIVE — 15/52 V3; 3H APPROVED/DEPLOYED; MOBILE QC PENDING**
 
 ## User-device QC passed
 
@@ -404,3 +404,20 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - Remaining 3H visual candidate generated in the user's separate request has correct 3H index and 3 hearts by visual inspection, but has **not been approved/deployed**. Keep v3 count **14/52**; no generated photo is deployed without user approval.
 - Durable full-photo display principle in `PROJECT_CANON.md` and new decision `D-039` in `DECISION_LOG.md`. Google Drive mirror `MAGIC — HANDOFF_CURRENT` updated through H-0031.
 - **Next action:** user mobile QC for 6S and KS showing the full four edges/corners, including scroll/orientation check as desired. If PASS, resume visual QC/production one-card-at-a-time for 3H. If clipped regions remain, first determine if asset-native or other viewport behavior before changing any Drive image.
+
+
+## H-0032 checkpoint — User-approved 3H v3 fully synchronized; 4H QC pending
+
+- Date: **2026-10-12**. Direct verification of GitHub repository, Google Drive files, permissions, workflow and state documents completed.
+- User approved exact full-resolution `3 of Hearts` tabletop-photo candidate displayed directly in chat (file source `a_close_up_top_down_photo_of_a_single_playing_car.png`, approx. 2.88 MB). Rejected earlier infographic-style outputs are NOT the approved asset.
+- Uploaded the approved source file to production Google Drive as `Magic_Trick01_3H_v3.png` with ID **`1iS7eW73GBLu2dtfawf4naM4LPJQ5avk1`**, folder `Trick01_Reveal_Assets` (`1izQtvZxIa4_j0ZAk2X1lUy8jWlJST5g6`). New file metadata verified public **anyone / reader**.
+- Updated only the `3H` `PHOTO_ASSETS` mapping in `site/app.js` (commit **`150c96cfa27aae05bc74570a72c4f0409088db2a`**) and cache version to **`20261012-6`** in `site/index.html` (commit **`076009c3fb1cc99ed5297fb7dbca5b86975eb399`**). No performer logic or state was altered.
+- GitHub Pages **run #109 `38229966329`: SUCCESS**, on commit `076009c3fb1cc99ed5297fb7dbca5b86975eb399`. Repository source readback confirms `3H` uses the new Drive file.
+- After successful deployment, permanently deleted superseded production image `Magic_Trick01_3H_Bicycle_v2.png` (ID `11EqVCQoqhzLKHnBv5tmFM6yG_nW_Le79`). Post-cleanup Drive folder count **52**, live app `PHOTO_ASSETS` **52 distinct codes / 52 unique IDs**, no missing mapped assets, zero obsolete files.
+- V3 production count now **15/52**: 13 Spades (AS, 2S–10S, JS, QS, KS), 2H, 3H. Every other card remains live on its earlier photo v2.
+- User specified a **minimal card-name-only generation request** for next card (e.g. `4 of Hearts`, with no extended style instructions). The most recent 4H white-card image is **only a QC candidate**, not approved or production-mapped; its clean vector-like appearance may need further user QC. Do not count it as approved.
+- The global mobile `object-fit: contain` fix remains deployed. **Real Android device screenshot QC remains pending**; GitHub workflow PASS alone is not mobile visual PASS.
+- Stable spectator URL: `https://momentum448-glitch.github.io/Magic/?c=test01`. The spectator displays the channel's current selection, not 3H automatically. Keep performer channel unchanged unless specifically requested.
+- Repo `PROJECT_STAGE.md` updated to the actual active S3 15/52 checkpoint and `DECISION_LOG.md` appended D-040. Their named Drive control mirrors were resynchronized with current GitHub text. `PROJECT_CANON.md` unchanged because no new architecture decision is required.
+- **NEXT EXECUTION:** obtain user QC for 4H generated with identity-only prompt; once approved, upload exact 4H file to Drive, verify public access, replace only mapping 4H, cache-bust/deploy, verify 52/52 integrity, delete old 4H and handoff. Separately ask for device QC of no-crop display when convenient.
+- **Sync:** GitHub updates completed; Drive control mirror `MAGIC — HANDOFF_CURRENT` to be updated after this GitHub handoff write.
