@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0029**  
+Handoff ID: **H-0030**  
 Last updated: **2026-10-12**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 PHOTO DECK 52/52 LIVE — APPROVED v3 REBUILD AT 14/52; NEXT 3H QC**
+Status: **S3 PHOTO DECK 52/52 LIVE — APPROVED v3 REBUILD AT 14/52; 3H GENERATION IDENTITY BLOCKER**
 
 ## User-device QC passed
 
@@ -382,3 +382,11 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - `Magic-state/channels/test01.json` last read: `KS`, version 50. The spectator link `https://momentum448-glitch.github.io/Magic/?c=test01` is therefore not a 2H preview unless the performer changes the channel.
 - Drive Google Doc `MAGIC — HANDOFF_CURRENT` updated with H-0029. GitHub handoff updated last.
 - **Next action:** Generate one independent photographic `3 of Hearts` (`3H`) v3 candidate with correct index/pip positions and realistic, lightly worn card. Present for user QC only; upload/update/delete only on user approval. Continue one card at a time. Separately retain the pending non-deployed AH v3 candidate for proper reconciliation rather than counting it as delivered.
+
+
+## H-0030 checkpoint — repeated wrong-card generation for 3H
+
+- Two new candidate attempts for `3 of Hearts` (`3H`) after the 2H approval both generated `2 of Hearts` instead. REJECTED; no Drive upload, mapping or deploy for either failed `3H` attempt.
+- Verified stable prod snapshot remains after H-0029: 52/52 total live mappings, 14/52 v3 including newly approved/deployed 2H; Pages run #104 SUCCESS.
+- Correct next deliverable: a single true `3H` candidate with numeral 3 in both corner indices and exactly three red heart pips, convincingly photographed with subtle normal wear. Use fresh generation context due to repeated previous-card contamination; do not reuse the incorrectly generated 2H assets.
+- Drive mirror `MAGIC — HANDOFF_CURRENT` updated with H-0030. Backend and channel state unchanged.
