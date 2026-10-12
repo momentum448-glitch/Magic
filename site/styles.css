@@ -180,22 +180,42 @@ button{touch-action:manipulation}
 }
 
 
-/* Drive-hosted full-scene photo reveal */
+/* Drive-hosted full-scene photo reveal.
+   Always show the complete photograph, even on tall/narrow mobile screens. */
 .photo-frame.scene-photo{
   position:absolute;
   inset:0;
-  width:100vw;
+  width:100%;
   height:100vh;
+  height:100dvh;
   aspect-ratio:auto;
   transform:none;
   filter:none;
   z-index:2;
+  isolation:isolate;
+  overflow:hidden;
+  background:#342116;
+}
+/* Extend the same real tabletop photograph behind any letterbox area. */
+.photo-frame.scene-photo::before{
+  content:"";
+  position:absolute;
+  inset:-24px;
+  z-index:0;
+  background-image:var(--reveal-photo-url,none);
+  background-size:cover;
+  background-position:center center;
+  filter:blur(20px) brightness(.62) saturate(.8);
+  transform:scale(1.03);
+  pointer-events:none;
 }
 .photo-frame.scene-photo::after{display:none}
 .photo-frame.scene-photo .card-photo{
+  position:relative;
+  z-index:1;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center center;
   border-radius:0;
   filter:none;
