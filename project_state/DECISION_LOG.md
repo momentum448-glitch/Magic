@@ -285,3 +285,12 @@
 **Decision:** For the one-card v3 QC pipeline, use concise card-identity-first image requests (e.g. `3 of Hearts`), rather than long prescriptive descriptions of material, wear, layout or camera. Preserve the accepted true-card / Bicycle Standard visual language and prioritize a believable physical playing card over synthetic/distressed image effects.
 
 **Quality rule:** Do not over-age the card. Light normal wear at most. Verify rank, suit, pip geometry and correct corner indices before showing a candidate. The user approved the 2H candidate with a more natural angled photo and rejected highly specified, artificially worn prior iterations. Approval of one card does not approve other cards.
+
+
+### D-039 — 2026-10-12 — Full-card safe fit for spectator mobile displays
+
+**Observed QC:** User screenshots of KS and 6S on a tall Android screen showed both sides of the original photographs clipped by the viewport. Original K♠ and 6♠ Drive assets show complete physical card borders: the main defect was CSS `object-fit: cover` in `site/styles.css` for `.scene-photo .card-photo`.
+
+**Decision:** Present the full Drive-hosted photograph with `object-fit: contain` for all 52 cards on any screen ratio. Keep a subdued blurred backdrop based on the same approved photo for unused screen area. Avoid per-card regenerated images, changes to card codes, or changes to performer/backend logic.
+
+**Validation:** GitHub Pages deploy #107 (run 38224958509), commit `f75084864264bd8bba11b2aa9f2397de671ea27b` succeeded; CSS/JS source readback confirms the full-image layout. Real Android screenshot QC after this deploy is still pending; do not label the user-device QC PASS until confirmed.
