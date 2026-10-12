@@ -1,9 +1,9 @@
 # Magic — Handoff Current
 
-Handoff ID: **H-0028**  
+Handoff ID: **H-0029**  
 Last updated: **2026-10-12**  
 Current stage: **S3 — Trick 01 Production Polish**  
-Status: **S3 PHOTO DECK 52/52 LIVE — APPROVED v3 REBUILD AT 13/52; NEXT AH QC (GENERATION BLOCKED)**
+Status: **S3 PHOTO DECK 52/52 LIVE — APPROVED v3 REBUILD AT 14/52; NEXT 3H QC**
 
 ## User-device QC passed
 
@@ -370,3 +370,15 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - Next card `AH` (Ace of Hearts) v3: **NOT GENERATED SUCCESSFULLY / NOT APPROVED / NOT DEPLOYED.** Two image-generation attempts made in this conversation instead returned new KS images. Both must be discarded; do not relabel them AH or upload them.
 - Current blocker: generation context repeatedly inherits the previous king artwork. Next execution step: use fresh image generation context or deterministic identity-preserving image method using explicit AH rank/suit reference. Candidate must have red A + heart indices in opposite corners, one large central red heart, no people and no J/Q/K indices. Present exactly one correct AH v3 candidate to user for visual QC; **only after user approves** upload, map, deploy/cache-bust, delete old AH.
 - Google Drive mirror `MAGIC — HANDOFF_CURRENT` updated with H-0028. Project remains in S3 production visual polish; performer/backend unchanged.
+
+
+## H-0029 checkpoint — 2H v3 approved and deployed
+
+- User approved an authentic-looking `2H` ("2 of Hearts") image on 2026-10-12 after rejecting overly synthetic/aged iterations. Latest visual rule documented in `DECISION_LOG.md` D-038 and `PROJECT_CANON.md`: brief card-name-first prompts; Bicycle-style face, natural photographic look, no exaggerated wear.
+- Exact approved image `Magic_Trick01_2H_v3.png`, Drive file ID `1NfM8WluG_ICRRSCHg5QPekUn1CpEgasd`, has inherited public `anyone/reader`.
+- Site `site/app.js` 2H mapping update commit `c4982d54b87bc3583223ee2628df9da362a8bc71`. New cache query version `20261012-4` commit `bc9cd81f6b36fec12c4fec38a4418ca4291aeff9`. GitHub Pages deploy run `38223422639`, #104, **SUCCESS**.
+- Former `2H` v2 Drive file `13sPqbJovbUOJNaxIjEzVboBxCHjvuHvV` was deleted after success and verified new mapping and public permission.
+- 52 unique card codes mapped, 52 Drive images remain after cleanup. V3 status: 13 Spades (AS, 2S-10S, JS, QS, KS) + `2H` = **14/52**. AH is still a v2 mapped file even though an AH QC candidate was generated earlier; no AH v3 Drive or production update has been performed. Do not count AH as deployed.
+- `Magic-state/channels/test01.json` last read: `KS`, version 50. The spectator link `https://momentum448-glitch.github.io/Magic/?c=test01` is therefore not a 2H preview unless the performer changes the channel.
+- Drive Google Doc `MAGIC — HANDOFF_CURRENT` updated with H-0029. GitHub handoff updated last.
+- **Next action:** Generate one independent photographic `3 of Hearts` (`3H`) v3 candidate with correct index/pip positions and realistic, lightly worn card. Present for user QC only; upload/update/delete only on user approval. Continue one card at a time. Separately retain the pending non-deployed AH v3 candidate for proper reconciliation rather than counting it as delivered.
