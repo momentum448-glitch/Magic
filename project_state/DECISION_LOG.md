@@ -278,3 +278,10 @@
 **Decision:** Rebuild the deck one card at a time. For each card: generate candidate → user QC → if approved, immediately upload the approved asset to the production Drive folder → update the live web mapping → delete the superseded Drive asset → only then generate the next card.
 
 **Quality rule:** Continue using the approved newer/cleaner physical-card look, Bicycle Standard reference guidance, one card per image, and no batch rollout before QC.
+
+
+### D-038 — 2026-10-12 — Authentic photographic playing cards; minimal generation prompt
+
+**Decision:** For the one-card v3 QC pipeline, use concise card-identity-first image requests (e.g. `3 of Hearts`), rather than long prescriptive descriptions of material, wear, layout or camera. Preserve the accepted true-card / Bicycle Standard visual language and prioritize a believable physical playing card over synthetic/distressed image effects.
+
+**Quality rule:** Do not over-age the card. Light normal wear at most. Verify rank, suit, pip geometry and correct corner indices before showing a candidate. The user approved the 2H candidate with a more natural angled photo and rejected highly specified, artificially worn prior iterations. Approval of one card does not approve other cards.
