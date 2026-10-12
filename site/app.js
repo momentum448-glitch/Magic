@@ -164,6 +164,8 @@
     let fallbackTried = false;
 
     frame?.classList.toggle("scene-photo", asset.isPhoto);
+    // The blurred backdrop and foreground share the same approved full-scene photo.
+    frame?.style.setProperty("--reveal-photo-url", asset.isPhoto ? `url("${asset.url}")` : "none");
     cardPhoto.classList.add("is-loading");
     cardPhoto.alt = labelFor(code);
 
