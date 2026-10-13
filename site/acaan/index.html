@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#57341f">
+<title>Photograph</title>
+<style>
+:root{font-family:system-ui,-apple-system,Arial,sans-serif;background:#26180e;color:#f6efe2}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+button,input{font:inherit}button{cursor:pointer}
+#scene{min-height:100vh;min-height:100dvh;display:grid;place-items:center;position:relative;overflow:hidden;padding:13px;background:
+radial-gradient(ellipse at 17% 7%,#ab7950aa 0%,transparent 47%),
+radial-gradient(ellipse at 84% 88%,#1a0e0790 0%,transparent 51%),
+repeating-linear-gradient(3deg,#714929 0px,#7b5030 11px,#6c4327 25px,#845432 32px,#754a2b 49px)}
+#scene:before{content:"";position:absolute;inset:0;opacity:.15;pointer-events:none;background:repeating-linear-gradient(89deg,transparent 0 78px,#1c090f 79px,#b8875e 81px,transparent 83px 154px)}
+#photo{width:min(100%,670px);aspect-ratio:0.75;max-height:calc(100dvh - 24px);position:relative;display:flex;align-items:center;justify-content:center;transform:rotate(-.35deg);filter:drop-shadow(0 17px 20px #190c0875)}
+#deck{width:100%;max-height:100%;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));gap:clamp(2px,.45vw,4px);padding:clamp(4px,1.6vw,11px)}
+.playcard{position:relative;min-width:0;min-height:0;aspect-ratio:63/88;transform:rotate(var(--rotate));filter:drop-shadow(1px 2px 1.5px #130a087a)}
+.playcard img{width:100%;height:100%;display:block;border-radius:3px;background:#f6f4ef;border:1px solid #e4dfd6;object-fit:contain}
+.playcard .fallback{display:none;background:#f9f8f2;color:#111;font-weight:900;align-items:flex-start;padding:4px;height:100%;font-size:clamp(11px,3vw,24px);border-radius:3px}
+.playcard.no-img img{display:none}.playcard.no-img .fallback{display:flex}
+.playcard.red .fallback{color:#bd151e}
+.playcard .index{display:none;position:absolute;top:1px;right:1px;border-radius:100%;background:#1c251e;color:white;font-weight:800;font-size:11px;padding:2px 5px;z-index:2;opacity:.95}
+.qc .playcard .index{display:block}
+#hotspot{position:fixed;z-index:10;top:0;left:0;width:85px;height:70px;border:0;background:transparent;opacity:.001}
+#qcPanel{display:none;position:fixed;z-index:9;bottom:6px;left:6px;right:6px;background:#111d;color:#fff;font:11px/1.5 ui-monospace,monospace;padding:7px;border-radius:8px;pointer-events:none}
+.qc #qcPanel{display:block}
+dialog{background:#1b1b1d;color:#fff;border:0;border-radius:18px;width:min(96vw,560px);max-height:90dvh;padding:18px;box-shadow:0 15px 45px #000b}
+dialog::backdrop{background:#000b}
+h1{font-size:21px;margin:0 0 8px}.hint{font-size:12px;color:#bbb;margin:4px 0 12px}
+#choices{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-height:45dvh;overflow:auto}
+.choice{min-height:43px;background:#2e2e32;color:#f9f9f9;border:1px solid #545457;border-radius:9px;font-weight:800;font-size:18px}
+.choice.red{color:#ff7279}.choice.selected{background:#e9e3d6;color:#111;border-color:#fff}.choice.selected.red{color:#9c151e}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}
+.controls input{width:82px;min-height:43px;padding:8px;border-radius:9px;border:1px solid #555;background:#333;color:#fff}
+.action{padding:12px 16px;border:0;border-radius:10px;background:#faf4e9;font-weight:800;color:#1a1a1a}
+.action:disabled{opacity:.4} .secondary{background:#3e3e40;color:#fff}
+#status{min-height:20px;font-size:12px;color:#e7d1a8}
+#tokenInput{width:100%;padding:12px;color:white;background:#292929;border:1px solid #555;border-radius:9px}
+@media(min-width:650px){#photo{aspect-ratio:.91}}
+</style>
+</head>
+<body>
+<main id="scene">
+ <div id="photo"><div id="deck" aria-label="52 playing cards spread across a wooden table"></div></div>
+ <button id="hotspot" aria-label="Open operator setup"></button>
+</main>
+<aside id="qcPanel"></aside>
+<dialog id="settings">
+ <h1>ACAAN · Setup</h1>
+ <p class="hint">Chọn lá bài và vị trí 1–52. Khán giả đếm từ trái sang phải, từ trên xuống dưới.</p>
+ <div id="choices"></div>
+ <div class="controls"><label>Vị trí <input id="number" type="number" inputmode="numeric" min="1" max="52" value="21"></label><span id="selection">Chưa chọn lá</span></div>
+ <p id="status"></p>
+ <div class="controls"><button class="action secondary" id="cancel" type="button">Đóng</button><button class="action" id="done" type="button" disabled>Done</button></div>
+</dialog>
+<dialog id="arming">
+ <h1>Arm performer device</h1>
+ <p class="hint">Fine-grained GitHub token, chỉ cấp Contents:write trên Magic-state. Không nhập token trên máy khán giả.</p>
+ <input id="tokenInput" type="password" placeholder="github_pat_..." autocomplete="off">
+ <p id="armStatus" class="hint"></p>
+ <div class="controls"><button id="armCancel" type="button" class="action secondary">Đóng</button><button id="saveToken" type="button" class="action">Arm device</button></div>
+</dialog>
+<script>
+(function(){
+"use strict";
+var OWNER="momentum448-glitch", REPO="Magic-state", TOKEN_KEY="magic_state_pat_session";
+var params=new URLSearchParams(location.search);
+var channel=(params.get("c")||"demo01").trim();
+var valid=/^[a-zA-Z0-9_-]{1,40}$/.test(channel);
+var QC=params.get("qc")==="1";
+if(QC)document.body.classList.add("qc");
+var RANKS=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+var SUITS=[["S","♠"],["H","♥"],["D","♦"],["C","♣"]];
+var codes=[];
+RANKS.forEach(function(r){SUITS.forEach(function(s){codes.push(r+s[0]);});});
+var full=new Set(codes);
+var state={cardCode:null,position:null,version:0};
+var selected=null, pending=false, latestSha=null, lastSync="chưa đọc", remaining="?", busy=false;
+var started=Date.now(), polls=0, hotCount=0,hotTimer=0;
+var deckEl=document.getElementById("deck");
+var choices=document.getElementById("choices");
+var settings=document.getElementById("settings");
+var arming=document.getElementById("arming");
+var status=document.getElementById("status");
+var number=document.getElementById("number");
+var done=document.getElementById("done");
+function token(){return sessionStorage.getItem(TOKEN_KEY)||"";}
+function apiUrl(){return "https://api.github.com/repos/"+OWNER+"/"+REPO+"/contents/channels/acaan_"+channel+".json";}
+function headers(t){var h={"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};if(t)h.Authorization="Bearer "+t;return h;}
+function decode(data){var bytes=Uint8Array.from(atob(data.replace(/\s/g,"")),function(c){return c.charCodeAt(0);});return JSON.parse(new TextDecoder().decode(bytes));}
+function encode(obj){var bytes=new TextEncoder().encode(JSON.stringify(obj,null,2)+"\n"),bin="";bytes.forEach(function(x){bin+=String.fromCharCode(x);});return btoa(bin);}
+function baseline(){
+ var a=codes.slice(),seed=0x52ACAA21;
+ for(var i=a.length-1;i>0;i--){seed=(Math.imul(1664525,seed)+1013904223)>>>0;var j=seed%(i+1);var x=a[i];a[i]=a[j];a[j]=x;}
+ return a;
+}
+function ordering(s){
+ var a=baseline();
+ if(s && full.has(s.cardCode) && Number.isInteger(s.position) && s.position>=1 && s.position<=52){
+ var pos=a.indexOf(s.cardCode),target=s.position-1;var x=a[target];a[target]=a[pos];a[pos]=x;
+ }
+ return a;
+}
+function label(c){return c.slice(0,-1)+({"S":"♠","H":"♥","D":"♦","C":"♣"})[c.slice(-1)];}
+function cardSvg(c){return "https://raw.githubusercontent.com/block52/cards/main/"+(c.startsWith("10")?"T"+c.slice(2):c)+".svg";}
+var nodes=[];
+for(var i=0;i<52;i++){
+ var el=document.createElement("div");el.className="playcard";
+ el.style.setProperty("--rotate",(((i*13)%9)-4)*.52+"deg");
+ var img=document.createElement("img");img.alt="";img.loading="eager";img.decoding="async";
+ var fallback=document.createElement("span");fallback.className="fallback";
+ var marker=document.createElement("span");marker.className="index";marker.textContent=String(i+1);
+ el.appendChild(img);el.appendChild(fallback);el.appendChild(marker);
+ img.addEventListener("error",function(){this.parentNode.classList.add("no-img");});
+ deckEl.appendChild(el);nodes.push({el:el,img:img,fallback:fallback,code:null});
+}
+function render(s){
+ var order=ordering(s);
+ order.forEach(function(code,i){
+  var n=nodes[i];if(n.code!==code){n.code=code;n.img.src=cardSvg(code);n.fallback.textContent=label(code);n.el.classList.toggle("red",/H$|D$/.test(code));n.el.classList.remove("no-img");}
+ });
+ diagnostics();
+}
+function diagnostics(){
+ if(!QC)return;
+ var when=state.updatedAt?Date.parse(state.updatedAt):0;
+ var lag=when?Math.max(0,(Date.now()-when)/1000).toFixed(1)+"s (ước lượng)":"n/a";
+ document.getElementById("qcPanel").textContent="Trick02 QC | v"+(state.version||0)+" | "+(state.cardCode||"chưa chọn")+" @ "+(state.position||"—")+" | Read: "+lastSync+" | Poll: "+polls+" | Remaining: "+remaining+" | Age: "+lag;
+}
+async function fetchState(t){
+ var r=await fetch(apiUrl()+"?t="+Date.now(),{headers:headers(t),cache:"no-store"});
+ polls++;
+ remaining=r.headers.get("x-ratelimit-remaining")||remaining;
+ if(!r.ok){var e=new Error("GitHub read HTTP "+r.status);e.http=r.status;throw e;}
+ var json=await r.json(),s=decode(json.content);
+ if(!s||typeof s.version!=="number"||!(s.cardCode===null||full.has(s.cardCode))||!(s.position===null||Number.isInteger(s.position)&&s.position>=1&&s.position<=52))throw new Error("Invalid state");
+ return {data:s,sha:json.sha};
+}
+async function sync(){
+ if(!valid||busy)return;busy=true;
+ try{
+  var res=await fetchState();
+  latestSha=res.sha;
+  lastSync=new Date().toLocaleTimeString("vi-VN");
+  if(!state||res.data.version!==state.version||res.data.cardCode!==state.cardCode||res.data.position!==state.position){state=res.data;render(state);}
+  else diagnostics();
+ }catch(e){lastSync=e.message;diagnostics();console.warn("ACAAN sync",e);}
+ finally{busy=false;}
+}
+function timer(){
+ if(document.visibilityState==="hidden")return;
+ var elapsed=Date.now()-started;
+ // Deliberately short QC polling windows. Not approved for high-volume production.
+ if(elapsed<75000){sync();setTimeout(timer,2000);}
+ else if(elapsed<180000){sync();setTimeout(timer,8000);}
+}
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")sync();});
+window.addEventListener("pageshow",function(){sync();});
+window.addEventListener("focus",function(){sync();});
+function choose(c){
+ selected=c;document.querySelectorAll(".choice").forEach(function(b){b.classList.toggle("selected",b.dataset.code===c);});
+ document.getElementById("selection").textContent=label(c);done.disabled=false;
+}
+codes.forEach(function(c){
+ var b=document.createElement("button");b.type="button";b.className="choice"+(/H$|D$/.test(c)?" red":"");b.textContent=label(c);b.dataset.code=c;
+ b.addEventListener("click",function(){choose(c);});choices.appendChild(b);
+});
+function openSetup(){
+ if(!token()){pending=true;arming.showModal();return;}
+ if(full.has(state.cardCode))choose(state.cardCode);
+ if(state.position)number.value=state.position;
+ settings.showModal();
+}
+document.getElementById("hotspot").addEventListener("click",function(){
+ hotCount++;clearTimeout(hotTimer);
+ if(hotCount>=5){hotCount=0;openSetup();}
+ else hotTimer=setTimeout(function(){hotCount=0;},2500);
+});
+document.getElementById("cancel").addEventListener("click",function(){settings.close();});
+document.getElementById("armCancel").addEventListener("click",function(){arming.close();});
+document.getElementById("saveToken").addEventListener("click",function(){
+ var v=document.getElementById("tokenInput").value.trim();
+ if(!v){document.getElementById("armStatus").textContent="Token trống.";return;}
+ sessionStorage.setItem(TOKEN_KEY,v);
+ document.getElementById("tokenInput").value="";
+ arming.close();location.hash="";
+ if(pending){pending=false;openSetup();}
+});
+async function writeOnce(t,newCard,newPosition){
+ var cur=await fetchState(t);
+ var next={cardCode:newCard,position:newPosition,version:Number(cur.data.version)+1,updatedAt:new Date().toISOString()};
+ var r=await fetch(apiUrl(),{
+ method:"PUT",
+ headers:Object.assign({},headers(t),{"Content-Type":"application/json"}),
+ body:JSON.stringify({message:"ACAAN QC state v"+next.version,content:encode(next),sha:cur.sha})
+ });
+ if(!r.ok){var e=new Error("GitHub write HTTP "+r.status);e.http=r.status;throw e;}
+ return next;
+}
+done.addEventListener("click",async function(){
+ var pos=Number(number.value);
+ if(!full.has(selected)||!Number.isInteger(pos)||pos<1||pos>52){status.textContent="Chọn lá bài và số hợp lệ (1–52).";return;}
+ done.disabled=true;status.textContent="Đang lưu vào GitHub...";
+ var t=token();
+ try{
+  var next;
+  try{next=await writeOnce(t,selected,pos);}
+  catch(e){if(e.http===409||e.http===422)next=await writeOnce(t,selected,pos);else throw e;}
+  state=next;render(state);lastSync="WRITE OK";status.textContent="Đã cập nhật.";
+  settings.close();
+ }catch(e){status.textContent=e.message+"; chưa cập nhật.";console.error(e);}
+ finally{done.disabled=false;diagnostics();}
+});
+render(state);
+if(valid){sync();setTimeout(timer,2000);}
+else if(QC){lastSync="Invalid channel";diagnostics();}
+if(location.hash==="#arm")arming.showModal();
+})();
+</script>
+</body>
+</html>
