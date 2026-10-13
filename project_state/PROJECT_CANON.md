@@ -102,6 +102,18 @@ GitHub-only v1 must be validated for:
 
 Architecture details are recorded in `project_state/ARCHITECTURE_TRICK_01.md`.
 
+## Trick 02 — ACAAN (locked 2026-10-13)
+
+- A spectator scans a QR and sees a face-up 52-card tabletop spread, then places the phone face down.
+- Only afterward, spectator freely chooses any of 52 cards and a number 1–52.
+- Performer covertly enters both selections in a hidden setup. Without a visible refresh, spectator turns phone face up and counts to the selected card at the named index.
+- Deck layout: tidy rows with light natural misalignment; clear counting order is left-to-right, top-to-bottom.
+- Trick 02 must stay isolated from Trick 01. A separate page and separate state files prevent production regressions.
+- Phase-1 technical decision: GitHub-only sync experiment, not unconditional approval of realtime performance. GitHub Pages serves immutable app; Magic-state stores per-channel updates.
+- Final visual target: realistic, genuinely photographed physical 52-card spread on wooden tabletop. The temporary QC SVG layout is not a visually approved deliverable.
+- Production sync architecture requires device-measured latency and rate-limit QC before final approval.
+- See `project_state/ARCHITECTURE_TRICK_02.md`.
+
 ## Canon update rule
 
 Only durable cross-session decisions belong here. Temporary tasks, transient blockers, test notes, and immediate next actions belong in `HANDOFF_CURRENT.md` or `PROJECT_STAGE.md`.
