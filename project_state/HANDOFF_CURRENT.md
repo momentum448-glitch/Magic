@@ -421,3 +421,25 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - Repo `PROJECT_STAGE.md` updated to the actual active S3 15/52 checkpoint and `DECISION_LOG.md` appended D-040. Their named Drive control mirrors were resynchronized with current GitHub text. `PROJECT_CANON.md` unchanged because no new architecture decision is required.
 - **NEXT EXECUTION:** obtain user QC for 4H generated with identity-only prompt; once approved, upload exact 4H file to Drive, verify public access, replace only mapping 4H, cache-bust/deploy, verify 52/52 integrity, delete old 4H and handoff. Separately ask for device QC of no-crop display when convenient.
 - **Sync:** GitHub updates completed; Drive control mirror `MAGIC — HANDOFF_CURRENT` to be updated after this GitHub handoff write.
+
+
+## H-0033 checkpoint — Trick 02 ACAAN GitHub-only QC pilot, independent of Trick 01
+
+- Date: **2026-10-13**, Asia/Bangkok. This checkpoint adds a parallel Trick 02; Trick 01 4H approval/mobile layout QC remain unchanged.
+- User locked effect: spectator opens QR to a 52-card face-up photo BEFORE freely naming any card and a number 1–52; phone is face down during secret setting, then flipped to count left-right/top-bottom. Ordered rows with subtle natural misalignment, photographic wooden table.
+- User requested GitHub-only synchronization trial and cited a previous separate site achieving ~1–2s updates. Prior implementation/method is still unidentified; do not assume GitHub alone guarantees that latency.
+- Research: public GitHub REST 60 GET/hour/IP; 2s continuous polling is unsuitable for long-running/multiple-spectator production. Raw file + cache-busting is a pending controlled comparison; CDN propagation unverified.
+- PROTOTYPE: new file `site/acaan/index.html` (isolation from `site/index.html` Trick 01); source commit `ac02f90bc796480e9da542b2032753a6ae9f99bc`.
+- New state file: `Magic-state/channels/acaan_demo01.json`, initialization commit `6b3dd92227fb5a9a7480c7f418417d7b95d3c4c1`.
+- Live GitHub Pages workflow run `38415254173` SUCCESS for initial prototype source commit.
+- QC link: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&qc=1`.
+- Performer arm: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01#arm`.
+- Spectator: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01`.
+- Code reuses Magic-state fine-grained PAT mechanism and hidden five-tap setup. Secret token not embedded; page is unauthenticated for spectators. Number input 1–52.
+- 52 card faces in proof are Block52 SVG placeholders, NOT actual photo-quality 52-card production assets. Existing one-card Drive photos cannot be simply tiled without isolating individual card photos.
+- Deterministic base permutation + single swap yields valid deck for ALL 2,704 possible (card,position) pairs; exhaustive in-session test: **PASS, 0 failures**.
+- Poll proof: 2s until 75s, then 8s until 180s, then resume/focus only. This is a deliberately limited QC budget and not approved for public performances or guaranteed 1–2s freshness.
+- Project updates: new `project_state/ARCHITECTURE_TRICK_02.md`; `PROJECT_CANON.md` Trick 02 rule; `PROJECT_STAGE.md` parallel track; `DECISION_LOG.md` D-041 and D-042.
+- User device/browser QC: **PENDING**. A successful Pages run is NOT evidence of phone layout, 2-device sync, screen-down/lock survival or p95 4s latency.
+- NEXT EXECUTABLE ACTION: user opens spectator QC URL on Android, verifies 52 distinct cards and left-to-right/top-to-bottom numbering using debug labels. Performer opens #arm with existing repo-scoped state token, secretly sets sample 7H/21 and another random pair. Test no F5 and record Done-to-visibility latency in 20 runs. Capture rate-remaining, 403/429 and lock/resume. Then implement/test raw.githubusercontent.com cache-bust comparison, choose synchronization architecture based on data.
+- Drive: MAGIC — CANON, PROJECT_STAGE and DECISION_LOG append-only updates performed on 2026-10-13. The HANDOFF_CURRENT Drive mirror must also receive this checkpoint. Verify status before claiming synced.
