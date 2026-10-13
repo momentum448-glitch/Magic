@@ -124,3 +124,18 @@ Immediate next work:
 
 Residual non-blocking check:
 - Deliberately force an HTTP 409 update collision when convenient to validate existing one-retry recovery.
+
+
+## Trick 02 — ACAAN (parallel proof track, does not change Trick 01 S3)
+
+Status: **QC PROTOTYPE DEPLOYED — REAL-DEVICE QC PENDING** (2026-10-13).
+
+- Locked: 52 cards on wooden table in subtly offset ordered rows; user chooses arbitrary card and position 1–52; hidden setup; GitHub-only sync trial.
+- New page: `site/acaan/index.html` under `/Magic/acaan/`.
+- Separate state: `Magic-state/channels/acaan_demo01.json`.
+- Card-placement algorithm tested exhaustively: 2,704/2,704 correct with 52 unique cards.
+- Initial Github Pages workflow `38415254173`: SUCCESS; source commit `ac02f90bc796480e9da542b2032753a6ae9f99bc`.
+- Temporary prototype uses existing Block52 SVG faces, NOT approved photographic assets.
+- QC polling is limited-duration and is NOT production reliable yet. REST 60 unauthenticated requests/hour/IP, with shared-IP risk.
+- Next milestone: two-device latency and on-phone counting QC; compare raw GitHub caching; test phone face down, background, lock, visibility return.
+- Existing Trick 01 production stage remains S3, 15/52 approved v3; 4H and mobile no-crop QC still pending.
