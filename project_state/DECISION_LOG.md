@@ -305,3 +305,18 @@
 **4H:** The most recent minimal-prompt result is an unapproved QC candidate. No 4H production replacement is authorized yet.
 
 **Practical release rule:** User approval of 3H is not approval of 4H. Preserve the one-card-at-a-time production deployment sequence, and do not claim phone QC without user validation.
+
+
+### D-041 — 2026-10-13 — Trick 02 ACAAN effect and ordered photographic deck
+
+**Decision:** Add a separate ACAAN trick. Spectator opens QR/photo before freely choosing a card and number, faces phone down, and turns it back up to count that card at the chosen position. Deck uses ordered rows with slight natural physical offsets and a consistent left-to-right, top-to-bottom counting rule.
+
+**Consequence:** A separate page and state namespace are required; existing Trick 01 remains untouched. Photorealism is the final target, and temporary deterministic card faces are allowed strictly for functionality QC.
+
+### D-042 — 2026-10-13 — GitHub-only realtime feasibility test first
+
+**Decision:** Retain GitHub Pages + Magic-state + REST Contents API for an initial technical prototype; test limited-duration short polling and candidate raw-file cache-busted reading. No external database/realtime provider is added now.
+
+**Evidence/constraint:** User previously observed approximately 1–2 second web synchronization in another project, but method not yet identified. GitHub public REST requests remain limited to 60/hour/IP; a phone physically turned face-down does not automatically create a browser visibility event. A realtime guarantee is not yet validated.
+
+**Exit gate:** Phone-to-phone QC confirms no F5, measured latency (target median <=2s and p95 <=4s) and safe quota behavior for intended audience size and show duration. Until then this is QC only, not production sync approval.
