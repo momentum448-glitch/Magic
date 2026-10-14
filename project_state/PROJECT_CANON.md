@@ -107,7 +107,7 @@ Architecture details are recorded in `project_state/ARCHITECTURE_TRICK_01.md`.
 - A spectator scans a QR and sees a face-up 52-card tabletop spread, then places the phone face down.
 - Only afterward, spectator freely chooses any of 52 cards and a number 1–52.
 - Performer covertly enters both selections in a hidden setup. Without a visible refresh, spectator turns phone face up and counts to the selected card at the named index.
-- Deck layout: a controlled single curved fan spread on wooden tabletop, not a grid or straight rows; count by fan order from left to right.
+- Deck layout: 52 cards in a single **nearly horizontal, very shallow curved ribbon/fan** (not a steep arc, grid or rows), across a natural wood tabletop; count strictly from left to right by card index position.
 - Trick 02 must stay isolated from Trick 01. A separate page and separate state files prevent production regressions.
 - Phase-1 technical decision: GitHub-only sync experiment, not unconditional approval of realtime performance. GitHub Pages serves immutable app; Magic-state stores per-channel updates.
 - Final visual target: realistic, genuinely photographed physical 52-card fan spread on wooden tabletop. The temporary QC SVG/vector rendering is not a visually approved production asset.
@@ -119,3 +119,5 @@ Architecture details are recorded in `project_state/ARCHITECTURE_TRICK_01.md`.
 Only durable cross-session decisions belong here. Temporary tasks, transient blockers, test notes, and immediate next actions belong in `HANDOFF_CURRENT.md` or `PROJECT_STAGE.md`.
 
 - Trick 02 visual construction decision (2026-10-14): do not repeatedly AI-generate the entire 52-card image. Use exactly 52 deterministic card codes in exactly 52 fixed fan slots; one shared physical width/height template for every card (including K♣), with controlled overlap, crisp legible indices and pinch-zoom vector rendering. Photograph-like surface and artwork polish remains gated by QC.
+
+- Trick 02 layout update (2026-10-14): wood tabletop is a separately generated photographic image, while all 52 cards remain vector/card elements placed and shuffled by deterministic code. The base 52-card order must LOOK RANDOM (not sorted by rank or suit), but stay stable across both devices and sessions so a magician's selected card/position can be swapped correctly. Keep every card's physical geometry identical and zoomable.
