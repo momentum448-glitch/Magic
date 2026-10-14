@@ -83,3 +83,13 @@ User confirmed option 2: **deterministic geometry and card identities**, not fur
 - Tests: exhaustive 52×52 = 2,704 permutations PASS; six representative browser-render tests PASS, including K♣ first and last; no JS console errors; local desktop & tall mobile screenshots inspected; Github Pages run 38526510021 SUCCESS on source commit 53a5d6f.
 - Temporary scene uses CSS wooden-table approximation and vector pip/court placeholders. True photorealism (physical card faces, consistent cast shadows, paper/wood photo assets) remains an independent visual-production step and must be user-approved before production.
 - Backend remains existing isolated GitHub-only REST state + bounded prototype polling, not an accepted production realtime guarantee.
+
+
+## Art layer v0.3 (2026-10-14)
+
+- `site/acaan/assets/` contains 12 verified present J/Q/K court SVG files from Webisso/playing-cards, MIT-licensed, with `ASSET_SOURCES.md`. Render the exposed final card from the appropriate local SVG, keeping the equal-size 190×262 card geometry and stable index overlay. If the SVG fails, fallback court motif remains rendered.
+- Card art coverage: courts (J/Q/K all suits) use standard English face art; exposed number/ace cards continue to use deterministic pip patterns, so **true complete photo-looking deck is not yet approved**.
+- Static wood backdrop: free photographic background by Kevin Shek (Unsplash License; URL images.unsplash.com/photo-1684846100473-f08fc22f5286), CSS textured fallback. External image is **static decoration only**, NOT a new database/state sync service. Remote image/real-phone loading has not been verified; self-hosting the photo in Magic is advisable after visual approval, to remove runtime dependency. A locally synthesized repeated-photo wood texture failed aesthetic QC and was deliberately NOT uploaded or used.
+- GitHub Pages run 38529599372 for visual commit d877116192ce50e8aafecd2e24df5e3ff300b509: SUCCESS.
+- QC scope: local DOM-based Chromium injection (direct local URLs blocked in environment), 12/12 samples pass across mobile/desktop for 52 unique cards, exact choice/position, identical dimensions, JS errors 0, horizontal overflow 0; source asset paths present 12/12. These verify markup/logic only, not real-network image loading or visual photorealism.
+- Primary remaining gates: on-device appearance and gesture zoom, image-load diagnostics, full photographic feel, operator/spectator two-device actual GitHub-only delay, rate-budget under multiple public spectators and phone locking.
