@@ -529,3 +529,38 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 
 ### Parallel Trick 01 untouched
 - Remains S3, 52/52 photos live and 15/52 v3 approved; 4H visual still unapproved. Do not conflate Trick 01 with ACAAN Trick 02.
+
+
+## H-0037 — 2026-10-14 — ACAAN v0.5 vertical ribbon of horizontal cards
+
+### Locked correction
+- User chose not to generate an image for deck. The generated wood-only photograph stays a separate background.
+- Ribbon direction: **top to bottom** on portrait spectator phone (one continuous 52-card cascade). **Each separate playing card lies horizontally/landscape**, NOT portrait. The prior v0.4 horizontal spread is superseded.
+- Count card 1 at the very top through card 52 at the bottom.
+- Mix all ranks/suits with fixed-seed deterministic shuffle, and swap selected card to selected index using code. Keep full 52 card uniqueness, equal sizes, pinch zoom, and hidden performer setup.
+
+### Implementation and evidence
+- Modified ONLY `site/acaan/index.html` on `momentum448-glitch/Magic`, source commit **54d3b42f8289d46e2fc26bd56bcd745fa3cf9c64**.
+- GitHub Pages workflow **38569596409** SUCCESS, completed for EXACT source commit SHA above.
+- New `#fan` SVG `viewBox="0 0 850 1850"`, `#photo` aspect `850/1850` matching portrait device orientation.
+- 52 SVG groups, each the SAME **CARD_W=286, CARD_H=198** (landscape aspect), including K♣ regardless of where it lands. `STEP_Y=29.5, X0=270, Y0=78, ARC_X=45`, gentle horizontal sine. Rotation never exceeds ±5.37°. No page rotation trick or permanent flattened deck photo.
+- Each card's rank/suit pair is placed upright in a single 29.5-unit exposed horizontal strip. All court SVG assets from `site/acaan/assets/` remain available; when a court is the last revealed full card, its traditional portrait art is rotated 90 degrees and scaled proportionally to the landscape card; number/ace last faces are deterministic vector pips.
+- Wood-only `ACAAN_WOOD_BACKGROUND_v04.jpg` persists as a separate static Google Drive thumbnail background ID `1Aa6EBY3Vni1WAWz-9csQfBwwMdB8iDao`, with existing photo/CSS fallbacks. Does not affect ACAAN data transport.
+- Same `shuffledBase()` seed `0xACAA6524`, per-request `ordering()` single card swap, isolated state `Magic-state/channels/acaan_demo01.json`, five-tap hidden settings, GitHub-only public REST pilot. No token committed.
+- Exhaustive programmatic check (52 cards × 52 numbers) **2704/2704 PASS**, no duplicate, correct target index.
+- Exact deployed inline JavaScript extracted from GitHub and parsed with JS parser **PASS** (no syntax errors).
+- Separate local Chromium reconstructed-layout DOM and screenshots with exact generated wood JPEG data URL, using 390×844 Android-like and 1448×1086 desktop viewports: **2/2 PASS**, all 52 unique, expected `7H` in 21st slot, 52 index labels, all 52 286×198 (width > height), no JS errors and no horizontal overflow, max rotation 5.3681°. Screenshot files `/mnt/data/acaan_v05_android_qc.png`, `/mnt/data/acaan_v05_desktop_qc.png`. **These are local geometry tests, not true remote-browser network image tests.**
+- GitHub compare v0.4 source to v0.5 source: only `site/acaan/index.html` touched in application subtree. Trick 01 `site/index.html` and `site/app.js` **unchanged**.
+
+### URLs
+- Spectator: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&v=05`
+- QC static sample (no GitHub state writes/reads): `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&qc=1&sample=7H-21&v=05`
+- Hidden performer arm: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01#arm`
+
+### Unresolved QA and next action
+1. Ask user to QC **real Android portrait** rendering for dải bài dọc + từng lá ngang; compare with local layout screenshot. Check full 52 indices and pinch-zoom. Avoid treating a visually convincing screenshot as final photo realism approval.
+2. Check Google Drive background photo and local `./assets` court image loading on the user's real spectator browser, and the print orientation of the final exposed card.
+3. Once user approves physical layout, refine paper/drop shadows only without changing core geometry, code-driven cards, wood-only image layer, deterministic shuffle or count convention.
+4. Two actual phones: measure GitHub-state Done→spectator no-F5 update, screen face-down/background/lock resume, p50/p95 delay and public 60 REST req/hour per IP rate budget. **No claim of 1–2s realtime PASS**.
+5. Canon updated superseding D-044 ribbon direction, new Decision Log D-045, Project Stage and Trick 02 Architecture updated. Drive CANON/DECISION_LOG/STAGE mirrors updated. Drive HANDOFF_CURRENT must be updated/read back after this GitHub H-0037 commit.
+6. Trick 01 is parallel and stays unchanged, including existing 4H photo approval gate.
