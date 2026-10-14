@@ -497,3 +497,35 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - Durable rules in `PROJECT_CANON.md` and D-043 remain unchanged.
 - Drive `MAGIC — PROJECT_STAGE` appended v0.3 checkpoint; **Drive `MAGIC — HANDOFF_CURRENT` must be appended/read back after this GitHub H-0035 write**.
 - Next execution: real-phone inspection of current live v0.3 to check court art SVG loads, static wood photo loads and pinch zoom readability; validate against photograph-like quality (if visual fail, iterate on physical shadows/wood/asset hosting). After visual accept, self-host licensed/photo source instead of runtime external wood CDN, and test two actual phones for update with no F5, screen lock/face-down, rate limits and latency before accepting realtime. Trick 01 remains untouched, 4H production still unapproved in its separate track.
+
+
+## H-0036 — 2026-10-14 — ACAAN v0.4 shallow horizontal randomized ribbon, generated wooden background
+
+### User-requested changes
+- After actual Android screenshot of v0.3, the user clarified: deck should lie almost horizontally across the wooden table, with only a very slight curved ribbon / parenthesis-like shape, not a deep arc.
+- Show 52 cards in a visibly **random-looking order**, not suit/rank order.
+- Generate one **standalone photoreal wood-table background** (no playing cards in the image) and keep all 52 playing cards separately positioned/repositionable by code, never a flat generated deck photograph.
+
+### Implemented and verified
+- One wood-only generated JPG `ACAAN_WOOD_BACKGROUND_v04.jpg` (941x1672, 421,784 bytes) uploaded to central Drive `Magic — Project Control` folder `11-OPyrRF57g7fJqjGjY3XcMoYVp8FJvF`, file ID `1Aa6EBY3Vni1WAWz-9csQfBwwMdB8iDao`. Drive metadata: **anyone/reader**, shared true, owner in user's account. Static image in CSS uses `https://drive.google.com/thumbnail?id=1Aa6EBY3Vni1WAWz-9csQfBwwMdB8iDao&sz=w2200` atop the older Unsplash and CSS fallbacks. NOTE: still subject to Google Drive CDN/mobile image loading limitations; only local screenshot with embedded exact JPEG is visually tested, so remote Android display is NOT YET user-approved.
+- Edited ONLY Trick 02 `site/acaan/index.html`; code commit **c8fe4198a38cf1821779e55decf4456d485b8ca2**, 16,997 chars.
+- CSS/card visual code still uses SVG identical card template **190×262 units** per one of 52 slots; no K♣ scale exception. New fan geometry: `STEP_X=1140, X0=73, Y0=390, ARC=46` in 1440×1000 viewBox; maximum card rotation ~±7.2° (previous v0.3 steep ARC=285).
+- `shuffledBase()` performs fixed-seed Fisher-Yates with unsigned LCG `0xACAA6524`. Base deck is thoroughly mixed visually yet reproducible on both spectator/performer browsers. `ordering()` swaps the selected card code with named 1–52 slot, keeping 52 unique cards and the same 52 fixed positions. Static `sample=7H-21` QC path still functions without writing state.
+- GitHub Pages run **38544956694**, source SHA c8fe4198, **completed SUCCESS**.
+- GitHub comparison confirms Trick 01 `site/index.html` and `site/app.js` remained unchanged.
+- QC: standalone exhaustive algorithm all **2,704/2,704** (card,position) combinations pass; Chromium offline page tests **12/12** across desktop 1448×1086 and Android-sized 390×844 for 7H/21, AS/1, KD/52, KC/1, KC/52, QH/52; 52 index nodes/52 unique codes/correct requested slot/card 190×262, no JS exceptions, no viewport overflow. Mobile/desktop screenshots created using *exact* generated JPEG embedded into local test markup (network access restricted in this test environment), visually inspected.
+- Current live URLs:
+  - Public spectator: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&v=04`.
+  - QC no-API static 7H/21: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&qc=1&sample=7H-21&v=04`.
+  - Performer arm: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01#arm`.
+- Existing GitHub-only state repo stays `Magic-state/channels/acaan_demo01.json`; no third-party realtime DB. 1–2s latency is not confirmed. Public REST anonymous 60 requests/hour per IP. No visible state change animation implemented, and real spectator phone not yet tested.
+
+### Open risks and next action (execute autonomously as feasible)
+1. **Actual Android visual QC**: ask user to open v0.4, verify the new wood JPG loads from publicly shared Drive thumbnail, 52 cards readable with pinch zoom, near-horizontal appearance, physical contact/shadows realistic. Screenshot from user if new page does not match our embedded-JPEG local screenshot.
+2. If wood thumbnail unreliable, self-host a static image under GitHub Pages via available permitted binary upload or replace source with another reliable static photo provider; do not replace code-driven card logic with a rendered deck photo.
+3. Polish realistic perspective, card-stock paper, shadows and J/Q/K artwork with matched lighting; avoid K♣ scale deviations and index overlap. User requested production illusion of photograph, not a mere SVG mockup. No final visual approval yet.
+4. **Two-phone real sync QC**: 7H/21 and random combinations with first phone showing QR before selection and face down; secret setup on second phone, result appears without F5. Measure p50/p95, screen lock/background resume, REST 60 req/hour/IP and reliability; determine whether bounded polling is show-worthy or adjust architecture based on evidence.
+5. Project documents: canon shallow mixed deck, Decision Log D-044, project stage v0.4 and architecture notes already updated. Drive CANON / DECISION LOG / STAGE mirrors updated. Add Drive HANDOFF_CURRENT H-0036 mirror after this GitHub update and verify readback.
+
+### Parallel Trick 01 untouched
+- Remains S3, 52/52 photos live and 15/52 v3 approved; 4H visual still unapproved. Do not conflate Trick 01 with ACAAN Trick 02.
