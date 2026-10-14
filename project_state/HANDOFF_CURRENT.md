@@ -443,3 +443,25 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - User device/browser QC: **PENDING**. A successful Pages run is NOT evidence of phone layout, 2-device sync, screen-down/lock survival or p95 4s latency.
 - NEXT EXECUTABLE ACTION: user opens spectator QC URL on Android, verifies 52 distinct cards and left-to-right/top-to-bottom numbering using debug labels. Performer opens #arm with existing repo-scoped state token, secretly sets sample 7H/21 and another random pair. Test no F5 and record Done-to-visibility latency in 20 runs. Capture rate-remaining, 403/429 and lock/resume. Then implement/test raw.githubusercontent.com cache-bust comparison, choose synchronization architecture based on data.
 - Drive sync: verified 2026-10-13. MAGIC — PROJECT_CANON, PROJECT_STAGE, DECISION_LOG and HANDOFF_CURRENT all received Trick 02 addenda; Drive HANDOFF_CURRENT H-0033 readback verified. GitHub remains full source of truth.
+
+
+## H-0034 — Trick 02 controlled fan v0.2 technical QC/deploy (2026-10-14)
+
+- User selected option 2: stop repeatedly AI-rendering entire 52-card photos after repeated 5H/6H/7H duplicates and visibly undersized K♣; use deterministic equal-sized card assets and fixed fan geometry instead.
+- Locked visual layout: exactly ONE gently curved fan spread on a tabletop, not straight ordered rows or 7×8 grid. Count from left to right along the fan, allow mobile pinch zoom.
+- Current independent Trick 02 source: `site/acaan/index.html`, commit **53a5d6f0c59d2eba1ddaffbc4dc4bd890b7440a7**. Existing Trick 01 `site/index.html`, `site/app.js` and photo mappings remain UNCHANGED.
+- Backend still existing isolated `Magic-state/channels/acaan_demo01.json`, Github Contents API (authorized performer write, unauthenticated spectator read) and bounded proof polling. Realtime 1–2 seconds is NOT empirically approved; 60 unauthenticated REST GET/hour/IP limit remains.
+- SVG renderer builds 52 fixed `data-slot` groups, all **CARD_W=190 / CARD_H=262** in a 1440×1000 coordinate space. Identical dimensions, including K♣. 52 vector-sharp rank/suit index groups are placed above all card bodies for count legibility. The last face is rendered deterministically by current card code, no special K♣ scale.
+- Start deck 52 exact codes, Hearts A–K / Spades A–K / Diamonds A–K / Clubs A–K. On selection (cardCode, position) swap selected card into requested index; all 52 remain unique and the 52 slot positions do not shift.
+- Browser/local technical QC **PASS**: all **2,704** card-number permutations correct; six separate Chromium cases (7H/21, AS/1, KD/52, 10C/13, KC/1, KC/52) show 52 unique cards, correct count index and 1 identical template size; zero JavaScript page errors; desktop 1448×1086 and Android-sized 390×844 screenshot tests performed; simulated touch pinch 2.5× changed visualViewport scale from 1 to 2.5.
+- GitHub Pages run **38526510021** completed with **SUCCESS** for exact source commit 53a5d6f.
+- URLs:
+  - Spectator `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01`
+  - Live tech QC `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&qc=1`
+  - No-API demo sample `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&qc=1&sample=7H-21` (does NOT change public GitHub state)
+  - Performer `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01#arm` (same fine-grained state token from operator device; no token in code).
+- Photo-grade visual remains NOT APPROVED: current wood backdrop is a CSS wood impression, all cards are deterministic SVG, court/number face motifs are temporary graphics. User must not confuse this with the final true photograph standard. No photo production assets were deleted or replaced.
+- User-device browser QC still PENDING: zoom/readability on Android, actual Done-to-spectator no-F5 delay, screen facedown/lock/foreground visibility, rate limiting/403 across networks.
+- GitHub docs updated: PROJECT_CANON fan geometry and equal-scale rule, DECISION_LOG D-043, PROJECT_STAGE fan v0.2 milestone, ARCHITECTURE_TRICK_02 v0.2 supersession.
+- Drive CANON, STAGE and DECISION_LOG append updates completed 2026-10-14; Drive HANDOFF mirror will be appended after this write.
+- NEXT: user QC layout + vector pinch zoom via no-API sample link, then operator/spectator two-device test; measure latency and rate; refine physical/photographic card art and authentic wood surface only after geometry/count QC, without ever changing scale rules. Trick 01 remains at S3 15/52 v3 assets; 4H still unapproved and full-card mobile user QC pending.
