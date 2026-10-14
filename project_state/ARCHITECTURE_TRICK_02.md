@@ -109,3 +109,13 @@ User confirmed option 2: **deterministic geometry and card identities**, not fur
 - Chromium DOM test 6 card-number samples × 2 viewports = 12/12 pass on uniqueness, chosen position, equal 190×262 card geometry, no JS page errors/overflow. Exhaustive standalone 2,704 pairs pass with same numeric PRNG algorithm.
 - Pending: actual Drive thumbnail loading across Android browsers, pinch-zoom legibility, live spectator GitHub read, screen-lock and 2-device transport latency/rate.
 - Trick 01 remains isolated and unchanged.
+
+
+## V0.5 display-direction supersession (2026-10-14)
+
+- Canon reading: **52-card ribbon is VERTICAL down a portrait viewport, but EACH CARD IS PHYSICALLY HORIZONTAL/LANDSCAPE**. This supersedes the horizontal ribbon/left-to-right counting direction in earlier prototype descriptions. Do not render a fixed AI-generated full-deck image.
+- Portrait SVG viewBox **850x1850**, paper rectangle **286x198** per slot (same for card 1..52 including King of Clubs). Geometry: `STEP_Y=29.5, X0=270, Y0=78, ARC_X=45` with `x=X0+ARC_X*sin(π*i/51)`, `y=Y0+STEP_Y*i`, card angle from tangent, approximately ±5.37°. Every card is a different SVG `g[data-slot]` and every card has its own `g[data-index-slot]`. Count **top to bottom**.
+- Upright index label and suit share the exposed horizontal top strip (rank at x10 and suit x35/48, both baseline y24) before the next overlapping card begins after 29.5 units. Optional ordinal debug number at x96, y24. The last exposed card shows a court asset rotated 90° through affine translation + scale + rotate inside the shared landscape box, or a deterministic number/ace pip pattern; no special K♣ scale.
+- Seeded shuffle and chosen card to numbered position single-swap are unchanged. Wood-only Google Drive photo remains a separate background; state repo and bounded prototype polling unchanged.
+- Build source commit `54d3b42f8289d46e2fc26bd56bcd745fa3cf9c64`, Pages workflow `38569596409` SUCCESS.
+- QC: exact deployed JS syntax parse PASS, local 2/2 desktop/Android-sized SVG + generated JPG mock browser DOM tests PASS 52 identities / #21 7H / shared landscape proportions / 52 labels / ±5.37° / zero JS errors / no horizontal overflow; all 2704 permutations mathematically PASS. Actual Android photo loading, portrait pinch zoom, and two-device realtime behavior PENDING.
