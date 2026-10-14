@@ -172,3 +172,14 @@ Status: **QC PROTOTYPE DEPLOYED — REAL-DEVICE QC PENDING** (2026-10-13).
 - GitHub Pages run `38544956694` **SUCCESS** for exact v0.4 source commit. No Trick 01 files edited.
 - Local Chromium screenshot QC with the exact generated wood image embedded offline, SVG geometry and shuffled base: desktop 1448×1086 and mobile 390×844 inspected. 6 card/position cases × 2 screen sizes = **12/12 PASS** (52 distinct, desired index, 52 equal 190×262 SVG templates, no page errors, no horizontal overflow). 2,704/2,704 pairs exhaustive logic test PASS.
 - Still **PENDING real-device**: GitHub Pages loading of actual Google Drive thumbnail (vs offline embedded copy), visible rank/suit legibility at different zoom levels, 2-device no-refresh sync rate/latency, background reload/offline behavior and lock/face-down test. Not a fully approved photo-real performance build yet.
+
+
+### 2026-10-14 — Trick 02 v0.5 vertical ribbon of landscape cards
+
+- User explicit correction adopted: **ribbon runs top-to-bottom, each of the 52 cards lies horizontally**, with slight curve and natural wood-only photographic background. Does not use newly AI-generated deck picture.
+- Modified only `site/acaan/index.html`, GitHub commit `54d3b42f8289d46e2fc26bd56bcd745fa3cf9c64`. GitHub Pages workflow `38569596409` **SUCCESS** at exact commit.
+- New portrait SVG viewBox `850×1850`; exact **286×198** card template in every slot including K♣; vertical `STEP_Y=29.5`, `X0=270`, `Y0=78`, `ARC_X=45`. 52 slots in a descending near-straight ribbon, maximum tilt ±5.37°. Rank/suit index remains upright on each exposed top strip. The final court illustration is rotated and scaled without aspect distortion to the landscape slot.
+- Retained reproducible Fisher-Yates `0xACAA6524` seed, ACAAN single-swap, 52 unique identities, Drive wood photo background `1Aa6EBY3Vni1WAWz-9csQfBwwMdB8iDao`, separate `Magic-state/channels/acaan_demo01.json`, hidden five-tap setup.
+- Exhaustive permutation logic QC: **2,704/2,704 PASS**. Deployed JS extracted from exact GitHub file parses successfully. Local Chromium DOM/screenshot tests run with matching SVG geometry and exact same wood JPEG included as data URL: **2/2 Android-sized 390×844 and desktop 1448×1086 PASS** for 52 unique codes, 7H at #21, 52 indices, landscape card geometry 286×198 for all 52, max tilt ≤5.37°, no JS page errors or viewport horizontal overflow.
+- Screenshots `/mnt/data/acaan_v05_android_qc.png` and `/mnt/data/acaan_v05_desktop_qc.png` generated in test runtime. Testing via isolated local reconstruction is a **geometry/logic proof**, not a claim that remote network static wood and SVG court assets loaded successfully.
+- **Real Android user visual QC and two-device GitHub-only synchronization latency still PENDING**. No realtime guarantee or photo-grade production approval.
