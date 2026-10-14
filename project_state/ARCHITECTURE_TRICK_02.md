@@ -93,3 +93,19 @@ User confirmed option 2: **deterministic geometry and card identities**, not fur
 - GitHub Pages run 38529599372 for visual commit d877116192ce50e8aafecd2e24df5e3ff300b509: SUCCESS.
 - QC scope: local DOM-based Chromium injection (direct local URLs blocked in environment), 12/12 samples pass across mobile/desktop for 52 unique cards, exact choice/position, identical dimensions, JS errors 0, horizontal overflow 0; source asset paths present 12/12. These verify markup/logic only, not real-network image loading or visual photorealism.
 - Primary remaining gates: on-device appearance and gesture zoom, image-load diagnostics, full photographic feel, operator/spectator two-device actual GitHub-only delay, rate-budget under multiple public spectators and phone locking.
+
+
+## User correction and v0.4 implementation — 2026-10-14
+
+### Visual design
+- Separate wood-only ImageGen asset stored in Google Drive: `ACAAN_WOOD_BACKGROUND_v04.jpg`, ID `1Aa6EBY3Vni1WAWz-9csQfBwwMdB8iDao`, public permission `anyone / reader` confirmed via metadata. URL is a static GitHub Pages CSS background `https://drive.google.com/thumbnail?id=1Aa6EBY3Vni1WAWz-9csQfBwwMdB8iDao&sz=w2200`, with previous Unsplash background and CSS fallback underneath. The Drive asset serves NO realtime/state function. The runtime image URL is not guaranteed until real mobile QC.
+- Cards are NOT rendered in ImageGen picture; they remain exactly 52 separate SVG card slots drawn programmatically, with their identities and faces changed via code. All card geometry remains 190×262 viewBox units, including last slot and K♣.
+- Coordinates changed from steep ARC=285 to mild ARC=46 in the same 1440×1000 viewBox; `CARD_W=190, CARD_H=262, STEP_X=1140, X0=73, Y0=390, ARC=46`; max |angle| ~7.2° and near-horizontal left-to-right reading order.
+- Base card sequence is no longer A–K sorted per suit. Instead a stable Fisher-Yates shuffle seeded with `0xACAA6524` runs identically on spectator/performer devices, so it looks random yet needs no additional state. The selected card's base index is pair-swapped with desired 1–52 slot; all 2,704 possible requests preserve 52 unique card identities, no layout change.
+
+### Validation
+- Source commit `c8fe4198a38cf1821779e55decf4456d485b8ca2`; GitHub Pages workflow `38544956694` success.
+- Locally inspected desktop and mobile screenshots with the SAME newly generated wood image embedded as a test data URL (due external browser restriction): near-straight horizontal spread and photo texture visually confirmed.
+- Chromium DOM test 6 card-number samples × 2 viewports = 12/12 pass on uniqueness, chosen position, equal 190×262 card geometry, no JS page errors/overflow. Exhaustive standalone 2,704 pairs pass with same numeric PRNG algorithm.
+- Pending: actual Drive thumbnail loading across Android browsers, pinch-zoom legibility, live spectator GitHub read, screen-lock and 2-device transport latency/rate.
+- Trick 01 remains isolated and unchanged.
