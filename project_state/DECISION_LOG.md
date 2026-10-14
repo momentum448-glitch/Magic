@@ -329,3 +329,12 @@
 **Decision:** All 52 cards are positioned as fixed slots in one slightly curved fan, left-to-right count order. Each card uses exactly the same card geometry and receives one deterministic rank/suit; any chosen card and number is resolved by an order permutation that maintains 52 unique cards. Keep vector-quality zoom. The first technical renderer uses a temporary graphic face style while photographic artwork/texture remains pending.
 
 **Consequence:** Trick 02 changes only `site/acaan/index.html` and its isolated state namespace; Trick 01 remains intact. Do not approve production imagery based solely on technical test PASS. D-041's former 'ordered rows' visual wording is superseded by this fan-spread decision.
+
+
+### D-044 — 2026-10-14 — Shallow horizontal random-order ribbon over separate wood photograph
+
+**User feedback and correction:** Real phone screenshot of v0.3 showed a steep crescent, overly graphic/dark table, and sorted suit/rank order. User wants deck lying horizontally in an almost straight, slightly curved spread. Wood must be a separate photorealistic picture. Every playing card still uses deterministic code-driven placement, never a generated whole-deck photo.
+
+**Decision:** Generate one wood-only image and use it as a static background asset; maintain 52 separately rendered cards, same physical dimensions including K♣; use fixed seeded Fisher-Yates shuffle to make the visible order mixed yet identical for magician/spectator, then pair-swap chosen card to selected 1–52 index.
+
+**QC consequences:** Nonlinear geometry reduced to a shallow ARC=46 over STEP_X=1140 in a 1440×1000 SVG canvas; max approximately 7.2° card rotation. Static background stored in Google Drive project folder as ACAAN_WOOD_BACKGROUND_v04.jpg, publicly readable with inherited Anyone/Reader permission. Mobile photo-loading and two-device synchronization still must be checked on the user's actual Android device.
