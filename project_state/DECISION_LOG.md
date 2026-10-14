@@ -338,3 +338,14 @@
 **Decision:** Generate one wood-only image and use it as a static background asset; maintain 52 separately rendered cards, same physical dimensions including K♣; use fixed seeded Fisher-Yates shuffle to make the visible order mixed yet identical for magician/spectator, then pair-swap chosen card to selected 1–52 index.
 
 **QC consequences:** Nonlinear geometry reduced to a shallow ARC=46 over STEP_X=1140 in a 1440×1000 SVG canvas; max approximately 7.2° card rotation. Static background stored in Google Drive project folder as ACAAN_WOOD_BACKGROUND_v04.jpg, publicly readable with inherited Anyone/Reader permission. Mobile photo-loading and two-device synchronization still must be checked on the user's actual Android device.
+
+
+### D-045 — 2026-10-14 — Vertical ribbon of landscape cards (supersedes D-044 ribbon direction)
+
+**User correction:** "Chiều dải bài đã đúng nhưng lá bài cần nằm ngang, em không gen ảnh mà dùng code đưa vào." The whole spread runs from top to bottom; **each card independently lies horizontally (landscape orientation)**. A previous AI picture was illustrative only and is NOT to be used as a flattened playing-card deck asset.
+
+**Locked decision:** Keep 52 same-sized code-rendered card elements, stable seed-shuffled identities, top-to-bottom count rule, slight left/right curvature like a shallow parenthesis. Keep the separate wood-only photo as the static background. ACAAN pair-swap logic and isolated Trick 02 GitHub-state architecture unchanged.
+
+**Implementation:** Portrait SVG viewBox 850×1850, card template 286×198 (landscape), fixed vertical step 29.5, horizontal waviness ARC_X=45, maximum rotation approximately ±5.37°. Face card SVG rotated 90° inside the landscape rectangle when last/exposed; rank/suit index is printed upright within the 29.5-unit exposed top edge of every slot. The swap still maps any chosen card to any vertical position 1–52.
+
+**Scope:** supersedes the horizontal fan geometry in D-044 but **preserves D-044 wood/seed-shuffle/card-layer decisions**. Trick 01 remains unchanged.
