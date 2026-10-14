@@ -162,3 +162,13 @@ Status: **QC PROTOTYPE DEPLOYED — REAL-DEVICE QC PENDING** (2026-10-13).
 - Self-QC in local browser using injected DOM (direct browser navigation blocked by execution policy): 6 cases × mobile 390×844 plus desktop 1448×1086 = **12/12 PASS** for 52 slots, 52 unique card identities, selected slot, same card dimensions, no JavaScript exceptions or viewport horizontal overflow. Court image src correctly tracks KD/52, QH/52 and KC/52; KC/1 correctly shows a numeric final card.
 - Browser screenshots with local/offline assets display fallback, so **actual remote court artwork/Unsplash photo loaded/rendered PASS is not claimed**. Production visual QC and real Android zoom/no-F5/latency remain PENDING.
 - Trick 01 files unaffected, confirmed through compare from fan v0.2 commit; changes limited to Trick 02 and project_state files.
+
+
+### 2026-10-14 — Trick 02 fan v0.4 horizontal mixed deck / generated wood background
+
+- User-supplied Android screenshot and explicit corrected design requirements applied: almost straight horizontal card ribbon, only slight curvature, separate photorealistic wooden table, no ordered suits/ranks.
+- New generated static image `ACAAN_WOOD_BACKGROUND_v04.jpg` from wood-only ImageGen (941×1672 JPEG, 421,784 bytes), uploaded into MAGIC Project Control Drive folder: file ID `1Aa6EBY3Vni1WAWz-9csQfBwwMdB8iDao`. Permissions verified `anyone/reader`. Website uses Drive thumbnail as first static background layer, with Unsplash and CSS fallback. The generated wood is a static resource; GitHub-only **state** architecture stays unchanged.
+- Updated isolated `site/acaan/index.html` source commit `c8fe4198a38cf1821779e55decf4456d485b8ca2`: `STEP_X=1140, X0=73, Y0=390, ARC=46`, max ±7.2°; deterministic seeded Fisher-Yates `0xACAA6524` base deck, fixed from load to load; selected (card, number) still applied by pair swap.
+- GitHub Pages run `38544956694` **SUCCESS** for exact v0.4 source commit. No Trick 01 files edited.
+- Local Chromium screenshot QC with the exact generated wood image embedded offline, SVG geometry and shuffled base: desktop 1448×1086 and mobile 390×844 inspected. 6 card/position cases × 2 screen sizes = **12/12 PASS** (52 distinct, desired index, 52 equal 190×262 SVG templates, no page errors, no horizontal overflow). 2,704/2,704 pairs exhaustive logic test PASS.
+- Still **PENDING real-device**: GitHub Pages loading of actual Google Drive thumbnail (vs offline embedded copy), visible rank/suit legibility at different zoom levels, 2-device no-refresh sync rate/latency, background reload/offline behavior and lock/face-down test. Not a fully approved photo-real performance build yet.
