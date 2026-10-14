@@ -320,3 +320,12 @@
 **Evidence/constraint:** User previously observed approximately 1–2 second web synchronization in another project, but method not yet identified. GitHub public REST requests remain limited to 60/hour/IP; a phone physically turned face-down does not automatically create a browser visibility event. A realtime guarantee is not yet validated.
 
 **Exit gate:** Phone-to-phone QC confirms no F5, measured latency (target median <=2s and p95 <=4s) and safe quota behavior for intended audience size and show duration. Until then this is QC only, not production sync approval.
+
+
+### D-043 — 2026-10-14 — Deterministic fan renderer, not AI whole-deck images
+
+**User choice:** After repeated AI whole-image duplicates (5♥/6♥/7♥) and inconsistent K♣ scale, choose option 2: cease the whole-deck image-generation revision loop and construct the spread programmatically from 52 card identities and a single geometric card template.
+
+**Decision:** All 52 cards are positioned as fixed slots in one slightly curved fan, left-to-right count order. Each card uses exactly the same card geometry and receives one deterministic rank/suit; any chosen card and number is resolved by an order permutation that maintains 52 unique cards. Keep vector-quality zoom. The first technical renderer uses a temporary graphic face style while photographic artwork/texture remains pending.
+
+**Consequence:** Trick 02 changes only `site/acaan/index.html` and its isolated state namespace; Trick 01 remains intact. Do not approve production imagery based solely on technical test PASS. D-041's former 'ordered rows' visual wording is superseded by this fan-spread decision.
