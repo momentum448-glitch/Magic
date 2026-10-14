@@ -6,16 +6,17 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#67402c">
 <title>Photograph</title>
-<!-- ACAAN visual v0.3: court SVGs locally hosted under MIT; wood background photograph by Kevin Shek (Unsplash License) is an optional static image, fallback CSS grain remains. No external realtime backend. -->
+<!-- ACAAN visual v0.4: real separate wood photo is in publicly readable MAGIC Drive control folder; mild near-linear fan; deterministic Fisher-Yates deck permutation; vector cards. Previous v0.3: court SVGs locally hosted under MIT; wood background photograph by Kevin Shek (Unsplash License) is an optional static image, fallback CSS grain remains. No external realtime backend. -->
 <style>
 :root { font-family: ui-sans-serif,system-ui,-apple-system,Arial,sans-serif; color:#f5f0e8; background:#372318; }
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;} button,input{font:inherit} button{cursor:pointer}
 #scene {min-height:100vh;min-height:100dvh;display:grid;place-items:center;position:relative;padding:4px;isolation:isolate;overflow:hidden;
   background-color:#6b442e;
   background-image:radial-gradient(ellipse at 16% 8%,rgba(245,200,148,.12),transparent 46%),linear-gradient(135deg,rgba(90,44,18,.15),rgba(20,11,7,.24)),
+  url("https://drive.google.com/thumbnail?id=1Aa6EBY3Vni1WAWz-9csQfBwwMdB8iDao&sz=w2200"),
   url("https://images.unsplash.com/photo-1684846100473-f08fc22f5286?auto=format&fit=crop&w=2200&q=85"),
   repeating-linear-gradient(1deg,#795035 0px,#74472a 5px,#8d5935 11px,#81502e 17px,#674029 23px,#8a5638 30px,#6d4026 39px,#8a5634 53px);
-  background-size:cover,cover,cover,auto; background-position:center; }
+  background-size:cover,cover,cover,cover,auto; background-position:center; }
 #scene:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.08;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0px,transparent 126px,rgba(30,11,5,.42) 128px,transparent 132px),repeating-radial-gradient(ellipse at 18% 44%,transparent 0px,rgba(30,14,8,.18) 2px,transparent 4px,transparent 14px);}
 #photo {display:block;width:min(calc(100vw - 8px),calc((100dvh - 8px)*1.44),1440px);aspect-ratio:1440/1000;position:relative;filter:drop-shadow(0px 15px 13px rgba(15,6,4,.15));}
 #fan{display:block;width:100%;height:100%;overflow:visible;user-select:none;-webkit-user-select:none;}
@@ -67,7 +68,7 @@ var RANKS=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
 var SUITS=[["H","♥"],["S","♠"],["D","♦"],["C","♣"]];
 var codes=[];SUITS.forEach(function(s){RANKS.forEach(function(r){codes.push(r+s[0]);});});
 var full=new Set(codes), SVG_NS="http://www.w3.org/2000/svg";
-var CARD_W=190, CARD_H=262, STEP_X=1230, X0=60, Y0=482, ARC=285;
+var CARD_W=190, CARD_H=262, STEP_X=1140, X0=73, Y0=390, ARC=46;
 var state={cardCode:null,position:null,version:0};
 var selected=null, pending=false, lastSync="Chưa đọc",remaining="?",busy=false;
 var started=Date.now(),polls=0,hotCount=0,hotTimer=0;
@@ -79,7 +80,12 @@ function apiUrl(){return "https://api.github.com/repos/"+OWNER+"/"+REPO+"/conten
 function headers(t){var h={"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};if(t)h.Authorization="Bearer "+t;return h;}
 function decode(s){return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),function(c){return c.charCodeAt(0);})));}
 function encode(obj){var bytes=new TextEncoder().encode(JSON.stringify(obj,null,2)+"\n"),b="";bytes.forEach(function(x){b+=String.fromCharCode(x);});return btoa(b);}
-function ordering(s){var a=codes.slice();if(s && full.has(s.cardCode) && Number.isInteger(s.position) && s.position>=1 && s.position<=52){var p=a.indexOf(s.cardCode),q=s.position-1;var x=a[p];a[p]=a[q];a[q]=x;}return a;}
+function shuffledBase(){
+ var a=codes.slice(),seed=0xACAA6524;
+ for(var j=a.length-1;j>0;j--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;var k=seed%(j+1),tmp=a[j];a[j]=a[k];a[k]=tmp;}
+ return a;
+}
+function ordering(s){var a=shuffledBase();if(s && full.has(s.cardCode) && Number.isInteger(s.position) && s.position>=1 && s.position<=52){var p=a.indexOf(s.cardCode),q=s.position-1;var x=a[p];a[p]=a[q];a[q]=x;}return a;}
 function label(c){return c.slice(0,-1)+({"H":"♥","S":"♠","D":"♦","C":"♣"})[c.slice(-1)];}
 function svgEl(name,attrs,parent){var e=document.createElementNS(SVG_NS,name);Object.keys(attrs||{}).forEach(function(k){if(attrs[k] !== undefined && attrs[k] !== null) e.setAttribute(k,String(attrs[k]));});if(parent)parent.appendChild(e);return e;}
 function coords(i){var t=i/51, dy=-ARC*Math.PI*Math.cos(Math.PI*t);return {x:X0+STEP_X*t,y:Y0-ARC*Math.sin(Math.PI*t),angle:Math.atan2(dy,STEP_X)*180/Math.PI};}
@@ -139,7 +145,7 @@ function drawCards(s){
  }
  diagnostics();
 }
-function diagnostics(){if(!QC)return;var a=ordering(state),last=nodes[51];document.getElementById("qcPanel").textContent="FAN V2 | 52/52 "+new Set(a).size+" unique | K♣ size "+CARD_W+"×"+CARD_H+" (all 52 equal) | v"+(state.version||0)+" "+(state.cardCode||"–")+" @ "+(state.position||"–")+" | GET "+lastSync+" | calls="+polls+" | remaining="+remaining;}
+function diagnostics(){if(!QC)return;var a=ordering(state),last=nodes[51];document.getElementById("qcPanel").textContent="FAN V4 | 52/52 "+new Set(a).size+" unique | K♣ size "+CARD_W+"×"+CARD_H+" (all 52 equal) | v"+(state.version||0)+" "+(state.cardCode||"–")+" @ "+(state.position||"–")+" | GET "+lastSync+" | calls="+polls+" | remaining="+remaining;}
 async function fetchState(t){var r=await fetch(apiUrl()+"?t="+Date.now(),{headers:headers(t),cache:"no-store"});polls++;remaining=r.headers.get("x-ratelimit-remaining")||remaining;if(!r.ok){var e=new Error("GitHub read HTTP "+r.status);e.http=r.status;throw e;}var j=await r.json(),s=decode(j.content);if(!s||typeof s.version!=="number"||!(s.cardCode===null||full.has(s.cardCode))||!(s.position===null||Number.isInteger(s.position)&&s.position>=1&&s.position<=52))throw new Error("Invalid state");return {data:s,sha:j.sha};}
 async function sync(){if(!valid||busy)return;busy=true;try{var res=await fetchState();lastSync=new Date().toLocaleTimeString("vi-VN");if(res.data.version!==state.version||res.data.cardCode!==state.cardCode||res.data.position!==state.position){state=res.data;drawCards(state);}else diagnostics();}catch(e){lastSync=e.message;diagnostics();console.warn(e);}finally{busy=false;}}
 function timer(){if(document.visibilityState==="hidden")return;var e=Date.now()-started;if(e<75000){sync();setTimeout(timer,2000);}else if(e<180000){sync();setTimeout(timer,8000);}}
