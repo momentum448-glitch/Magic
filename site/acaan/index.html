@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#67402c">
 <title>Photograph</title>
-<!-- ACAAN visual v0.4: real separate wood photo is in publicly readable MAGIC Drive control folder; mild near-linear fan; deterministic Fisher-Yates deck permutation; vector cards. Previous v0.3: court SVGs locally hosted under MIT; wood background photograph by Kevin Shek (Unsplash License) is an optional static image, fallback CSS grain remains. No external realtime backend. -->
+<!-- ACAAN visual v0.5: portrait phone / vertical ribbon of separate landscape playing cards, stable shuffled order, image-only wooden table backdrop. v0.4: real separate wood photo is in publicly readable MAGIC Drive control folder; mild near-linear fan; deterministic Fisher-Yates deck permutation; vector cards. Previous v0.3: court SVGs locally hosted under MIT; wood background photograph by Kevin Shek (Unsplash License) is an optional static image, fallback CSS grain remains. No external realtime backend. -->
 <style>
 :root { font-family: ui-sans-serif,system-ui,-apple-system,Arial,sans-serif; color:#f5f0e8; background:#372318; }
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;} button,input{font:inherit} button{cursor:pointer}
@@ -18,7 +18,7 @@
   repeating-linear-gradient(1deg,#795035 0px,#74472a 5px,#8d5935 11px,#81502e 17px,#674029 23px,#8a5638 30px,#6d4026 39px,#8a5634 53px);
   background-size:cover,cover,cover,cover,auto; background-position:center; }
 #scene:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.08;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0px,transparent 126px,rgba(30,11,5,.42) 128px,transparent 132px),repeating-radial-gradient(ellipse at 18% 44%,transparent 0px,rgba(30,14,8,.18) 2px,transparent 4px,transparent 14px);}
-#photo {display:block;width:min(calc(100vw - 8px),calc((100dvh - 8px)*1.44),1440px);aspect-ratio:1440/1000;position:relative;filter:drop-shadow(0px 15px 13px rgba(15,6,4,.15));}
+#photo {display:block;width:min(calc(100vw - 8px),calc((100dvh - 8px)*850/1850),850px);aspect-ratio:850/1850;position:relative;filter:drop-shadow(0px 15px 13px rgba(15,6,4,.15));}
 #fan{display:block;width:100%;height:100%;overflow:visible;user-select:none;-webkit-user-select:none;}
 #fan .paper{fill:#fffdf7;stroke:#dad5ce;stroke-width:.9;}
 #fan .card-shadow{fill:#210f0866;filter:url(#castShadow)}
@@ -43,15 +43,15 @@ h1{font-size:21px;margin:0 0 8px}.hint{font-size:12px;color:#b8b8b8;margin:4px 0
 <body>
 <main id="scene">
   <div id="photo" aria-label="Photograph of 52 playing cards on a wooden table">
-    <svg id="fan" viewBox="0 0 1440 1000" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="52 lá bài trải hình quạt trên bàn gỗ, đếm từ trái sang phải">
+    <svg id="fan" viewBox="0 0 850 1850" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="52 lá bài nằm ngang, trải theo dải dọc trên bàn gỗ; đếm từ trên xuống dưới">
       <defs><filter id="castShadow" x="-20%" y="-20%" width="145%" height="145%"><feGaussianBlur stdDeviation="2.5"/></filter></defs>
-      <g id="deck" data-layout="fan-52"></g>
+      <g id="deck" data-layout="vertical-landscape-52"></g>
     </svg>
   </div>
   <button id="hotspot" aria-label="Open performer settings"></button>
 </main>
 <aside id="qcPanel"></aside>
-<dialog id="settings"><h1>ACAAN · Setup</h1><p class="hint">Chọn lá và vị trí 1–52. Khán giả đếm lần lượt theo đường cong từ trái sang phải.</p>
+<dialog id="settings"><h1>ACAAN · Setup</h1><p class="hint">Chọn lá và vị trí 1–52. Khán giả đếm từ trên xuống dưới, mỗi lá nằm ngang trên bàn gỗ.</p>
  <div id="choices"></div><div class="controls"><label>Vị trí <input id="number" type="number" min="1" max="52" inputmode="numeric" value="21"></label><span id="selection">Chưa chọn lá</span></div><p id="status"></p>
  <div class="controls"><button class="action secondary" id="cancel" type="button">Đóng</button><button class="action" id="done" type="button" disabled>Done</button></div></dialog>
 <dialog id="arming"><h1>Arm performer device</h1><p class="hint">Fine-grained GitHub token: chỉ Contents:write của repo Magic-state. Không nhập trên điện thoại khán giả.</p>
@@ -68,7 +68,7 @@ var RANKS=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
 var SUITS=[["H","♥"],["S","♠"],["D","♦"],["C","♣"]];
 var codes=[];SUITS.forEach(function(s){RANKS.forEach(function(r){codes.push(r+s[0]);});});
 var full=new Set(codes), SVG_NS="http://www.w3.org/2000/svg";
-var CARD_W=190, CARD_H=262, STEP_X=1140, X0=73, Y0=390, ARC=46;
+var CARD_W=286, CARD_H=198, STEP_Y=29.5, X0=270, Y0=78, ARC_X=45;
 var state={cardCode:null,position:null,version:0};
 var selected=null, pending=false, lastSync="Chưa đọc",remaining="?",busy=false;
 var started=Date.now(),polls=0,hotCount=0,hotTimer=0;
@@ -88,31 +88,40 @@ function shuffledBase(){
 function ordering(s){var a=shuffledBase();if(s && full.has(s.cardCode) && Number.isInteger(s.position) && s.position>=1 && s.position<=52){var p=a.indexOf(s.cardCode),q=s.position-1;var x=a[p];a[p]=a[q];a[q]=x;}return a;}
 function label(c){return c.slice(0,-1)+({"H":"♥","S":"♠","D":"♦","C":"♣"})[c.slice(-1)];}
 function svgEl(name,attrs,parent){var e=document.createElementNS(SVG_NS,name);Object.keys(attrs||{}).forEach(function(k){if(attrs[k] !== undefined && attrs[k] !== null) e.setAttribute(k,String(attrs[k]));});if(parent)parent.appendChild(e);return e;}
-function coords(i){var t=i/51, dy=-ARC*Math.PI*Math.cos(Math.PI*t);return {x:X0+STEP_X*t,y:Y0-ARC*Math.sin(Math.PI*t),angle:Math.atan2(dy,STEP_X)*180/Math.PI};}
+function coords(i){
+ // Physical cards have landscape geometry and follow a shallow upright parenthesis.
+ // Position 1 at the top, position 52 at the bottom. Geometry NEVER depends on chosen card.
+ var t=i/51, dx=ARC_X*Math.PI*Math.cos(Math.PI*t);
+ return {x:X0+ARC_X*Math.sin(Math.PI*t), y:Y0+STEP_Y*i,
+         angle:Math.atan2(dx, STEP_Y*51)*180/Math.PI};
+}
 function cardInk(code){return /[HD]$/.test(code)?"#be2634":"#1d2024";}
 function drawFace(group,code){
- var rank=code.slice(0,-1), suit=label(code).slice(rank.length),ink=cardInk(code);
- // Court art: vector emblem is an intentional QC placeholder, not a final printed court-face asset.
+ var rank=code.slice(0,-1), suit=label(code).slice(rank.length), ink=cardInk(code);
+ // Traditional cards are physically turned 90 degrees to rest horizontally.
+ // The full exposed bottom card uses a matching, rotated court illustration.
  if(/[JQK]/.test(rank)){
-  svgEl("rect",{x:39,y:50,width:112,height:160,rx:4,fill:"#f6f2e7",stroke:ink,"stroke-width":2},group);
-  svgEl("rect",{x:46,y:57,width:98,height:146,fill:"#e0c38e",stroke:"#2b3542","stroke-width":3},group);
-  svgEl("path",{d:"M49 77 L142 184 M141 76 L48 185",stroke:ink,"stroke-width":5,opacity:.6},group);
-  svgEl("text",{x:95,y:144,"text-anchor":"middle","font-size":66,fill:ink,"class":"face-glyph"},group).textContent=suit;
-  svgEl("text",{x:95,y:97,"text-anchor":"middle","font-size":29,fill:"#252931","class":"face-glyph"},group).textContent=rank;
-  svgEl("text",{x:95,y:190,"text-anchor":"middle","font-size":26,fill:"#252931","class":"face-glyph"},group).textContent=rank;
- }else {
-  var n=rank==="A"?1:Number(rank), positions=[];
-  if(n===1){positions=[[95,135]];}
-  else{var rows=Math.ceil(n/2);for(var j=0;j<rows;j++){var y=65+j*(137/Math.max(1,rows-1));if(j*2+1<=n)positions.push([69,y]);if(j*2+2<=n)positions.push([121,y]);}}
-  positions.forEach(function(p){svgEl("text",{x:p[0],y:p[1],"text-anchor":"middle","dominant-baseline":"central","font-size":36,fill:ink,"class":"face-glyph"},group).textContent=suit;});
+  var name=({J:"jack",Q:"queen",K:"king"})[rank],
+      sname=({H:"hearts",S:"spades",D:"diamonds",C:"clubs"})[code.slice(-1)];
+  // Graceful fallback when the court SVG cannot be loaded on a spectator device.
+  svgEl("rect",{x:80,y:35,width:155,height:127,rx:5,fill:"#eedaa6",stroke:ink,"stroke-width":2},group);
+  svgEl("text",{x:157,y:103,"text-anchor":"middle","dominant-baseline":"middle","font-size":61,fill:ink,"class":"face-glyph"},group).textContent=suit;
+  svgEl("text",{x:155,y:61,"text-anchor":"middle","font-size":24,fill:"#222","class":"face-glyph"},group).textContent=rank;
+  // Source court assets are portrait 190:262. Rotate without distortion into landscape 286:198.
+  var sx=CARD_W/262,sy=CARD_H/190;
+  svgEl("image",{x:0,y:0,width:190,height:262,
+       transform:"translate("+CARD_W+" 0) scale("+sx.toFixed(6)+" "+sy.toFixed(6)+") rotate(90)",
+       href:"./assets/"+name+"_of_"+sname+".svg",preserveAspectRatio:"none","class":"court-art"},group);
+ } else {
+  var n=rank==="A"?1:Number(rank), cols=n>6?4:n>2?3:1,
+      rows=Math.ceil(n/cols), startX=55, usableX=CARD_W-105, startY=51, usableY=CARD_H-99;
+  for(var j=0;j<n;j++){
+   var col=j%cols,row=Math.floor(j/cols),
+       x=startX+(cols===1?usableX/2:col*usableX/(cols-1)),
+       y=startY+(rows===1?usableY/2:row*usableY/(rows-1));
+   svgEl("text",{x:x,y:y,"text-anchor":"middle","dominant-baseline":"middle","font-size":n===1?81:31,fill:ink,"class":"face-glyph"},group).textContent=suit;
+  }
  }
- // Each standard English court illustration is now served from /Magic/acaan/assets (MIT).
- // The deterministic fallback above remains visible if an art asset fails to load.
- if(/[JQK]/.test(rank)){
-  var name=({J:"jack",Q:"queen",K:"king"})[rank],sname=({H:"hearts",S:"spades",D:"diamonds",C:"clubs"})[code.slice(-1)];
-  svgEl("image",{x:0,y:0,width:CARD_W,height:CARD_H,href:"./assets/"+name+"_of_"+sname+".svg",preserveAspectRatio:"none",class:"court-art"},group);
- }
-
 }
 function buildDeck(){
  deck.replaceChildren();nodes=[];
@@ -137,15 +146,15 @@ function drawCards(s){
  for(var i=0;i<52;i++){
   var p=coords(i),c=a[i],rank=c.slice(0,-1),suit=label(c).slice(rank.length),color=cardInk(c);
   var g=svgEl("g",{transform:"translate("+p.x.toFixed(3)+" "+p.y.toFixed(3)+") rotate("+p.angle.toFixed(4)+")",'data-index-slot':i+1,'data-index-card':c},deck);
-  svgEl("text",{x:8,y:26,"font-size":rank==="10"?19:24,"textLength":rank==="10"?22:undefined,fill:color,"class":"rank"},g).textContent=rank;
-  svgEl("text",{x:12,y:47,"font-size":21,fill:color,"class":"index-suit"},g).textContent=suit;
+  svgEl("text",{x:10,y:24,"font-size":rank==="10"?21:25,"textLength":rank==="10"?28:undefined,fill:color,"class":"rank"},g).textContent=rank;
+  svgEl("text",{x:rank==="10"?48:35,y:24,"font-size":24,fill:color,"class":"index-suit"},g).textContent=suit;
   if(QC && params.get("numbers")==="1"){
-   svgEl("text",{x:8,y:73,"font-size":17,fill:"#8c775f","class":"rank"},g).textContent=String(i+1);
+   svgEl("text",{x:96,y:24,"font-size":17,fill:"#88745c","class":"rank"},g).textContent=String(i+1);
   }
  }
  diagnostics();
 }
-function diagnostics(){if(!QC)return;var a=ordering(state),last=nodes[51];document.getElementById("qcPanel").textContent="FAN V4 | 52/52 "+new Set(a).size+" unique | K♣ size "+CARD_W+"×"+CARD_H+" (all 52 equal) | v"+(state.version||0)+" "+(state.cardCode||"–")+" @ "+(state.position||"–")+" | GET "+lastSync+" | calls="+polls+" | remaining="+remaining;}
+function diagnostics(){if(!QC)return;var a=ordering(state),last=nodes[51];document.getElementById("qcPanel").textContent="VERTICAL LANDSCAPE V5 | 52/52 "+new Set(a).size+" unique | K♣ size "+CARD_W+"×"+CARD_H+" (all 52 equal) | v"+(state.version||0)+" "+(state.cardCode||"–")+" @ "+(state.position||"–")+" | GET "+lastSync+" | calls="+polls+" | remaining="+remaining;}
 async function fetchState(t){var r=await fetch(apiUrl()+"?t="+Date.now(),{headers:headers(t),cache:"no-store"});polls++;remaining=r.headers.get("x-ratelimit-remaining")||remaining;if(!r.ok){var e=new Error("GitHub read HTTP "+r.status);e.http=r.status;throw e;}var j=await r.json(),s=decode(j.content);if(!s||typeof s.version!=="number"||!(s.cardCode===null||full.has(s.cardCode))||!(s.position===null||Number.isInteger(s.position)&&s.position>=1&&s.position<=52))throw new Error("Invalid state");return {data:s,sha:j.sha};}
 async function sync(){if(!valid||busy)return;busy=true;try{var res=await fetchState();lastSync=new Date().toLocaleTimeString("vi-VN");if(res.data.version!==state.version||res.data.cardCode!==state.cardCode||res.data.position!==state.position){state=res.data;drawCards(state);}else diagnostics();}catch(e){lastSync=e.message;diagnostics();console.warn(e);}finally{busy=false;}}
 function timer(){if(document.visibilityState==="hidden")return;var e=Date.now()-started;if(e<75000){sync();setTimeout(timer,2000);}else if(e<180000){sync();setTimeout(timer,8000);}}
