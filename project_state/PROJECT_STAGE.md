@@ -151,3 +151,14 @@ Status: **QC PROTOTYPE DEPLOYED — REAL-DEVICE QC PENDING** (2026-10-13).
 - Public QC: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&qc=1`. Static sample `&sample=7H-21` bypasses GitHub (QC only), enabling visual count inspection without consuming API quota.
 - Remaining NOT PASS: photo-level card face/paper/wood realism; real Android / two-device synchronization latency and update while screen face down or locked; 60 unauthenticated GitHub REST requests/hour per IP.
 - Do not change Trick 01's S3 4H approval status or its 52-photo mappings.
+
+
+### 2026-10-14 — Trick 02 fan v0.3 art integration
+
+- Updated `site/acaan/index.html` commit `d877116192ce50e8aafecd2e24df5e3ff300b509` in isolated Trick 02. Pages workflow `38529599372` SUCCESS for that commit.
+- Imported all **12 J/Q/K court SVG assets** into `site/acaan/assets/` plus `ASSET_SOURCES.md`; sourced from MIT-licensed Webisso/playing-cards / Byron Knoll public-domain vector material.
+- SVG renderer uses local `./assets/{jack|queen|king}_of_{suit}.svg` for whichever court is exposed at slot 52, with the previous deterministic fallback artwork underneath if an image cannot load. All 52 geometry and index labels retain the same fixed card template size 190×262. Number and Ace faces still use deterministic vector pips for exposed final slot.
+- Added optional static **real wooden tabletop photograph** (Kevin Shek, Unsplash License) as CSS background, with CSS textured fallback. This background image is currently an external asset request, **not yet self-hosted**; it is not a realtime/state provider. Online image loading/user phone appearance remain to be inspected; do NOT claim photographic visual approval yet.
+- Self-QC in local browser using injected DOM (direct browser navigation blocked by execution policy): 6 cases × mobile 390×844 plus desktop 1448×1086 = **12/12 PASS** for 52 slots, 52 unique card identities, selected slot, same card dimensions, no JavaScript exceptions or viewport horizontal overflow. Court image src correctly tracks KD/52, QH/52 and KC/52; KC/1 correctly shows a numeric final card.
+- Browser screenshots with local/offline assets display fallback, so **actual remote court artwork/Unsplash photo loaded/rendered PASS is not claimed**. Production visual QC and real Android zoom/no-F5/latency remain PENDING.
+- Trick 01 files unaffected, confirmed through compare from fan v0.2 commit; changes limited to Trick 02 and project_state files.
