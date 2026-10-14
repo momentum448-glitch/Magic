@@ -465,3 +465,35 @@ GitHub execution is available through the connected GitHub integration. AGENTS.m
 - GitHub docs updated: PROJECT_CANON fan geometry and equal-scale rule, DECISION_LOG D-043, PROJECT_STAGE fan v0.2 milestone, ARCHITECTURE_TRICK_02 v0.2 supersession.
 - Drive CANON, STAGE and DECISION_LOG append updates completed 2026-10-14; Drive HANDOFF mirror will be appended after this write.
 - NEXT: user QC layout + vector pinch zoom via no-API sample link, then operator/spectator two-device test; measure latency and rate; refine physical/photographic card art and authentic wood surface only after geometry/count QC, without ever changing scale rules. Trick 01 remains at S3 15/52 v3 assets; 4H still unapproved and full-card mobile user QC pending.
+
+
+## H-0035 — ACAAN fan v0.3 artistic asset integration (2026-10-14)
+
+### Current focus and user instruction
+- User: "Ok em làm tiếp đi" after v0.2 technical fan PASS. Authorized autonomous continuation of Trick 02; do not touch Trick 01.
+- Trick 02 remains isolated, GitHub-only shared state proof. **No visual production PASS or two-device realtime PASS yet.**
+
+### Completed actual GitHub changes
+- Updated `site/acaan/index.html`, code commit **d877116192ce50e8aafecd2e24df5e3ff300b509**. Added optional photographic wooden tabletop CSS background (Kevin Shek, Unsplash License) with original CSS fallback. This is a remote static decoration, NOT a realtime service, and not yet self-hosted; actual background image load on a real phone is unverified.
+- Imported exactly 12 traditional court illustrations: `site/acaan/assets/{jack,queen,king}_of_{hearts,spades,diamonds,clubs}.svg`. Hosted in Magic repo rather than linking to runtime third-party card art. Source: `Webisso/playing-cards` MIT license, original public-domain Byron Knoll vectors. `site/acaan/assets/ASSET_SOURCES.md` contains provenance.
+- Exposed last card uses code-specific court SVG with same 190×262 card geometry and previous vector fallback if image absent. If the last card is A/2..10, render deterministic pip motif. The 52 slot coordinates and index labels are unchanged.
+- Build **GitHub Pages run 38529599372** for source commit d8771161: **completed SUCCESS**.
+- Verified GitHub repo has all 12 named court files. GitHub comparison from v0.2 source commit 53a5d6f to v0.3 shows only `site/acaan/*` plus `project_state/*`; **Trick 01 source files unchanged**.
+
+### QC evidence and explicit limitations
+- Chromium local injected-DOM tests (direct file:// and http://localhost navigation blocked by environment policy) on 390×844 simulated-mobile + 1448×1086 desktop viewport:
+  - Six samples each (7H/21, AS/1, KD/52, KC/1, KC/52, QH/52), **12/12 PASS** for 52 slot elements, 52 vector indices, 52 unique card identities, chosen card at exact position, 190×262 identical template all slots including K♣, 0 uncaught JS errors and 0 horizontal overflow.
+  - Court art paths generated correctly by card code, e.g. `king_of_clubs.svg`, `king_of_diamonds.svg`, `queen_of_hearts.svg`; numeric result correctly has no court image.
+- Direct URL navigation and remote network image loading blocked by execution environment; screenshots demonstrate only CSS fallback and fallback court drawing, **NOT** actual live GitHub Pages image/photo render. Thus visual photo-quality on actual device and asset network load remain **PENDING**.
+- Tried offline local synthesis of wood photograph from previous user-approved reference. Artifacts (visible rectangular seams and, in first attempt, card fragments) FAILED visual QC. These attempts were not deployed, uploaded to GitHub, or used in live page. Continued with properly licensed remote static wood image on proof page for now.
+- All 2,704 original ACAAN positional combinations remain guaranteed by unchanged swap ordering logic; runtime 52/52 integrity checks still active.
+- No new backend service; current bounded public GitHub Contents REST polling still subject to 60 unauthenticated requests/hour/IP, not production-grade realtime.
+- Current spectator/QC URL: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01`
+- No-API sample 7H/21: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&qc=1&sample=7H-21`
+- Performer arm: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01#arm`, state `Magic-state/channels/acaan_demo01.json`; no credential committed.
+
+### Project control state and next action
+- Updated GitHub `project_state/PROJECT_STAGE.md`, `project_state/ARCHITECTURE_TRICK_02.md` for v0.3.
+- Durable rules in `PROJECT_CANON.md` and D-043 remain unchanged.
+- Drive `MAGIC — PROJECT_STAGE` appended v0.3 checkpoint; **Drive `MAGIC — HANDOFF_CURRENT` must be appended/read back after this GitHub H-0035 write**.
+- Next execution: real-phone inspection of current live v0.3 to check court art SVG loads, static wood photo loads and pinch zoom readability; validate against photograph-like quality (if visual fail, iterate on physical shadows/wood/asset hosting). After visual accept, self-host licensed/photo source instead of runtime external wood CDN, and test two actual phones for update with no F5, screen lock/face-down, rate limits and latency before accepting realtime. Trick 01 remains untouched, 4H production still unapproved in its separate track.
