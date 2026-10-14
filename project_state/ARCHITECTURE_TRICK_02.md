@@ -69,3 +69,17 @@ Status: TECHNICAL PROTOTYPE DEPLOYED; MOBILE TWO-DEVICE QC PENDING
 4. Screen-up/down and visibility/resume reliability tests, including long delay.
 5. Choose final sync strategy based on real p50/p95 + rate-limit budget, not unverified 1–2s claims.
 6. Only then build the photographed deck composition and polish operator mode.
+
+
+## Visual architecture supersession — v0.2 (2026-10-14)
+
+User confirmed option 2: **deterministic geometry and card identities**, not further AI-generated 52-card photos. This supersedes the older v0.1 '7 columns × 8 rows' and 'ordered rows' visual descriptions above.
+
+- Active source: `site/acaan/index.html`. 52 fixed SVG <g> card slots, all with CARD_W=190 and CARD_H=262 viewBox units, placed along a smooth single-arc fan via `coords(i)`. Every card uses the same width/height and matched rotation formula. No special K♣ scale.
+- Base deck: exactly once A–K Hearts, Spades, Diamonds, Clubs. Upon (cardCode, position), a single pair-swap of card codes guarantees the selected card at the chosen count slot and preserves all 52 unique cards. This is independent of card visual assets.
+- The corner rank/suit indices are rendered vector-sharp on a separate layer after card bodies to avoid occlusion. The final exposed card uses a temporary deterministic pip/court motif; it is *not* user-approved traditional court artwork.
+- Fixed 1440×1000 coordinate canvas fit into phone display; native browser pinch-to-zoom remains enabled by viewport meta, and browser-emulated 2.5× pinch was observed. User-device gesture QC still pending.
+- Tech debug mode `?c=demo01&qc=1`; add `&numbers=1` for per-card ordinal marks. Offline deterministic sample: `?c=demo01&qc=1&sample=7H-21` skips API polling/writes for visual inspection.
+- Tests: exhaustive 52×52 = 2,704 permutations PASS; six representative browser-render tests PASS, including K♣ first and last; no JS console errors; local desktop & tall mobile screenshots inspected; Github Pages run 38526510021 SUCCESS on source commit 53a5d6f.
+- Temporary scene uses CSS wooden-table approximation and vector pip/court placeholders. True photorealism (physical card faces, consistent cast shadows, paper/wood photo assets) remains an independent visual-production step and must be user-approved before production.
+- Backend remains existing isolated GitHub-only REST state + bounded prototype polling, not an accepted production realtime guarantee.
