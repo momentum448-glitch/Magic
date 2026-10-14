@@ -139,3 +139,15 @@ Status: **QC PROTOTYPE DEPLOYED — REAL-DEVICE QC PENDING** (2026-10-13).
 - QC polling is limited-duration and is NOT production reliable yet. REST 60 unauthenticated requests/hour/IP, with shared-IP risk.
 - Next milestone: two-device latency and on-phone counting QC; compare raw GitHub caching; test phone face down, background, lock, visibility return.
 - Existing Trick 01 production stage remains S3, 15/52 approved v3; 4H and mobile no-crop QC still pending.
+
+
+### 2026-10-14 — Trick 02 deterministic fan v0.2 checkpoint
+
+- GitHub `site/acaan/index.html` replaced the 7×8 mock grid with a fixed curved 52-slot SVG fan on a wooden-looking scene; one vector-size template **190×262 viewBox units**, including K♣.
+- Source commit `53a5d6f0c59d2eba1ddaffbc4dc4bd890b7440a7`; GitHub Pages run `38526510021` SUCCESS.
+- Local browser screenshot QC: 1448×1086 desktop and 390×844 Android-sized viewport, no JavaScript errors.
+- Algorithm: **2,704/2,704 permutations PASS**, zero duplicates. Browser samples `7H/21`, `AS/1`, `KD/52`, `10C/13`, `KC/1`, `KC/52` PASS; 52 equal SVG dimensions and 52 visible indices.
+- Browser touch zoom: emulated Android pinch scale 2.5× succeeds. Actual user-device pinch zoom still PENDING.
+- Public QC: `https://momentum448-glitch.github.io/Magic/acaan/?c=demo01&qc=1`. Static sample `&sample=7H-21` bypasses GitHub (QC only), enabling visual count inspection without consuming API quota.
+- Remaining NOT PASS: photo-level card face/paper/wood realism; real Android / two-device synchronization latency and update while screen face down or locked; 60 unauthenticated GitHub REST requests/hour per IP.
+- Do not change Trick 01's S3 4H approval status or its 52-photo mappings.
